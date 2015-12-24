@@ -95,8 +95,9 @@
   <Group label="Packages" language="Genero" targetDirectory="$(ProjectDir)/bin300">
     <Package binaryName="emea_testcase2_arm" dependencies="400358049||781919164||159917928||212784684||715422167||362164715||313644474" description="Android Package (arm)" distDirectory="$(ProjectDir)/distbin300" label="emea_testcase2_arm" platform="Android (arm)" rootDirectory="$(ProjectDir)/bin300">
       <DynamicProperty name="gma-accent-color" value="#8ac2cd"/>
+      <DynamicProperty name="gma-actionbar-color" value="#ebebeb"/>
       <DynamicProperty name="gma-primary-color" value="#4097b1"/>
-      <DynamicProperty name="gma-primary-dark-color" value="#0000a5"/>
+      <DynamicProperty name="gma-primary-dark-color" value="#1e4da5"/>
       <DynamicProperty name="icon-hdpi" value="$(ProjectDir)/images/myicon.png"/>
       <DynamicProperty name="icon-ldpi" value="$(ProjectDir)/images/myicon.png"/>
       <DynamicProperty name="icon-mdpi" value="$(ProjectDir)/images/myicon.png"/>

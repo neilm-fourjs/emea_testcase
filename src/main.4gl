@@ -1024,12 +1024,16 @@ FUNCTION log(l_msg)
 	DEFINE l_file STRING
 	LET l_file = os.path.join( m_dir,base.Application.getProgramName()||".log")
 	LET c = base.Channel.create()
-	CALL c.openFile(l_file,"a+")
-	IF l_msg.getCharAt(1) = "\n" THEN
-		LET l_msg = l_msg.subString(2,l_msg.getLength())
-	END IF
-	CALL c.writeLine(CURRENT||":"||l_msg)
-	CALL c.close()
+	TRY
+		CALL c.openFile(l_file,"a+")
+		IF l_msg.getCharAt(1) = "\n" THEN
+			LET l_msg = l_msg.subString(2,l_msg.getLength())
+		END IF
+		CALL c.writeLine(CURRENT||":"||l_msg)
+		CALL c.close()
+	CATCH
+		CALL fgl_winMessage("Error",SFMT("Failed to update log file\n%1",l_file),"exclamation")
+	END TRY
 END FUNCTION
 --------------------------------------------------------------------------------
 
