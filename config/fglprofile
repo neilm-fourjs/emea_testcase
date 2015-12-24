@@ -1,0 +1,7 @@
+dbi.default.driver = "dbmsqt"
+dbi.database.mydatabase.source = "mydatabase.db"
+
+security.global.ca = "SrvCAList.pem"
+#security.global.certificate = "../etc/ssl/Server.crt"
+#security.global.privatekey  = "../etc/ssl/Server.key"
+

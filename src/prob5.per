@@ -1,0 +1,19 @@
+ACTION DEFAULTS
+	ACTION accept ( TEXT="" )
+	ACTION cancel ( TEXT="" )
+	ACTION act1 ( TEXT="Action1", IMAGE="info")
+	ACTION act2 ( TEXT="Action2", IMAGE="smiley" )
+	ACTION act3 ( TEXT="Action3" )
+END -- AD
+
+LAYOUT ( TEXT="Prob #5" )
+GRID
+{
+Field 1:[fld1  ]
+Field 2:[fld2                        ]
+}
+END 
+
+ATTRIBUTES
+fld1 = formonly.fld1;
+fld2 = formonly.fld2;

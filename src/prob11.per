@@ -1,0 +1,35 @@
+
+LAYOUT (TEXT="Photos")
+GRID
+{
+<T tab                                                           >
+ [file                                                          ]
+ [file                                                          ]
+ [file                                                          ]
+ [file                                                          ]
+ [file                                                          ]
+<                                                                >
+<G "Image"                                                       >
+ [img                                                           ]
+ [                                                              ]
+ [                                                              ]
+ [                                                              ]
+ [                                                              ]
+ [                                                              ]
+ [                                                              ]
+ [                                                              ]
+ [                                                              ]
+ [                                                              ]
+ [                                                              ]
+ [                                                              ]
+ [                                                              ]
+}
+END -- GRID
+END -- LAYOUT
+
+ATTRIBUTES
+EDIT file = FORMONLY.l_file, STYLE="small";
+IMAGE img = FORMONLY.img;
+
+INSTRUCTIONS
+SCREEN RECORD arr ( FORMONLY.l_file )

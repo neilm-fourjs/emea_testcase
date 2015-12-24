@@ -1,0 +1,22 @@
+
+ACTION DEFAULTS
+	ACTION but1 ( IMAGE="info" )
+END -- AD
+
+LAYOUT ( TEXT="Prob #2" )
+GRID
+{
+ButtonEdit:
+[fld1                              ]
+[""]
+Button 1:[img1]
+Button 2:[img2]
+Button 3:[img3]
+}
+END 
+
+ATTRIBUTES
+BUTTONEDIT fld1 = formonly.fld1, ACTION=but1,STYLE="scaleicon";
+BUTTON img1 : img1,IMAGE="info",TEXT="Click Me";
+BUTTON img2 : img2,IMAGE="info",TEXT="Click Me",STYLE="scaleicon";
+BUTTON img3 : img3,IMAGE="info",TEXT="Click Me",STYLE="small";

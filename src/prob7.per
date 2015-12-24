@@ -1,0 +1,48 @@
+
+ACTION DEFAULTS
+	ACTION but1 ( IMAGE="info" )
+END -- AD
+
+LAYOUT ( TEXT="Prob #7" )
+GRID
+{
+<G "Text1"                        >
+ [txt1                          ]
+ [                              ]
+<                                 >
+ [img1       ]
+<G "Text2"                        >
+ [txt2                          ]
+ [                              ]
+ [                              ]
+<                                 >
+ [img2       ]
+<G "More FIelds"                  >
+ [lab1][fld1         ]
+ [lab2][fld2      ]
+ [lab3][fld3               ]
+ [lab4][fld4        ]
+<                                 >
+ [img3       ]
+}
+END 
+
+ATTRIBUTES
+TEXTEDIT txt1 = FORMONLY.txt1, NOENTRY,STRETCH=BOTH;
+TEXTEDIT txt2 = FORMONLY.txt2, STYLE="small";
+
+LABEL lab1 : lab1, TEXT="Field #1:",STYLE="big";
+BUTTONEDIT fld1 = FORMONLY.fld1,ACTION=but1,STYLE="big";
+
+LABEL lab2 : lab2, TEXT="Field #2:",STYLE="bold";
+DATEEDIT fld2 = FORMONLY.fld2,STYLE="bold";
+
+LABEL lab3 : lab3, TEXT="Field #3:",STYLE="bold yellow";
+fld3 = FORMONLY.fld3,STYLE="bold yellow";
+
+LABEL lab4 : lab4, TEXT="Field #4:";
+fld4 = FORMONLY.fld4;
+
+BUTTON img1 : img1,IMAGE="info",TEXT="Click Me",STYLE="scaleicon small";
+BUTTON img2 : img2,IMAGE="info",TEXT="Click Me",STYLE="scaleicon";
+BUTTON img3 : img3,IMAGE="info",TEXT="Click Me";

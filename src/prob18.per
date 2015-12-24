@@ -1,0 +1,44 @@
+LAYOUT ( TEXT="Test #18" )
+VBOX
+GRID
+{
+[lnum   ][num     ]
+[lstr   ][str                                     ]
+[ldte   ][dte        ]
+[ldtetim][dtetim             ] yyyy-mm-dd hh:mm:ss
+[lfld5  ][Chk]
+[lfld6  ][radio                          ]
+[lfld7  ][spin]
+}
+END -- GRID
+GROUP (TEXT="Result")
+GRID
+{
+[txt                                     ]
+[                                        ]
+[                                        ]
+[                                        ]
+}
+END -- GRID
+END -- GROUP
+END -- VBOX
+END -- LAYOUT
+
+ATTRIBUTES
+LABEL lnum : lab1, TEXT="Number:",JUSTIFY=RIGHT;
+LABEL lstr  : lab2, TEXT="Comobo:",JUSTIFY=RIGHT;
+LABEL ldte  : lab3, TEXT="Date:",JUSTIFY=RIGHT;
+LABEL ldtetim : lab4, TEXT="DateTime:",JUSTIFY=RIGHT;
+LABEL lfld5 : lab5, TEXT="Check:",JUSTIFY=RIGHT;
+LABEL lfld6 : lab6, TEXT="Radio:",JUSTIFY=RIGHT;
+LABEL lfld7 : lab7, TEXT="SpinEdit:",JUSTIFY=RIGHT;
+
+EDIT num = FORMONLY.num, KEYBOARDHINT=NUMBER;
+COMBOBOX str = FORMONLY.str, ITEMS=("Item 1","Item Two", "3rd Item" );
+DATEEDIT dte = FORMONLY.dte;
+DATETIMEEDIT dtetim = FORMONLY.dtetim;
+CHECKBOX chk = FORMONLY.chk, VALUECHECKED=1,VALUEUNCHECKED=0, NOT NULL;
+RADIOGROUP radio = FORMONLY.radio, ITEMS=((1,"Male"),(2,"Famale"),(3,"Confused")), NOT NULL,ORIENTATION=HORIZONTAL;
+SPINEDIT spin = FORMONLY.spin, VALUEMAX=100, VALUEMIN=0, STEP=5;
+
+TEXTEDIT txt = FORMONLY.txt, STRETCH=BOTH, NOENTRY;

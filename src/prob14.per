@@ -1,0 +1,31 @@
+LAYOUT (TEXT="RESTFUL WS Test", STYLE="dialog")
+GRID
+{
+URL for test service: 
+[l_url                                                          ]
+Add the runno:[r]
+Conn Timeout: [l_cto ]
+Timeout:      [l_to  ]
+RW Timeout:   [l_rwto]
+Commands:
+[m_cmd                                                          ]
+[                                                               ]
+[                                                               ]
+[                                                               ]
+Result:[x  ]
+[l_msg                                                          ]
+[                                                               ]
+[                                                               ]
+[                                                               ]
+}
+END -- GRID
+
+ATTRIBUTES
+l_url = FORMONLY.m_url;
+CHECKBOX r = FORMONLY.m_add_runno,VALUECHECKED=1,VALUEUNCHECKED=0;
+l_cto = FORMONLY.m_con_timeout;
+l_to = FORMONLY.m_timeout;
+l_rwto = FORMONLY.m_rw_timeout;
+TEXTEDIT m_cmd = FORMONLY.m_cmd, STRETCH=BOTH, NOENTRY;
+TEXTEDIT l_msg = FORMONLY.m_msg, STRETCH=BOTH, NOENTRY;
+X = FORMONLY.x, NOENTRY;

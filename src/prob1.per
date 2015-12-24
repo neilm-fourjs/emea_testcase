@@ -1,0 +1,13 @@
+LAYOUT ( TEXT="Prob #1" )
+GRID
+{
+[head                           ]
+Phone:
+[ptyp][pno                      ]
+}
+END 
+
+ATTRIBUTES
+LABEL head = FORMONLY.head, STYLE="heading";
+COMBOBOX ptyp = FORMONLY.ptyp, ITEMS=("Home","Mobile","Work"), NOT NULL;
+pno = FORMONLY.pno, KEYBOARDHINT=PHONE;
