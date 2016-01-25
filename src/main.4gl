@@ -4,7 +4,7 @@ IMPORT util
 IMPORT security
 IMPORT com
 
-CONSTANT c_appver = "V2.6"
+CONSTANT c_appver = "V2.7"
 CONSTANT C_TESTDIR = "/sdcard/testdir"
 
 	DEFINE m_dir STRING -- restfull test 
@@ -425,6 +425,9 @@ FUNCTION prob9()
 			FOR x = 1 TO l_paths.getLength()
 				LET l_paths[x].exist = os.Path.exists(l_paths[x].path)
 				LET l_msg = l_msg.append(l_paths[x].path||" "||l_paths[x].exist||"\n")
+				IF l_paths[x].exist THEN
+					LET l_msg = l_msg.append( write_test( l_paths[x].path ) )
+				END IF
 			END FOR
 			DISPLAY BY NAME l_msg
 	END MENU
@@ -1037,7 +1040,23 @@ FUNCTION log(l_msg)
 END FUNCTION
 --------------------------------------------------------------------------------
 
-
+--------------------------------------------------------------------------------
+-- set writing a simple file.
+FUNCTION write_test( l_path )
+	DEFINE l_path, l_msg, l_file STRING
+	DEFINE c base.Channel
+	LET c = base.Channel.create()
+	LET l_file = SFMT("test-%1.txt",ui.Interface.getFrontEndVersion())
+	TRY
+		CALL c.openFile( os.path.join( l_path,l_file), "w")
+		CALL c.writeLine( "Test Running:"||CURRENT )
+		CALL c.close()
+		LET l_msg = SFMT("Test file %1 written okay.\n",l_file)
+	CATCH
+		LET l_msg = SFMT("Failed to write to %1 Status:%2\n  %3\n",l_file, STATUS, ERR_GET(STATUS))
+	END TRY
+	RETURN l_msg
+END FUNCTION
 --------------------------------------------------------------------------------
 -- Set a Property in the AUI
 FUNCTION deCode( data )
