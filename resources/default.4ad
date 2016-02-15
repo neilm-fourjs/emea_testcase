@@ -35,5 +35,5 @@
 	<ActionDefault name="exit" text="Exit" image="quit"/>
 	<ActionDefault name="back" text="Go Back" image="arrleft"/>
   <ActionDefault name="act4" text="Action4" image="ssmiley"/>
-  <ActionDefault name="act5" text="Action5"/>
+  <ActionDefault name="act5" text="Action5" image="heart" />
 </ActionDefaultList>

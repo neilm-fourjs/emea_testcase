@@ -789,50 +789,75 @@ END FUNCTION
 --------------------------------------------------------------------------------
 -- Widgets
 FUNCTION prob18()
-	DEFINE rec RECORD
-		num SMALLINT,
-		str STRING,
-		dte DATE,
-		dtetim DATETIME YEAR TO SECOND,
-		chk BOOLEAN,
-		radio SMALLINT,
-		spin SMALLINT,
-		txt STRING
-	END RECORD
-	OPEN WINDOW p18 WITH FORM "prob18"
-	LET rec.txt = "Dialog / Widget Test\n"
-	LET rec.dte = TODAY
-	LET rec.dtetim = CURRENT
-	LET rec.chk = TRUE
-	LET rec.spin = 0
-	INPUT BY NAME rec.* WITHOUT DEFAULTS ATTRIBUTES(UNBUFFERED)
-		BEFORE INPUT
-			CALL DIALOG.setActionActive("accept",FALSE)
-			CALL DIALOG.setActionActive("dialogtouched",TRUE)
+  TYPE t_rec RECORD
+    num SMALLINT,
+    edt CHAR(20),
+    cmb STRING,
+    dte DATE,
+    dtetim DATETIME YEAR TO SECOND,
+    chk BOOLEAN,
+    radio SMALLINT,
+    spin SMALLINT,
+    txt STRING
+  END RECORD
+  DEFINE rec, sav_rec t_rec
+  DEFINE audit_log STRING
 
-		ON ACTION dialogTouched
-			CALL DIALOG.setActionActive("dialogtouched",FALSE)
-			CALL DIALOG.setActionActive("accept",TRUE)
-			LET rec.txt = rec.txt.append("Touched\n")
+  OPEN WINDOW p18 WITH FORM "prob18"
+  LET audit_log = "Dialog / Widget Test\n"
+  LET rec.edt = "Edit field"
+  LET rec.cmb = "Item 1"
+  LET rec.dte = TODAY
+  LET rec.dtetim = CURRENT
+  LET rec.chk = TRUE
+  LET rec.spin = 0
+  LET rec.txt = "text field"
+  LET sav_rec.* = rec.*
 
-		ON CHANGE dte
-			IF rec.dte > TODAY THEN
-				LET rec.txt = rec.txt.append("Date confirm - future date\n")
-				IF fgl_winQuestion("Confirm","Date in the future, confirm okay","Yes","Yes|No","question",0) = "No" THEN
-					LET rec.txt = rec.txt.append("Future Date okay\n")
-					NEXT FIELD dte
-				END IF
-			ELSE
-				LET rec.txt = rec.txt.append("Date okay\n")
-			END IF
-			NEXT FIELD chk
+  INPUT BY NAME rec.*,audit_log WITHOUT DEFAULTS ATTRIBUTES(UNBUFFERED)
+    BEFORE INPUT
+      CALL DIALOG.setActionActive("accept",FALSE)
+      CALL DIALOG.setActionActive("dialogtouched",TRUE)
 
-		ON CHANGE chk
-			IF NOT rec.chk THEN
-				LET rec.txt = rec.txt.append("Jump to Spinedit\n")
-				NEXT FIELD spin
-			END IF
-	END INPUT
+    ON ACTION dialogTouched
+      DISPLAY "Touched!  dte:",rec.dte
+      IF rec.* = sav_rec.* THEN
+        LET audit_log = audit_log.append("Touched but nothing changed!\n")
+      ELSE
+        LET audit_log = audit_log.append("Touched and changed\n")
+      END IF
+      LET rec.* = sav_rec.* -- re-read incase someone else has changed it
+      CALL DIALOG.setActionActive("dialogtouched",FALSE)
+      CALL DIALOG.setActionActive("accept",TRUE)
+
+    ON CHANGE dte
+      IF rec.dte > TODAY THEN
+        LET audit_log = audit_log.append("Date confirm - future date\n")
+        IF fgl_winQuestion("Confirm","Date in the future, confirm okay","Yes","Yes|No","question",0) = "No" THEN
+          LET audit_log = audit_log.append("Future Date okay\n")
+          NEXT FIELD dte
+        END IF
+      ELSE
+        LET audit_log = audit_log.append("Date okay\n")
+      END IF
+--      NEXT FIELD chk
+
+    ON CHANGE chk
+      IF NOT rec.chk THEN
+        LET audit_log = audit_log.append("Jump to Spinedit\n")
+        NEXT FIELD spin
+      END IF
+
+    ON ACTION cancel
+      LET audit_log = audit_log.append("Cancelled\n")
+      LET rec.* = sav_rec.* -- put the record
+      CALL DIALOG.setActionActive("dialogtouched",TRUE)
+      CALL DIALOG.setActionActive("accept",FALSE)
+
+    ON ACTION exit
+      EXIT INPUT
+  END INPUT
+
 	CLOSE WINDOW p18
 END FUNCTION
 --------------------------------------------------------------------------------
