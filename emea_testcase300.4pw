@@ -58,7 +58,7 @@
       <File filePath="database/mydatabase.4db"/>
       <File filePath="database/mydatabase.db"/>
     </Library>
-    <Application binaryName="emea_testcase2" dependencies="159917928||212784684||362164715||455109296" environment="dirlist:FGLIMAGEPATH=$(ProjectDir)/images;$(ProjectDir)/webcomponents;$(FGLIMAGEPATH):$(FGLDIR)/lib/image2font.txt" id="400358049" label="emea_testcase2">
+    <Application binaryName="emea_testcase2" dependencies="159917928||212784684||362164715||455109296" environment="dirlist:FGLIMAGEPATH=$(ProjectDir)/webcomponents;/$(ProjectDir)/config/image2font.txt" id="400358049" label="emea_testcase2">
       <VirtualFolder label="forms">
         <File filePath="src/form.per"/>
         <File filePath="src/prob1.per"/>

@@ -34,6 +34,9 @@
  	<ActionDefault name="about" text="About" image="quest"/>
 	<ActionDefault name="exit" text="Exit" image="quit"/>
 	<ActionDefault name="back" text="Go Back" image="arrleft"/>
-  <ActionDefault name="act4" text="Action4" image="ssmiley"/>
-  <ActionDefault name="act5" text="Action5" image="heart" />
+  <ActionDefault name="act1" text="Action1" image="info" defaultView="yes" />
+  <ActionDefault name="act2" text="Action2" image="smiley" defaultView="yes" />
+  <ActionDefault name="act3" defaultView="yes" />
+  <ActionDefault name="act4" text="Action4" image="ssmiley" defaultView="yes" />
+  <ActionDefault name="act5" text="Action5" image="heart" defaultView="yes" />
 </ActionDefaultList>

@@ -18,11 +18,26 @@ END
 LAYOUT ( TEXT="Prob #5" )
 GRID
 {
-Field 1:[fld1                              ]
-Field 2:[fld2                              ]
+[fld0                                          ]
+Action1:[fld1                              ][i1]
+Action2:[fld2                              ][i2]
+Action3:[fld3                              ][i3]
+Action4:[fld4                              ][i4]
+Action5:[fld5                              ][i5]
+[res                                           ]
 }
 END 
 
 ATTRIBUTES
-fld1 = formonly.fld1, JUSTIFY=LEFT;
-fld2 = formonly.fld2, JUSTIFY=LEFT;
+fld0 = formonly.l_fld0;
+fld1 = formonly.l_fld1, NOENTRY;
+fld2 = formonly.l_fld2, NOENTRY;
+fld3 = formonly.l_fld3, NOENTRY;
+fld4 = formonly.l_fld4, NOENTRY;
+fld5 = formonly.l_fld5, NOENTRY;
+BUTTON i1 : act1, IMAGE="info",TEXT="";
+BUTTON i2 : act2, IMAGE="smiley",TEXT="";
+BUTTON i3 : act3, IMAGE="camera",TEXT="";
+BUTTON i4 : act4, IMAGE="ssmiley",TEXT="";
+BUTTON i5 : act5, IMAGE="heart",TEXT="";
+res = formonly.l_res, NOENTRY;

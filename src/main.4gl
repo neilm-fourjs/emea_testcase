@@ -88,7 +88,7 @@ MAIN
 
 	LET probs[ probs.getLength() + 1 ].titl = "10. GoogleMaps"
 	LET probs[ probs.getLength() ].desc = "Simple test for a WC"
-	LET probs[ probs.getLength() ].icon = "smiley"
+	LET probs[ probs.getLength() ].icon = "fa-map"
 
 	LET probs[ probs.getLength() + 1 ].titl = "11. Choose an Image"
 	LET probs[ probs.getLength() ].desc = "Choosing an image with Google Photos App"
@@ -96,11 +96,11 @@ MAIN
 
 	LET probs[ probs.getLength() + 1 ].titl = "12. Take a Photo"
 	LET probs[ probs.getLength() ].desc = "Take a photo and store it in a specific folder"
-	LET probs[ probs.getLength() ].icon = "smiley"
+	LET probs[ probs.getLength() ].icon = "camera"
 
 	LET probs[ probs.getLength() + 1 ].titl = "13. shellexec pdf"
 	LET probs[ probs.getLength() ].desc = "Attempt to open a PDF"
-	LET probs[ probs.getLength() ].icon = "info"
+	LET probs[ probs.getLength() ].icon = "fa-file-pdf-o"
 
 	LET probs[ probs.getLength() + 1 ].titl = "14. RESTFUL call"
 	LET probs[ probs.getLength() ].desc = "Testing restful calls to a simple service"
@@ -108,11 +108,11 @@ MAIN
 
 	LET probs[ probs.getLength() + 1 ].titl = "15. GEO Location"
 	LET probs[ probs.getLength() ].desc = "Open a GEO location with default app"
-	LET probs[ probs.getLength() ].icon = "info"
+	LET probs[ probs.getLength() ].icon = "fa-map-marker"
 
 	LET probs[ probs.getLength() + 1 ].titl = "16. Email"
 	LET probs[ probs.getLength() ].desc = "Sending an Email"
-	LET probs[ probs.getLength() ].icon = "info"
+	LET probs[ probs.getLength() ].icon = "mail"
 	LET l_first_time = TRUE
 
 	LET probs[ probs.getLength() + 1 ].titl = "17. FrontCalls"
@@ -272,30 +272,55 @@ END FUNCTION
 --------------------------------------------------------------------------------
 -- Hidden vs Active Action
 FUNCTION prob6()
-	DEFINE fld1, fld2 STRING
-
+	DEFINE l_fld0, l_fld1, l_fld2, l_fld3, l_fld4, l_fld5, l_res STRING
+	DEFINE l_f ui.Form
+	DEFINE l_a1 BOOLEAN
 	OPEN WINDOW p6 WITH FORM "prob6"
 
-	LET fld1 = "Try the actions"
-	LET fld2 = "if you can."
-	INPUT BY NAME fld1, fld2 WITHOUT DEFAULTS
-		BEFORE INPUT 
+	LET l_fld1 = "Enabled, Visible"
+	LET l_fld2 = "Hidden"
+	LET l_fld3 = "Enabled, Visible"
+	LET l_fld4 = "Disabled, Visible"
+	LET l_fld5 = "Enabled, Visible"
+	INPUT BY NAME l_fld0, l_fld1, l_fld2, l_fld3, l_fld4, l_fld5, l_res ATTRIBUTES(WITHOUT DEFAULTS, UNBUFFERED)
+		BEFORE INPUT
+			LET l_f = DIALOG.getForm()
 			CALL DIALOG.setActionHidden("act2", TRUE )
 			CALL DIALOG.setActionActive("act4",FALSE )
 		ON ACTION act1
-			CALL fgl_winMessage("Info","You Clicked the action #1","information")
+			LET l_res = "You Clicked the action #1"
 		ON ACTION act2
-			CALL fgl_winMessage("Info","You Clicked the action #2","information")
+			LET l_res = "You Clicked the action #2"
+			LET l_a1 = NOT l_a1
+			IF l_a1 THEN 
+				CALL l_f.setElementImage("act2","ssmiley")
+				CALL l_f.setElementImage("act4","smiley")
+			ELSE
+				CALL l_f.setElementImage("act2","smiley")
+				CALL l_f.setElementImage("act4","ssmiley")
+			END IF
 		ON ACTION act3
-			CALL fgl_winMessage("Info","You Clicked the action #3","information")
-		ON ACTION act4
-			CALL fgl_winMessage("Info","You Clicked the action #4","information")
+			LET l_res = "You Clicked the action #3"
 			CALL DIALOG.setActionHidden("act2", TRUE )
 			CALL DIALOG.setActionActive("act4",FALSE )
+			LET l_fld2 = "Hidden"
+			LET l_fld4 = "Disabled, Visible"
+		ON ACTION act4
+			LET l_res ="You Clicked the action #4"
+			LET l_a1 = NOT l_a1
+			IF l_a1 THEN 
+				CALL l_f.setElementImage("act2","ssmiley")
+				CALL l_f.setElementImage("act4","smiley")
+			ELSE
+				CALL l_f.setElementImage("act2","smiley")
+				CALL l_f.setElementImage("act4","ssmiley")
+			END IF
 		ON ACTION act5
-			CALL fgl_winMessage("Info","You Clicked the action #5","information")
+			LET l_res = "You Clicked the action #5"
 			CALL DIALOG.setActionHidden("act2", FALSE )
 			CALL DIALOG.setActionActive("act4",TRUE )
+			LET l_fld2 = "Enabled, Visible"
+			LET l_fld4 = "Enabled, Visible"
 	END INPUT
 
 	CLOSE WINDOW p6
@@ -767,19 +792,39 @@ END FUNCTION
 --------------------------------------------------------------------------------
 -- Various frontCalls
 FUNCTION prob17()
+	DEFINE l_phone, l_msg, l_res STRING
+	DEFINE l_ret SMALLINT
 
 	OPEN WINDOW p17 WITH FORM "prob17"
 
-	DISPLAY "Doing 'connectivity' ..." TO stat
-	CALL ui.interface.refresh()
-	TRY
-		CALL ui.Interface.frontCall("mobile", "connectivity", [], [m_conn] )
-	CATCH
-		LET m_conn = SFMT("FC Failed:%1 %2",STATUS,err_get(STATUS))
-	END TRY
-	DISPLAY BY NAME m_conn
-
 	MENU
+		ON ACTION connectivity
+			DISPLAY "Doing 'connectivity' ..." TO stat
+			CALL ui.interface.refresh()
+			TRY
+				CALL ui.Interface.frontCall("mobile", "connectivity", [], [m_conn] )
+				LET l_res = m_conn
+			CATCH
+				LET l_res = SFMT("FC Failed:%1 %2",STATUS,err_get(STATUS))
+			END TRY
+			DISPLAY BY NAME l_res
+
+		ON ACTION composeSMS
+			DISPLAY "Doing 'composeSMS' ..." TO stat
+			DISPLAY "Phone No:" TO lab1
+			DISPLAY "Message:" TO lab2
+			LET int_flag = FALSE
+			INPUT l_phone, l_msg FROM fld1, fld2
+			IF NOT int_flag THEN
+				TRY
+					CALL ui.Interface.frontCall("mobile", "composeSMS", [l_phone,l_msg], [l_ret] )
+					LET l_res = NVL(l_ret,"NULL")
+				CATCH
+					LET l_res = SFMT("FC Failed:%1 %2",STATUS,err_get(STATUS))
+				END TRY
+				DISPLAY BY NAME l_res
+			END IF
+
 		ON ACTION close EXIT MENU
 		ON ACTION accept EXIT MENU
 	END MENU
@@ -792,6 +837,7 @@ FUNCTION prob18()
   TYPE t_rec RECORD
     num SMALLINT,
     edt CHAR(20),
+    edt2 CHAR(20),
     cmb STRING,
     dte DATE,
     dtetim DATETIME YEAR TO SECOND,
@@ -806,6 +852,7 @@ FUNCTION prob18()
   OPEN WINDOW p18 WITH FORM "prob18"
   LET audit_log = "Dialog / Widget Test\n"
   LET rec.edt = "Edit field"
+  LET rec.edt2 = "EDIT UPSHIFTED"
   LET rec.cmb = "Item 1"
   LET rec.dte = TODAY
   LET rec.dtetim = CURRENT

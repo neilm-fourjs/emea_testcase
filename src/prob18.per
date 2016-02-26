@@ -4,6 +4,7 @@ GRID
 {
 [lnum   ][num     ]
 [ledt   ][edt                                     ]
+[ledt2  ][edt2                                    ]
 [lcmb   ][cmb                                     ]
 [ldte   ][dte        ]
 [ldtetim][dtetim             ] yyyy-mm-dd hh:mm:ss
@@ -30,6 +31,7 @@ END -- LAYOUT
 ATTRIBUTES
 LABEL lnum : lab1, TEXT="Number:",JUSTIFY=RIGHT;
 LABEL ledt  : ledt, TEXT="Edit:",JUSTIFY=RIGHT;
+LABEL ledt2  : ledt2, TEXT="Edit Up:",JUSTIFY=RIGHT;
 LABEL lcmb  : lab2, TEXT="Combo:",JUSTIFY=RIGHT;
 LABEL ldte  : lab3, TEXT="Date:",JUSTIFY=RIGHT;
 LABEL ldtetim : lab4, TEXT="DateTime:",JUSTIFY=RIGHT;
@@ -40,6 +42,7 @@ LABEL lfld8 : lab8, TEXT="TextEdit:",JUSTIFY=RIGHT;
 
 EDIT num = FORMONLY.num, KEYBOARDHINT=NUMBER;
 EDIT edt = FORMONLY.edt;
+EDIT edt2 = FORMONLY.edt2,UPSHIFT;
 COMBOBOX cmb = FORMONLY.cmb, ITEMS=("Item 1","Item Two", "3rd Item" );
 DATEEDIT dte = FORMONLY.dte;
 DATETIMEEDIT dtetim = FORMONLY.dtetim;

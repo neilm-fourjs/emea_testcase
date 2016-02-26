@@ -2,14 +2,24 @@ LAYOUT ( TEXT="Test #17" )
 GRID
 {
 Running:
-[stat                               ]
-
+[stat                                ]
+[lab1   ][fld1                       ]
+[lab2   ][fld2                       ]
 Results:
-[conn                               ]
+[l_res                               ]
+[                                    ]
+[                                    ]
+[                                    ]
 }
 END -- GRID
 END -- LAYOUT
 
 ATTRIBUTES
 EDIT stat = FORMONLY.stat;
-EDIT conn = FORMONLY.m_conn;
+
+LABEL lab1 = FORMONLY.lab1, SIZEPOLICY=DYNAMIC;
+EDIT fld1 = FORMONLY.fld1, KEYBOARDHINT=NUMBER;
+LABEL lab2 = FORMONLY.lab2, SIZEPOLICY=DYNAMIC;
+EDIT fld2 = FORMONLY.fld2;
+
+TEXTEDIT l_res = FORMONLY.l_res, STRETCH=BOTH;
