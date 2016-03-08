@@ -27,6 +27,7 @@ MAIN
 	END RECORD
 	DEFINE l_dummy STRING
 	DEFINE l_first_time BOOLEAN
+	DEFINE l_ret STRING
 
 	LET m_dir = C_TESTDIR
 	IF NOT os.path.exists( m_dir ) THEN
@@ -35,7 +36,15 @@ MAIN
 			LET m_dir = os.Path.pwd()
 		END IF
 	END IF
-
+	LET m_cli = UPSHIFT(ui.Interface.getFrontEndName())
+	IF m_cli = "GMA" THEN
+		TRY
+			CALL ui.Interface.frontCall("android", "askForPermission", 
+									["android.permission.WRITE_EXTERNAL_STORAGE"],[l_ret] )
+		CATCH
+			CALL fgl_winMessage("Error",SFMT("Failed 'askForPermission' %1",l_ret),"exclamation")
+		END TRY
+	END IF
 	TRY
 		CALL STARTLOG( os.path.join( m_dir,base.Application.getProgramName()||".err" ) )
 	CATCH
@@ -45,9 +54,9 @@ MAIN
 	OPEN FORM f FROM "form"
 	DISPLAY FORM f
 
-	LET m_cli = UPSHIFT(ui.Interface.getFrontEndName())
+
 	LET m_cli_info = c_appver," Cli:",m_cli," ",ui.Interface.getFrontEndVersion()
-	CALL LOG("Started:"||NVL(m_cli_info ,"NULL Client") )
+	CALL log("Started:"||NVL(m_cli_info ,"NULL Client") )
 	DISPLAY BY NAME m_cli_info
 
 	LET probs[ probs.getLength() + 1 ].titl = "1. Limitation Ex1."
@@ -123,10 +132,13 @@ MAIN
 	LET probs[ probs.getLength() ].desc = "Various Widgets & Dialog Touched"
 	LET probs[ probs.getLength() ].icon = "fa-bug"
 
-	#LET probs[ probs.getLength() + 1 ].titl = "19. no done yet"
+	LET probs[ probs.getLength() + 1 ].titl = "19. Single Checkbox"
+	LET probs[ probs.getLength() ].desc = "requires two taps"
+	LET probs[ probs.getLength() ].icon = "fa-bug"
+
+	#LET probs[ probs.getLength() + 1 ].titl = "20. no done yet"
 	#LET probs[ probs.getLength() ].desc = "..."
 	#LET probs[ probs.getLength() ].icon = "info"
-
 	LET l_first_time = TRUE
 	DIALOG
 		INPUT BY NAME l_dummy
@@ -169,6 +181,7 @@ FUNCTION do_test( x )
 		WHEN 16 CALL prob16()
 		WHEN 17 CALL prob17()
 		WHEN 18 CALL prob18()
+		WHEN 19 CALL prob19()
 	END CASE
 END FUNCTION
 --------------------------------------------------------------------------------
@@ -908,7 +921,24 @@ FUNCTION prob18()
 	CLOSE WINDOW p18
 END FUNCTION
 --------------------------------------------------------------------------------
+-- Single checkbox
+FUNCTION prob19()
+	DEFINE l_chk BOOLEAN
+	DEFINE l_text STRING
+	LET l_text = "It seems to require two taps to set it."
+	OPEN WINDOW p19 WITH FORM "prob19"
 
+	LET l_chk = FALSE
+	DISPLAY l_text TO text
+	INPUT BY NAME l_chk WITHOUT DEFAULTS
+	IF l_chk THEN
+		CALL fgl_winMessage("Information","The Checkbox was Ticked","information")
+	ELSE
+		CALL fgl_winMessage("Information","The NOT Checkbox was Ticked","information")
+	END IF
+
+	CLOSE WINDOW p19
+END FUNCTION
 
 
 
@@ -1097,6 +1127,7 @@ FUNCTION log(l_msg)
 	DEFINE l_msg STRING
 	DEFINE c base.Channel
 	DEFINE l_file STRING
+	DISPLAY l_msg
 	LET l_file = os.path.join( m_dir,base.Application.getProgramName()||".log")
 	LET c = base.Channel.create()
 	TRY
