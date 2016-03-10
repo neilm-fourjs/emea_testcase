@@ -1,0 +1,15 @@
+
+LAYOUT ( TEXT="Prob #19" )
+GRID
+{
+[text_lab              ]
+[text                  ]
+[f                     ]
+}
+
+END 
+
+ATTRIBUTES
+LABEL text_lab : text_lab, TEXT="Message",STYLE="mobile_label";
+TEXTEDIT text=formonly.text,STYLE="mobile_info",STRETCH=BOTH;
+CHECKBOX f = formonly.l_chk, VALUECHECKED=1, VALUEUNCHECKED=0, NOT NULL,TEXT="Tick me if you can";
