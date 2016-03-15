@@ -6,8 +6,8 @@ GRID
 [ledt   ][edt                                     ]
 [ledt2  ][edt2                                    ]
 [lcmb   ][cmb                                     ]
-[ldte   ][dte        ]
-[ldtetim][dtetim             ] yyyy-mm-dd hh:mm:ss
+[ldte   ][dte       ]
+[ldtetim][dtetim             ] 
 [lfld5  ][Chk]
 [lfld6  ][radio                          ]
 [lfld7  ][spin]
@@ -47,7 +47,7 @@ COMBOBOX cmb = FORMONLY.cmb, ITEMS=("Item 1","Item Two", "3rd Item" );
 DATEEDIT dte = FORMONLY.dte;
 DATETIMEEDIT dtetim = FORMONLY.dtetim;
 CHECKBOX chk = FORMONLY.chk, VALUECHECKED=1,VALUEUNCHECKED=0, NOT NULL;
-RADIOGROUP radio = FORMONLY.radio, ITEMS=((1,"Male"),(2,"Famale"),(3,"Confused")), NOT NULL,ORIENTATION=HORIZONTAL;
+RADIOGROUP radio = FORMONLY.radio, ITEMS=((1,"Male"),(2,"Famale"),(3,"Other")), NOT NULL,ORIENTATION=HORIZONTAL;
 SPINEDIT spin = FORMONLY.spin, VALUEMAX=100, VALUEMIN=0, STEP=5;
 TEXTEDIT txt = FORMONLY.txt;
 

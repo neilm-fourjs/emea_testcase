@@ -46,7 +46,7 @@
 		<StyleAttribute name="scaleIcon" value="yes" />
 	</Style>
 	<Style name=".big">
-		<StyleAttribute name="fontSize" value="x-large" />
+		<StyleAttribute name="fontSize" value="large" />
 	</Style>
 	<Style name="Window">
 		<StyleAttribute name="windowType" value="normal" />
