@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="ANSI_X3.4-1968"?>
 <StyleList>
+	<Style name="Window.fab">
+			<StyleAttribute name="materialFABActionList" value="accept,select,detail"/>
+	</Style>
 	<Style name="Edit">
 		<StyleAttribute name="textColor" value="red" />
 	</Style>
@@ -14,6 +17,14 @@
 	</Style>
 	<Style name="Group">
 		<StyleAttribute name="textColor" value="green" />
+	</Style>
+	<Style name="Edit.required">
+		<StyleAttribute name="backgroundColor" value="lightred" />
+		<StyleAttribute name="textColor" value="black" />
+	</Style>
+	<Style name="Label.required">
+		<StyleAttribute name="textColor" value="red" />
+		<StyleAttribute name="fontWeight" value="bold" />
 	</Style>
 	<Style name=".darkred">
 		<StyleAttribute name="textColor" value="darkred" />

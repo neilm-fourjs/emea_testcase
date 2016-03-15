@@ -4,7 +4,7 @@ IMPORT util
 IMPORT security
 IMPORT com
 
-CONSTANT c_appver = "V2.7"
+CONSTANT c_appver = "V2.8"
 CONSTANT C_TESTDIR = "/sdcard/testdir"
 
 	DEFINE m_dir STRING -- restfull test 
@@ -136,7 +136,11 @@ MAIN
 	LET probs[ probs.getLength() ].desc = "requires two taps"
 	LET probs[ probs.getLength() ].icon = "fa-bug"
 
-	#LET probs[ probs.getLength() + 1 ].titl = "20. no done yet"
+	LET probs[ probs.getLength() + 1 ].titl = "20. FAB action"
+	LET probs[ probs.getLength() ].desc = "Floating Action Button"
+	LET probs[ probs.getLength() ].icon = "smiley"
+
+	#LET probs[ probs.getLength() + 1 ].titl = "21. no done yet"
 	#LET probs[ probs.getLength() ].desc = "..."
 	#LET probs[ probs.getLength() ].icon = "info"
 	LET l_first_time = TRUE
@@ -182,6 +186,7 @@ FUNCTION do_test( x )
 		WHEN 17 CALL prob17()
 		WHEN 18 CALL prob18()
 		WHEN 19 CALL prob19()
+		WHEN 20 CALL prob20()
 	END CASE
 END FUNCTION
 --------------------------------------------------------------------------------
@@ -938,6 +943,32 @@ FUNCTION prob19()
 	END IF
 
 	CLOSE WINDOW p19
+END FUNCTION
+--------------------------------------------------------------------------------
+-- FAB
+FUNCTION prob20()
+	DEFINE l_fld1, l_fld2 STRING
+
+	OPEN WINDOW p20 WITH FORM "prob20"
+
+	MENU
+		ON ACTION input
+			INPUT BY NAME l_fld1,l_fld2 ATTRIBUTE(UNBUFFERED,WITHOUT DEFAULTS)
+				BEFORE INPUT
+					CALL DIALOG.setActionActive("accept",FALSE)
+				AFTER FIELD l_fld1
+					IF l_fld1 IS NOT NULL THEN
+						CALL DIALOG.setActionActive("accept",TRUE)
+					END IF
+				ON ACTION close EXIT MENU
+				ON ACTION detail
+					LET l_fld1 = "detail"
+			END INPUT
+		ON ACTION close EXIT MENU
+		ON ACTION exit EXIT MENU
+	END MENU
+
+	CLOSE WINDOW p20
 END FUNCTION
 
 

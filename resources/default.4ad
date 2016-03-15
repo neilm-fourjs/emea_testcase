@@ -34,6 +34,8 @@
  	<ActionDefault name="about" text="About" image="quest"/>
 	<ActionDefault name="exit" text="Exit" image="quit"/>
 	<ActionDefault name="back" text="Go Back" image="arrleft"/>
+	<ActionDefault name="detail" text="Details" image="fa-gear"/>
+	<ActionDefault name="input" text="Input" image="pen"/>
   <ActionDefault name="act1" text="Action1" image="info" defaultView="yes" />
   <ActionDefault name="act2" text="Action2" image="smiley" defaultView="yes" />
   <ActionDefault name="act3" defaultView="yes" />
