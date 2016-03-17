@@ -38,7 +38,7 @@
 	<ActionDefault name="input" text="Input" image="pen"/>
   <ActionDefault name="act1" text="Action1" image="info" defaultView="yes" />
   <ActionDefault name="act2" text="Action2" image="smiley" defaultView="yes" />
-  <ActionDefault name="act3" defaultView="yes" />
+  <ActionDefault name="act3" defaultView="yes" image="fa-gear" />
   <ActionDefault name="act4" text="Action4" image="ssmiley" defaultView="yes" />
   <ActionDefault name="act5" text="Action5" image="heart" defaultView="yes" />
 </ActionDefaultList>

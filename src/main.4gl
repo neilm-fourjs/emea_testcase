@@ -269,12 +269,15 @@ FUNCTION prob5()
 
 	LET fld1 = "Try the actions"
 	LET fld2 = "if you can."
+
 	INPUT BY NAME fld1, fld2 WITHOUT DEFAULTS
 		BEFORE INPUT 
 			CALL DIALOG.setActionHidden("act2", TRUE )
-
 		ON ACTION act1
-			CALL fgl_winMessage("Info","You Clicked the action #1","information")
+			MENU "MenuAction" ATTRIBUTE(STYLE="dialog",comment="You Clicked the action #1", IMAGE="myicon.png")
+				ON ACTION CLOSE EXIT MENU
+				ON ACTION okay EXIT MENU
+			END MENU
 		ON ACTION act2
 			CALL fgl_winMessage("Info","You Clicked the action #2","information")
 		ON ACTION act3
