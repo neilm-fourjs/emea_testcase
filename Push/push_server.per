@@ -1,0 +1,48 @@
+
+LAYOUT (TEXT="Send notification")
+VBOX
+GRID
+{
+Title:  [titl                                                           ]
+Message:[mess                                                           ]
+Icon:   [icon                       ]
+}
+END -- GRID
+TABLE ( DOUBLECLICK=toggle )
+{
+[a01][a02           ][a03][a04            ][a05                     ][a6]
+[a01][a02           ][a03][a04            ][a05                     ][a6]
+[a01][a02           ][a03][a04            ][a05                     ][a6]
+[a01][a02           ][a03][a04            ][a05                     ][a6]
+[a01][a02           ][a03][a04            ][a05                     ][a6]
+}
+END -- TABLE
+GRID
+{
+[res                                                                    ]
+[                                                                       ]
+[                                                                       ]
+[                                                                       ]
+[                                                                       ]
+}
+END -- VBOX
+END -- LAYOUT
+
+ATTRIBUTES
+
+titl = FORMONLY.l_titl, SCROLL, NOT NULL;
+mess = FORMONLY.l_mess, SCROLL, NOT NULL;
+COMBOBOX icon = FORMONLY.l_icon, NOT NULL, ITEMS=("exclamation","information");
+
+a01 = FORMONLY.id, TITLE="Id";
+PHANTOM FORMONLY.sender_id;
+a02 = FORMONLY.registration_token, TITLE="Token";
+a03 = FORMONLY.badge_number, TITLE="Badge";
+a04 = FORMONLY.app_user, TITLE="User";
+a05 = FORMONLY.reg_date, TITLE="Registered";
+CHECKBOX a6 = FORMONLY.send, TITLE="Send?", VALUECHECKED=1, VALUEUNCHECKED=0;
+
+TEXTEDIT res = FORMONLY.l_res, STRETCH=BOTH, NOENTRY;
+
+INSTRUCTIONS
+SCREEN RECORD f_rec ( FORMONLY.id THRU FORMONLY.send )

@@ -95,7 +95,6 @@ END FUNCTION
 #+
 #+ @returns The String reply to send back.
 FUNCTION process()
-	DEFINE l_cmd STRING
 	DEFINE l_res STRING
 	DEFINE l_int INTEGER
 	DEFINE x SMALLINT

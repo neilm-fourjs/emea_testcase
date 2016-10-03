@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<Project defaultApplication="400358049" gstVersion="30016" version="3.1">
+<Project defaultApplication="718255169" gstVersion="3001d" version="3.1">
   <Settings>
     <DynamicProperties version="2">
       <DynamicProperty description="Accent color (Android 5.0 and later)" initialValue="#9575CD" isDefaultInherited="false" isHidden="false" label="Accent color" name="gma-accent-color" readOnly="false" type="COLOR"/>
@@ -13,6 +13,7 @@
       <DynamicProperty description="Extra Extra High-DPI Icon (144x144 px) path" editorInfo="filters:*.png;openDirDialog:true;replaceDocPath:$(ProjectDir)" initialValue="" isDefaultInherited="false" isHidden="false" label="Icon-xxhdpi (144x144 px)" name="icon-xxhdpi" readOnly="false" type="FILE"/>
       <DynamicProperty description="120x120 pixel icon (used for home screen)" editorInfo="filters:*.png;openDirDialog:true;replaceDocPath:$(ProjectDir)" initialValue="" isDefaultInherited="false" isHidden="false" label="Icon (120x120 px)" name="icon120x120" readOnly="false" type="FILE"/>
       <DynamicProperty description="152x152 pixel icon (used for home screen)" editorInfo="filters:*.png;openDirDialog:true;replaceDocPath:$(ProjectDir)" initialValue="" isDefaultInherited="false" isHidden="false" label="Icon (152x152 px)" name="icon152x152" readOnly="false" type="FILE"/>
+      <DynamicProperty description="167x167 pixel icon (used for home screen)" editorInfo="filters:*.png;openDirDialog:true;replaceDocPath:$(ProjectDir)" initialValue="" isDefaultInherited="false" isHidden="false" label="Icon (167x167 px)" name="icon167x167" readOnly="false" type="FILE"/>
       <DynamicProperty description="180x180 pixel icon (used for home screen)" editorInfo="filters:*.png;openDirDialog:true;replaceDocPath:$(ProjectDir)" initialValue="" isDefaultInherited="false" isHidden="false" label="Icon (180x180 px)" name="icon180x180" readOnly="false" type="FILE"/>
       <DynamicProperty description="29x29 pixel icon (used for settings)" editorInfo="filters:*.png;openDirDialog:true;replaceDocPath:$(ProjectDir)" initialValue="" isDefaultInherited="false" isHidden="false" label="Icon (29x29 px)" name="icon29x29" readOnly="false" type="FILE"/>
       <DynamicProperty description="40x40 pixel icon (used for settings)" editorInfo="filters:*.png;openDirDialog:true;replaceDocPath:$(ProjectDir)" initialValue="" isDefaultInherited="false" isHidden="false" label="Icon (40x40 px)" name="icon40x40" readOnly="false" type="FILE"/>
@@ -27,7 +28,9 @@
       <DynamicProperty description="Launch screen for iPhone 6 (landscape)" editorInfo="filters:*.png;openDirDialog:true;replaceDocPath:$(ProjectDir)" initialValue="" isDefaultInherited="false" isHidden="false" label="Launch Screen (1334x750 px)" name="launchScreen1334x750" readOnly="false" type="FILE"/>
       <DynamicProperty description="Launch screen for iPad (portrait)" editorInfo="filters:*.png;openDirDialog:true;replaceDocPath:$(ProjectDir)" initialValue="" isDefaultInherited="false" isHidden="false" label="Launch Screen (1536x2048 px)" name="launchScreen1536x2048" readOnly="false" type="FILE"/>
       <DynamicProperty description="Launch screen for iPad (landscape)" editorInfo="filters:*.png;openDirDialog:true;replaceDocPath:$(ProjectDir)" initialValue="" isDefaultInherited="false" isHidden="false" label="Launch Screen (2048x1536 px)" name="launchScreen2048x1536" readOnly="false" type="FILE"/>
+      <DynamicProperty description="Launch screen for iPad (portrait)" editorInfo="filters:*.png;openDirDialog:true;replaceDocPath:$(ProjectDir)" initialValue="" isDefaultInherited="false" isHidden="false" label="Launch Screen (2048x2732 px)" name="launchScreen2048x2732" readOnly="false" type="FILE"/>
       <DynamicProperty description="Launch screen for iPhone 6+ (landscape)" editorInfo="filters:*.png;openDirDialog:true;replaceDocPath:$(ProjectDir)" initialValue="" isDefaultInherited="false" isHidden="false" label="Launch Screen (2208x1242 px)" name="launchScreen2208x1242" readOnly="false" type="FILE"/>
+      <DynamicProperty description="Launch screen for iPad (landscape)" editorInfo="filters:*.png;openDirDialog:true;replaceDocPath:$(ProjectDir)" initialValue="" isDefaultInherited="false" isHidden="false" label="Launch Screen (2732x2048 px)" name="launchScreen2732x2048" readOnly="false" type="FILE"/>
       <DynamicProperty description="Launch screen for iPhone" editorInfo="filters:*.png;openDirDialog:true;replaceDocPath:$(ProjectDir)" initialValue="" isDefaultInherited="false" isHidden="false" label="Launch Screen (320x480 px)" name="launchScreen320x480" readOnly="false" type="FILE"/>
       <DynamicProperty description="Launch screen for iPhone 4" editorInfo="filters:*.png;openDirDialog:true;replaceDocPath:$(ProjectDir)" initialValue="" isDefaultInherited="false" isHidden="false" label="Launch Screen (640x960 px)" name="launchScreen640x960" readOnly="false" type="FILE"/>
       <DynamicProperty description="Launch screen for iPhone 6 (portrait)" editorInfo="filters:*.png;openDirDialog:true;replaceDocPath:$(ProjectDir)" initialValue="" isDefaultInherited="false" isHidden="false" label="Launch Screen (750x1334 px)" name="launchScreen750x1334" readOnly="false" type="FILE"/>
@@ -42,10 +45,10 @@
       <DynamicProperty description="Requirements" editorInfo="title:Requirements;description:iOS Requirements;icon:checkbox_checked;contains:accelerometer|auto-focus-camera|armv6|armv7|bluetooth-le|camera-flash|front-facing-camera|gamekit|gps|gyroscope|healthkit|magnetometer|metal|microphone|location-services|opengles-1|opengles-2|opengles-3|peer-peer|sms|still-camera|telephony|video-camera|wifi" initialValue="wifi" isDefaultInherited="false" isHidden="true" label="Requirements" name="required" readOnly="false" type="MULTIPLEBOOLEAN"/>
       <DynamicPropertyGroup collapsed="false" description="Android" label="Android" name="AndroidGroup" properties="packageVersionName;gma-primary-color;gma-primary-dark-color;gma-accent-color;gma-actionbar-color;icon-ldpi;icon-mdpi;icon-hdpi;icon-xhdpi;icon-xxhdpi;permissions"/>
       <DynamicPropertyGroup collapsed="false" description="Package" label="Package" name="PackageGroup" properties="packageId;packageName;packageLabel;packageVersion"/>
-      <DynamicPropertyGroup collapsed="false" description="iOS" label="iOS" name="iOSGroup" properties="launchScreen320x480;launchScreen640x960;launchScreen;launchScreen750x1334;launchScreen1334x750;launchScreen1242x2208;launchScreen2208x1242;launchScreen768x1024;launchScreen1024x768;launchScreen1536x2048;launchScreen2048x1536;launchScreenXib;icon29x29;icon40x40;icon58x58;icon60x60;icon76x76;icon80x80;icon87x87;icon120x120;icon152x152;icon180x180;required"/>
+      <DynamicPropertyGroup collapsed="false" description="iOS" label="iOS" name="iOSGroup" properties="launchScreen320x480;launchScreen640x960;launchScreen;launchScreen750x1334;launchScreen1334x750;launchScreen1242x2208;launchScreen2208x1242;launchScreen768x1024;launchScreen1024x768;launchScreen1536x2048;launchScreen2048x1536;launchScreen2048x2732;launchScreen2732x2048;launchScreenXib;icon29x29;icon40x40;icon58x58;icon60x60;icon76x76;icon80x80;icon87x87;icon120x120;icon152x152;icon167x167;icon180x180;required"/>
     </DynamicProperties>
     <NodeInfos version="1">
-      <NodeInfo mimeType="pm/package" properties="packageId;packageLabel;packageName;packageVersion;packageVersionName;launchScreen320x480;launchScreen640x960;launchScreen;launchScreen750x1334;launchScreen1334x750;launchScreen1242x2208;launchScreen2208x1242;launchScreen768x1024;launchScreen1024x768;launchScreen1536x2048;launchScreen2048x1536;launchScreenXib;icon29x29;icon40x40;icon58x58;icon60x60;icon76x76;icon80x80;icon87x87;icon120x120;icon152x152;icon180x180;gma-primary-color;gma-primary-dark-color;gma-accent-color;gma-actionbar-color;icon-ldpi;icon-mdpi;icon-hdpi;icon-xhdpi;icon-xxhdpi;permissions;required"/>
+      <NodeInfo mimeType="pm/package" properties="packageId;packageLabel;packageName;packageVersion;packageVersionName;launchScreen320x480;launchScreen640x960;launchScreen;launchScreen750x1334;launchScreen1334x750;launchScreen1242x2208;launchScreen2208x1242;launchScreen768x1024;launchScreen1024x768;launchScreen1536x2048;launchScreen2048x1536;launchScreen2048x2732;launchScreen2732x2048;launchScreenXib;icon29x29;icon40x40;icon58x58;icon60x60;icon76x76;icon80x80;icon87x87;icon120x120;icon152x152;icon167x167;icon180x180;gma-primary-color;gma-primary-dark-color;gma-accent-color;gma-actionbar-color;icon-ldpi;icon-mdpi;icon-hdpi;icon-xhdpi;icon-xxhdpi;permissions;required"/>
     </NodeInfos>
   </Settings>
   <LanguageList version="1.0"/>
@@ -80,8 +83,10 @@
         <File filePath="src/prob7.per"/>
         <File filePath="src/prob8.per"/>
         <File filePath="src/prob9.per"/>
+        <File filePath="src/push.per"/>
       </VirtualFolder>
       <File filePath="src/main.4gl"/>
+      <File filePath="Push/push_cli.4gl"/>
     </Application>
     <Library binaryName="Entities" id="212784684" label="Entities"/>
     <Library binaryName="GoogleMapsWC" id="749244258" label="GoogleMapsWC">
@@ -179,7 +184,7 @@
       <Directory description="Resources" destinationDirectory="$(ProjectDir)/bin300" includedFiles="*.4ad *.4st" label="Resources" recursive="false" sourceDirectory="$(ProjectDir)/resources"/>
       <Directory description="Web Components" destinationDirectory="$(ProjectDir)/bin300" label="Webcomponents" recursive="false" sourceDirectory="$(ProjectDir)/webcomponents"/>
     </Package>
-    <Package binaryName="emea_testcase3_arm" dependencies="400358049||781919164||159917928||212784684||715422167||362164715||313644474" description="Android Package (arm)" distDirectory="$(ProjectDir)/distbin300.5" label="emea_testcase3_arm" platform="Android (arm)" rootDirectory="$(ProjectDir)/bin300">
+    <Package binaryName="emea_testcase5_arm" dependencies="400358049||781919164||159917928||212784684||715422167||362164715||313644474" description="Android Package (arm)" distDirectory="$(ProjectDir)/distbin300.5" label="emea_testcase5_arm" platform="Android (arm)" rootDirectory="$(ProjectDir)/bin300">
       <DynamicProperty name="gma-accent-color" value="#8ac2cd"/>
       <DynamicProperty name="gma-actionbar-color" value="#ebebeb"/>
       <DynamicProperty name="gma-primary-color" value="#3d7bb1"/>
@@ -192,12 +197,66 @@
       <DynamicProperty name="icon60x60" value="$(ProjectDir)/images/myicon.png"/>
       <DynamicProperty name="launchScreen320x480" value="$(ProjectDir)/images/myicon.png"/>
       <DynamicProperty name="launchScreen640x960" value="$(ProjectDir)/images/myicon.png"/>
-      <DynamicProperty name="packageId" value="com.fjsemea.testcase3"/>
-      <DynamicProperty name="packageLabel" value="emea-testcase3"/>
-      <DynamicProperty name="packageName" value="EMEA TestCase3"/>
-      <DynamicProperty name="packageVersion" value="3"/>
-      <DynamicProperty name="packageVersionName" value="3"/>
+      <DynamicProperty name="packageId" value="com.fjsemea.testcase5"/>
+      <DynamicProperty name="packageLabel" value="emea-testcase5"/>
+      <DynamicProperty name="packageName" value="EMEA TestCase5"/>
+      <DynamicProperty name="packageVersion" value="5"/>
+      <DynamicProperty name="packageVersionName" value="5"/>
       <DynamicProperty name="permissions" value="ACCESS_COARSE_LOCATION;ACCESS_FINE_LOCATION;ACCESS_NETWORK_STATE;ACCESS_WIFI_STATE;INSTALL_SHORTCUT;INTERNET;READ_CONTACTS;READ_EXTERNAL_STORAGE;WRITE_EXTERNAL_STORAGE"/>
+      <Directory description="Binaries" destinationDirectory="$(ProjectDir)/bin300" includedFiles="*.42?" label="Binaries" recursive="false" sourceDirectory="$(ProjectDir)/bin300"/>
+      <Directory description="Configuration Files" destinationDirectory="$(ProjectDir)/bin300" includedFiles="fglprofile *.pem" label="Config" recursive="false" sourceDirectory="$(ProjectDir)/config"/>
+      <Directory description="Database" destinationDirectory="$(ProjectDir)/bin300" includedFiles="*.db" label="Database" recursive="false" sourceDirectory="$(ProjectDir)/database"/>
+      <Directory description="Images" destinationDirectory="$(ProjectDir)/bin300" includedFiles="*.png *.jpg" label="Images" sourceDirectory="$(ProjectDir)/images"/>
+      <Directory description="Studio Library" destinationDirectory="$(ProjectDir)/bin300" includedFiles="*.42?" label="libgst" recursive="false" sourceDirectory="$(GSTLIBRARYDIR)/bin"/>
+      <Directory description="Resources" destinationDirectory="$(ProjectDir)/bin300" includedFiles="*.4ad *.4st *.ttf *.txt" label="Resources" recursive="false" sourceDirectory="$(ProjectDir)/resources"/>
+      <Directory description="Web Components" destinationDirectory="$(ProjectDir)/bin300" label="Webcomponents" recursive="false" sourceDirectory="$(ProjectDir)/webcomponents"/>
+    </Package>
+    <Package binaryName="emea_testcase6_arm" dependencies="400358049||781919164||159917928||212784684||715422167||362164715||313644474" description="Android Package (arm)" distDirectory="$(ProjectDir)/distbin300.6" label="emea_testcase6_arm" platform="Android (arm)" rootDirectory="$(ProjectDir)/bin300">
+      <DynamicProperty name="gma-accent-color" value="#8ac2cd"/>
+      <DynamicProperty name="gma-actionbar-color" value="#ebebeb"/>
+      <DynamicProperty name="gma-primary-color" value="#3d7bb1"/>
+      <DynamicProperty name="gma-primary-dark-color" value="#1e4da5"/>
+      <DynamicProperty name="icon-hdpi" value="$(ProjectDir)/images/myicon.png"/>
+      <DynamicProperty name="icon-ldpi" value="$(ProjectDir)/images/myicon.png"/>
+      <DynamicProperty name="icon-mdpi" value="$(ProjectDir)/images/myicon.png"/>
+      <DynamicProperty name="icon-xhdpi" value="$(ProjectDir)/images/myicon.png"/>
+      <DynamicProperty name="icon-xxhdpi" value="$(ProjectDir)/images/myicon.png"/>
+      <DynamicProperty name="icon60x60" value="$(ProjectDir)/images/myicon.png"/>
+      <DynamicProperty name="launchScreen320x480" value="$(ProjectDir)/images/myicon.png"/>
+      <DynamicProperty name="launchScreen640x960" value="$(ProjectDir)/images/myicon.png"/>
+      <DynamicProperty name="packageId" value="com.fjsemea.testcase6"/>
+      <DynamicProperty name="packageLabel" value="emea-testcase6"/>
+      <DynamicProperty name="packageName" value="EMEA TestCase6"/>
+      <DynamicProperty name="packageVersion" value="6"/>
+      <DynamicProperty name="packageVersionName" value="6"/>
+      <DynamicProperty name="permissions" value="ACCESS_COARSE_LOCATION;ACCESS_FINE_LOCATION;ACCESS_NETWORK_STATE;ACCESS_WIFI_STATE;INSTALL_SHORTCUT;INTERNET;READ_CONTACTS;READ_EXTERNAL_STORAGE;WRITE_EXTERNAL_STORAGE"/>
+      <Directory description="Binaries" destinationDirectory="$(ProjectDir)/bin300" includedFiles="*.42?" label="Binaries" recursive="false" sourceDirectory="$(ProjectDir)/bin300"/>
+      <Directory description="Configuration Files" destinationDirectory="$(ProjectDir)/bin300" includedFiles="fglprofile *.pem" label="Config" recursive="false" sourceDirectory="$(ProjectDir)/config"/>
+      <Directory description="Database" destinationDirectory="$(ProjectDir)/bin300" includedFiles="*.db" label="Database" recursive="false" sourceDirectory="$(ProjectDir)/database"/>
+      <Directory description="Images" destinationDirectory="$(ProjectDir)/bin300" includedFiles="*.png *.jpg" label="Images" sourceDirectory="$(ProjectDir)/images"/>
+      <Directory description="Studio Library" destinationDirectory="$(ProjectDir)/bin300" includedFiles="*.42?" label="libgst" recursive="false" sourceDirectory="$(GSTLIBRARYDIR)/bin"/>
+      <Directory description="Resources" destinationDirectory="$(ProjectDir)/bin300" includedFiles="*.4ad *.4st *.ttf *.txt" label="Resources" recursive="false" sourceDirectory="$(ProjectDir)/resources"/>
+      <Directory description="Web Components" destinationDirectory="$(ProjectDir)/bin300" label="Webcomponents" recursive="false" sourceDirectory="$(ProjectDir)/webcomponents"/>
+    </Package>
+    <Package binaryName="emea_testcase9_arm" dependencies="400358049||781919164||159917928||212784684||715422167||362164715||313644474" description="Android Package (arm)" distDirectory="$(ProjectDir)/distbin300.9" label="emea_testcase9_arm" platform="Android (arm)" rootDirectory="$(ProjectDir)/bin300">
+      <DynamicProperty name="gma-accent-color" value="#8ac2cd"/>
+      <DynamicProperty name="gma-actionbar-color" value="#ebebeb"/>
+      <DynamicProperty name="gma-primary-color" value="#3d7bb1"/>
+      <DynamicProperty name="gma-primary-dark-color" value="#1e4da5"/>
+      <DynamicProperty name="icon-hdpi" value="$(ProjectDir)/images/myicon.png"/>
+      <DynamicProperty name="icon-ldpi" value="$(ProjectDir)/images/myicon.png"/>
+      <DynamicProperty name="icon-mdpi" value="$(ProjectDir)/images/myicon.png"/>
+      <DynamicProperty name="icon-xhdpi" value="$(ProjectDir)/images/myicon.png"/>
+      <DynamicProperty name="icon-xxhdpi" value="$(ProjectDir)/images/myicon.png"/>
+      <DynamicProperty name="icon60x60" value="$(ProjectDir)/images/myicon.png"/>
+      <DynamicProperty name="launchScreen320x480" value="$(ProjectDir)/images/myicon.png"/>
+      <DynamicProperty name="launchScreen640x960" value="$(ProjectDir)/images/myicon.png"/>
+      <DynamicProperty name="packageId" value="com.fjsemea.testcase9"/>
+      <DynamicProperty name="packageLabel" value="emea-testcase9"/>
+      <DynamicProperty name="packageName" value="EMEA TestCase9"/>
+      <DynamicProperty name="packageVersion" value="6"/>
+      <DynamicProperty name="packageVersionName" value="6"/>
+      <DynamicProperty name="permissions" value="ACCESS_COARSE_LOCATION;ACCESS_FINE_LOCATION;ACCESS_NETWORK_STATE;ACCESS_WIFI_STATE;C2DM_RECEIVE;C2D_MESSAGE;GET_ACCOUNTS;INSTALL_SHORTCUT;INTERNET;READ_CONTACTS;READ_EXTERNAL_STORAGE;WAKE_LOCK;WRITE_EXTERNAL_STORAGE"/>
       <Directory description="Binaries" destinationDirectory="$(ProjectDir)/bin300" includedFiles="*.42?" label="Binaries" recursive="false" sourceDirectory="$(ProjectDir)/bin300"/>
       <Directory description="Configuration Files" destinationDirectory="$(ProjectDir)/bin300" includedFiles="fglprofile *.pem" label="Config" recursive="false" sourceDirectory="$(ProjectDir)/config"/>
       <Directory description="Database" destinationDirectory="$(ProjectDir)/bin300" includedFiles="*.db" label="Database" recursive="false" sourceDirectory="$(ProjectDir)/database"/>
@@ -208,6 +267,13 @@
     </Package>
   </Group>
   <Group label="ServerSide" language="Genero" targetDirectory="$(ProjectDir)/bin_serverside">
+    <Application binaryName="push_register_tokens" commandLineArguments="x" environment="value:FGLPROFILE=" id="-682275888" label="push_register_tokens">
+      <File filePath="Push/push_reg.4gl"/>
+    </Application>
+    <Application binaryName="push_server" id="718255169" label="push_server">
+      <File filePath="Push/push_server.per"/>
+      <File filePath="Push/push_srv.4gl"/>
+    </Application>
     <Application binaryName="resttest" id="666956871" label="resttest">
       <File filePath="src_serverside/resttest.4gl"/>
     </Application>

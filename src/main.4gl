@@ -4,8 +4,9 @@ IMPORT util
 IMPORT security
 IMPORT com
 
-CONSTANT c_appver = "V2.8"
+CONSTANT c_appver = "V3.0"
 CONSTANT C_TESTDIR = "/sdcard/testdir"
+CONSTANT C_SENDER_ID = "960478794365"
 
 	DEFINE m_dir STRING -- restfull test 
 	DEFINE m_cmd STRING -- restfull test 
@@ -28,6 +29,8 @@ MAIN
 	DEFINE l_dummy STRING
 	DEFINE l_first_time BOOLEAN
 	DEFINE l_ret STRING
+
+	WHENEVER ERROR CALL erro
 
 	LET m_dir = C_TESTDIR
 	IF NOT os.path.exists( m_dir ) THEN
@@ -54,6 +57,7 @@ MAIN
 	OPEN FORM f FROM "form"
 	DISPLAY FORM f
 
+	DISPLAY CURRENT TO l_curr
 
 	LET m_cli_info = c_appver," Cli:",m_cli," ",ui.Interface.getFrontEndVersion()
 	CALL log("Started:"||NVL(m_cli_info ,"NULL Client") )
@@ -140,10 +144,17 @@ MAIN
 	LET probs[ probs.getLength() ].desc = "Floating Action Button"
 	LET probs[ probs.getLength() ].icon = "smiley"
 
-	#LET probs[ probs.getLength() + 1 ].titl = "21. no done yet"
-	#LET probs[ probs.getLength() ].desc = "..."
-	#LET probs[ probs.getLength() ].icon = "info"
+	LET probs[ probs.getLength() + 1 ].titl = "21. Register for PUSH"
+	LET probs[ probs.getLength() ].desc = "Register for PUSH"
+	LET probs[ probs.getLength() ].icon = "info"
+
+{	LET probs[ probs.getLength() + 1 ].titl = "22. no done yet"
+	LET probs[ probs.getLength() ].desc = "..."
+	LET probs[ probs.getLength() ].icon = "info" }
+
 	LET l_first_time = TRUE
+	CALL handle_notification(C_SENDER_ID)
+
 	DIALOG
 		INPUT BY NAME l_dummy
 		END INPUT
@@ -160,6 +171,10 @@ MAIN
 		ON ACTION close EXIT DIALOG
 		ON ACTION about CALL ui.interface.frontCall("Android","showAbout",[],[])
 		ON ACTION exit EXIT DIALOG
+		ON IDLE 15
+			DISPLAY CURRENT TO l_curr
+		ON ACTION notificationpushed
+			CALL handle_notification(C_SENDER_ID)
 	END DIALOG
 	CALL LOG("Finished")
 END MAIN
@@ -187,6 +202,7 @@ FUNCTION do_test( x )
 		WHEN 18 CALL prob18()
 		WHEN 19 CALL prob19()
 		WHEN 20 CALL prob20()
+		WHEN 21 CALL push_register()
 	END CASE
 END FUNCTION
 --------------------------------------------------------------------------------
@@ -274,7 +290,7 @@ FUNCTION prob5()
 		BEFORE INPUT 
 			CALL DIALOG.setActionHidden("act2", TRUE )
 		ON ACTION act1
-			MENU "MenuAction" ATTRIBUTE(STYLE="dialog",comment="You Clicked the action #1", IMAGE="myicon.png")
+			MENU "MenuAction" ATTRIBUTE(STYLE="dialog",comment="You Clicked the action #1", IMAGE="myicon")
 				ON ACTION CLOSE EXIT MENU
 				ON ACTION okay EXIT MENU
 			END MENU
@@ -942,7 +958,7 @@ FUNCTION prob19()
 	IF l_chk THEN
 		CALL fgl_winMessage("Information","The Checkbox was Ticked","information")
 	ELSE
-		CALL fgl_winMessage("Information","The NOT Checkbox was Ticked","information")
+		CALL fgl_winMessage("Information","The Checkbox was NOT Ticked","information")
 	END IF
 
 	CLOSE WINDOW p19
@@ -976,10 +992,24 @@ END FUNCTION
 
 
 
-
-
-
-
+--------------------------------------------------------------------------------
+-- register for push notification
+FUNCTION push_register() --prob21
+	DEFINE l_sender_id, l_server, l_res, l_app_user STRING
+	DEFINE l_badge_number INTEGER
+	OPEN WINDOW p21 WITH FORM "push"
+	LET l_sender_id = C_SENDER_ID
+	--LET l_server = "http://10.2.1.199:9999"
+	LET l_server = "http://10.1.0.103:9999"
+	LET l_badge_number = 69
+	LET l_app_user = "neilm"
+	INPUT BY NAME l_sender_id, l_server, l_badge_number,l_app_user, l_res ATTRIBUTES( WITHOUT DEFAULTS, UNBUFFERED, ACCEPT=FALSE )
+		ON ACTION register
+			LET l_res = push_reg(l_sender_id, l_server, l_badge_number, l_app_user)
+	END INPUT
+	CLOSE WINDOW p21
+END FUNCTION
+--------------------------------------------------------------------------------
 
 
 
@@ -1237,4 +1267,9 @@ FUNCTION get_decimal_separator()
 	LET f=1.2
 	LET s=f
 	RETURN s.getCharAt(2)
+END FUNCTION
+--------------------------------------------------------------------------------
+-- called by WHENEVER ERROR CALL
+FUNCTION erro()
+	CALL fgl_winMessage("Error", STATUS||" "||ERR_GET( STATUS ),"exclamation")
 END FUNCTION

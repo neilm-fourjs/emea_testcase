@@ -30,7 +30,7 @@
   <ActionDefault name="nexttab" text="Next Folder Tab" acceleratorName="Control-Tab" contextMenu="no"/>
   <ActionDefault name="prevtab" text="Previous Folder Tab" acceleratorName="Control-Shift-Tab" contextMenu="no"/>
   <ActionDefault name="dialogtouched" validate="no" defaultView="no"  contextMenu="no"/>
- 
+  <ActionDefault name="notificationpushed" validate="no" defaultView="no"  contextMenu="no"/>
  	<ActionDefault name="about" text="About" image="quest"/>
 	<ActionDefault name="exit" text="Exit" image="quit"/>
 	<ActionDefault name="back" text="Go Back" image="arrleft"/>

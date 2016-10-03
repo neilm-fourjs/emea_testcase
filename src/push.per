@@ -1,0 +1,23 @@
+
+LAYOUT
+GRID
+{
+Sender Id:
+[s_id                        ]
+Server IP:
+[s_srv                       ]
+Badge No:
+[s_bn ]
+app User:
+[s_au                        ]
+Result:
+[res                         ]
+}
+END -- GRID
+
+ATTRIBUTES
+s_id = FORMONLY.l_sender_id, SCROLL;
+s_srv = FORMONLY.l_server, SCROLL;
+s_bn = FORMONLY.l_badge_number;
+s_au = FORMONLY.l_app_user, DOWNSHIFT;
+res = FORMONLY.l_res,SCROLL, NOENTRY;
