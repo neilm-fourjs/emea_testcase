@@ -3,7 +3,24 @@ IMPORT com  -- For RESTful post
 IMPORT util -- JSON API
 
 &include "../Push/push.inc"
-
+--------------------------------------------------------------------------------
+-- register for push notification
+FUNCTION push_register(l_app_ver) --prob21
+	DEFINE l_sender_id, l_server, l_res, l_app_user STRING
+	DEFINE l_app_ver DECIMAL(5,2)
+	DEFINE l_badge_number INTEGER
+	OPEN WINDOW p21 WITH FORM "push"
+	LET l_sender_id = C_SENDER_ID
+	LET l_server = C_REG_URL
+	LET l_badge_number = 69
+	LET l_app_user = "neilm"
+	INPUT BY NAME l_sender_id, l_server, l_badge_number,l_app_user, l_res ATTRIBUTES( WITHOUT DEFAULTS, UNBUFFERED, ACCEPT=FALSE )
+		ON ACTION register
+			LET l_res = push_reg(l_sender_id, l_server, l_badge_number, l_app_user, l_app_ver)
+	END INPUT
+	CLOSE WINDOW p21
+END FUNCTION
+--------------------------------------------------------------------------------
 FUNCTION push_reg(l_sender_id, l_server, l_badge_number, l_app_user, l_app_ver)
 	DEFINE l_sender_id, l_server, l_res, l_app_user STRING,
 				l_app_ver DECIMAL(5,2),
@@ -37,6 +54,12 @@ FUNCTION push_reg(l_sender_id, l_server, l_badge_number, l_app_user, l_app_ver)
 								l_resp.getStatusDescription())
 		ELSE
 			LET l_res = "Registration token sent."
+			TRY
+				LET l_obj = util.JSONObject.parse( l_resp.getTextResponse() )
+				LET l_res = l_obj.get("message")
+			CATCH
+				LET l_res = "Registration token sent, but non json reply!"
+			END TRY
 		END IF
 	CATCH
 		LET l_res = SFMT("Could not post registration token to server: %1", STATUS)
@@ -44,8 +67,9 @@ FUNCTION push_reg(l_sender_id, l_server, l_badge_number, l_app_user, l_app_ver)
 	RETURN l_res
 END FUNCTION
 --------------------------------------------------------------------------------
-FUNCTION handle_notification(l_sender_id)
+FUNCTION handle_notification(l_sender_id, l_app_ver)
 	DEFINE l_sender_id STRING,
+		l_app_ver DECIMAL(5,2),
 		notif_list STRING,
 		notif_array util.JSONArray,
 		notif_item util.JSONObject,

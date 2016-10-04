@@ -12,6 +12,8 @@ app User:
 [s_au                        ]
 Result:
 [res                         ]
+[                            ]
+[                            ]
 }
 END -- GRID
 
@@ -20,4 +22,4 @@ s_id = FORMONLY.l_sender_id, SCROLL;
 s_srv = FORMONLY.l_server, SCROLL;
 s_bn = FORMONLY.l_badge_number;
 s_au = FORMONLY.l_app_user, DOWNSHIFT;
-res = FORMONLY.l_res,SCROLL, NOENTRY;
+TEXTEDIT res = FORMONLY.l_res, STRETCH=BOTH, NOENTRY;

@@ -106,6 +106,7 @@ END FUNCTION
 FUNCTION process_command(url, data)
 	DEFINE url, data STRING
 	DEFINE data_rec t_reg_rec
+	DEFINE l_rec t_reg_rec
 	DEFINE p_id INTEGER,
 			p_ts DATETIME YEAR TO FRACTION(3),
 			result_rec RECORD
@@ -118,11 +119,16 @@ FUNCTION process_command(url, data)
 		CASE
 			WHEN url MATCHES "*token_maintainer/register"
 				CALL util.JSON.parse( data, data_rec )
-				SELECT id INTO p_id FROM tokens
+				SELECT * INTO l_rec.* FROM tokens
 								WHERE registration_token = data_rec.registration_token
-				IF p_id > 0 THEN
+				IF l_rec.id > 0 THEN
 					LET result_rec.status = 1
-					LET result_rec.message = SFMT("Token already registered:\n [%1]", data_rec.registration_token)
+					IF data_rec.app_ver != l_rec.app_ver THEN
+						LET result_rec.message = "Token already registered.\nApp version updated."
+						UPDATE tokens SET app_ver = data_rec.app_ver WHERE registration_token = data_rec.registration_token
+					ELSE
+						LET result_rec.message = "Token already registered."
+					END IF
 					RETURN util.JSON.stringify(result_rec)
 				END IF
 				SELECT MAX(id) + 1 INTO p_id FROM tokens

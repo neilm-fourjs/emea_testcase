@@ -4,9 +4,11 @@ IMPORT util
 IMPORT security
 IMPORT com
 
+IMPORT FGL push_cli
+
 &include "../Push/push.inc"
 
-CONSTANT c_appver = "3.11"
+CONSTANT c_appver = "3.14"
 CONSTANT C_TESTDIR = "/sdcard/testdir"
 
 
@@ -155,7 +157,7 @@ MAIN
 	LET probs[ probs.getLength() ].icon = "info" }
 
 	LET l_first_time = TRUE
-	CALL handle_notification(C_SENDER_ID)
+	CALL push_cli.handle_notification(C_SENDER_ID, c_appver)
 
 	DIALOG
 		INPUT BY NAME l_dummy
@@ -176,7 +178,7 @@ MAIN
 		ON IDLE 15
 			DISPLAY CURRENT TO l_curr
 		ON ACTION notificationpushed
-			CALL handle_notification(C_SENDER_ID)
+			CALL push_cli.handle_notification(C_SENDER_ID, c_appver)
 	END DIALOG
 	CALL LOG("Finished")
 END MAIN
@@ -204,7 +206,7 @@ FUNCTION do_test( x )
 		WHEN 18 CALL prob18()
 		WHEN 19 CALL prob19()
 		WHEN 20 CALL prob20()
-		WHEN 21 CALL push_register()
+		WHEN 21 CALL push_cli.push_register(c_appver)
 	END CASE
 END FUNCTION
 --------------------------------------------------------------------------------
@@ -994,23 +996,7 @@ END FUNCTION
 
 
 
---------------------------------------------------------------------------------
--- register for push notification
-FUNCTION push_register() --prob21
-	DEFINE l_sender_id, l_server, l_res, l_app_user STRING
-	DEFINE l_badge_number INTEGER
-	OPEN WINDOW p21 WITH FORM "push"
-	LET l_sender_id = C_SENDER_ID
-	LET l_server = C_REG_URL
-	LET l_badge_number = 69
-	LET l_app_user = "neilm"
-	INPUT BY NAME l_sender_id, l_server, l_badge_number,l_app_user, l_res ATTRIBUTES( WITHOUT DEFAULTS, UNBUFFERED, ACCEPT=FALSE )
-		ON ACTION register
-			LET l_res = push_reg(l_sender_id, l_server, l_badge_number, l_app_user, c_appver)
-	END INPUT
-	CLOSE WINDOW p21
-END FUNCTION
---------------------------------------------------------------------------------
+
 
 
 
