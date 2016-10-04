@@ -2,13 +2,16 @@
 IMPORT com  -- For RESTful post
 IMPORT util -- JSON API
 
-FUNCTION push_reg(l_sender_id, l_server, l_badge_number, l_app_user)
+&include "../Push/push.inc"
+
+FUNCTION push_reg(l_sender_id, l_server, l_badge_number, l_app_user, l_app_ver)
 	DEFINE l_sender_id, l_server, l_res, l_app_user STRING,
-				 l_registration_token STRING
-	DEFINE l_req com.HTTPRequest,
-				 l_obj util.JSONObject,
-				 l_resp com.HTTPResponse
-	DEFINE l_badge_number INTEGER
+				l_app_ver DECIMAL(5,2),
+				l_registration_token STRING,
+				l_req com.HTTPRequest,
+				l_obj util.JSONObject,
+				l_resp com.HTTPResponse,
+				l_badge_number INTEGER
 
 -- First get the registration token
 	CALL ui.Interface.frontCall(
@@ -25,6 +28,7 @@ FUNCTION push_reg(l_sender_id, l_server, l_badge_number, l_app_user)
 		CALL l_obj.put("registration_token", l_registration_token)
 		CALL l_obj.put("badge_number", l_badge_number)
 		CALL l_obj.put("app_user", l_app_user)
+		CALL l_obj.put("app_ver", l_app_ver)
 		CALL l_req.doTextRequest(l_obj.toString())
 		LET l_resp = l_req.getResponse()
 		IF l_resp.getStatusCode() != 200 THEN

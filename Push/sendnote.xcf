@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<APPLICATION Parent="defaultgwc" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.4js.com/ns/gas/3.00/cfextws.xsd">
+  <RESOURCE Id="res.app.path" Source="INTERNAL">/home/neilm/all/mobile/emea_testcase/bin_serverside/</RESOURCE>
+  <EXECUTION>
+    <ENVIRONMENT_VARIABLE Id="DBDATE">DMY4/</ENVIRONMENT_VARIABLE>
+		<ENVIRONMENT_VARIABLE Id="PUSH_APIKEY">xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</ENVIRONMENT_VARIABLE>
+    <PATH>$(res.app.path)</PATH>
+    <MODULE>push_server.42r</MODULE>
+  </EXECUTION>
+</APPLICATION>

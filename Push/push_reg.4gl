@@ -1,7 +1,7 @@
 IMPORT util
 IMPORT com
 
-CONSTANT DEFAULT_PORT = 9999
+&include "push.inc"
 
 MAIN
 	CALL open_create_db()
@@ -31,7 +31,8 @@ FUNCTION open_create_db()
 			registration_token VARCHAR(250) NOT NULL UNIQUE,
 			badge_number INTEGER NOT NULL,
 			app_user VARCHAR(50) NOT NULL, -- UNIQUE
-			reg_date DATETIME YEAR TO FRACTION(3) NOT NULL
+			app_ver DECIMAL(5,2),
+			reg_date DATETIME YEAR TO SECOND NOT NULL
 		)
 	END IF
 END FUNCTION
@@ -43,8 +44,8 @@ FUNCTION handle_registrations()
 
 	IF LENGTH(fgl_getenv("FGLAPPSERVER")) = 0 THEN
 	-- Normally, FGLAPPSERVER is set by the GAS
-		DISPLAY SFMT("Setting FGLAPPSERVER to %1", DEFAULT_PORT)
-		CALL fgl_setenv("FGLAPPSERVER", DEFAULT_PORT)
+		DISPLAY SFMT("Setting FGLAPPSERVER to %1", C_REG_PORT)
+		CALL fgl_setenv("FGLAPPSERVER", C_REG_PORT)
 	END IF
 
 	CALL com.WebServiceEngine.Start()
@@ -104,13 +105,8 @@ END FUNCTION
 --------------------------------------------------------------------------------
 FUNCTION process_command(url, data)
 	DEFINE url, data STRING
-	DEFINE data_rec RECORD
-				sender_id VARCHAR(150),
-				registration_token VARCHAR(250),
-				badge_number INTEGER,
-				app_user VARCHAR(50)
-			END RECORD,
-			p_id INTEGER,
+	DEFINE data_rec t_reg_rec
+	DEFINE p_id INTEGER,
 			p_ts DATETIME YEAR TO FRACTION(3),
 			result_rec RECORD
 				status INTEGER,
@@ -134,7 +130,7 @@ FUNCTION process_command(url, data)
 				LET p_ts = util.Datetime.toUTC(CURRENT YEAR TO FRACTION(3))
 				WHENEVER ERROR CONTINUE
 				INSERT INTO tokens
-						VALUES( p_id, data_rec.sender_id, data_rec.registration_token, data_rec.badge_number , data_rec.app_user, p_ts )
+						VALUES( p_id, data_rec.sender_id, data_rec.registration_token, data_rec.badge_number , data_rec.app_user,data_rec.app_ver, p_ts )
 				WHENEVER ERROR STOP
 				IF SQLCA.SQLCODE = 0 THEN
 					LET result_rec.message = SFMT("Token is now registered:\n [%1]", data_rec.registration_token)
@@ -180,14 +176,7 @@ FUNCTION process_command(url, data)
 END FUNCTION
 --------------------------------------------------------------------------------
 FUNCTION show_tokens()
-	DEFINE l_rec RECORD
-					id INTEGER,
-					sender_id VARCHAR(150),
-					registration_token VARCHAR(250),
-					badge_number INTEGER,
-					app_user VARCHAR(50),
-					reg_date DATETIME YEAR TO FRACTION(3)
-				END RECORD
+	DEFINE l_rec t_reg_rec
 
 	DECLARE c1 CURSOR FOR SELECT * FROM tokens ORDER BY id
 	FOREACH c1 INTO l_rec.*
@@ -196,6 +185,7 @@ FUNCTION show_tokens()
 		END IF
 		DISPLAY "	", l_rec.id, ": ",
 						l_rec.app_user[1,10], " / ",
+						l_rec.app_ver, " / ",
 						l_rec.sender_id[1,20],"... / ",
 						"(",l_rec.badge_number USING "<<<<&", ") ",
 						l_rec.registration_token[1,20],"..."

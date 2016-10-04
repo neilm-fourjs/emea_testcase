@@ -267,6 +267,9 @@
     </Package>
   </Group>
   <Group label="ServerSide" language="Genero" targetDirectory="$(ProjectDir)/bin_serverside">
+    <Library binaryName="lib" excludeFromBuild="true" id="-173340672" label="lib">
+      <File filePath="Push/push.inc"/>
+    </Library>
     <Application binaryName="push_register_tokens" commandLineArguments="x" environment="value:FGLPROFILE=" id="-682275888" label="push_register_tokens">
       <File filePath="Push/push_reg.4gl"/>
     </Application>

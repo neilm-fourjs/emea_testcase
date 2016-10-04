@@ -2,19 +2,14 @@
 IMPORT com
 IMPORT util
 
+&include "push.inc"
+
+DEFINE m_api_key STRING
 DEFINE m_reg_ids DYNAMIC ARRAY OF STRING
 
 MAIN
 	DEFINE l_titl, l_mess, l_icon, l_res STRING
-	DEFINE l_rec DYNAMIC ARRAY OF RECORD
-					id INTEGER,
-					sender_id VARCHAR(150),
-					registration_token VARCHAR(250),
-					badge_number INTEGER,
-					app_user VARCHAR(50),
-					reg_date DATETIME YEAR TO FRACTION(3),
-					send BOOLEAN
-				END RECORD
+	DEFINE l_rec DYNAMIC ARRAY OF t_reg_rec
 	DEFINE l_dbsrc VARCHAR(100)
 	DEFINE x SMALLINT
 
@@ -34,6 +29,12 @@ MAIN
 
 	OPEN FORM f FROM "push_server"
 	DISPLAY FORM f
+
+	LET m_api_key = fgl_getEnv("PUSH_APIKEY")
+	IF m_api_key.getLength() < 10 THEN
+		CALL fgl_winMessage("Error","PUSH_APIKEY not set!","exclamation")
+		EXIT PROGRAM
+	END IF
 
 	LET l_titl = "my message title"
 	LET l_mess = "my message text"
@@ -83,7 +84,7 @@ FUNCTION send_message(l_titl, l_mess, l_icon)
 	CALL l_notif_obj.put("data", l_data_obj)
 
 	DISPLAY "Sending:",l_notif_obj.toString()
-	LET l_res = gcm_send_notif_http( "AIzaSyAdzWsDiq4y4zZFjsvy7WrJDy1hviINoMo", l_notif_obj)
+	LET l_res = gcm_send_notif_http( m_api_key, l_notif_obj)
 	DISPLAY "Result:", l_res
 	DISPLAY "Finished."
 	RETURN l_res

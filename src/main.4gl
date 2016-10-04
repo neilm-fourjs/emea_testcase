@@ -4,9 +4,11 @@ IMPORT util
 IMPORT security
 IMPORT com
 
-CONSTANT c_appver = "V3.0"
+&include "../Push/push.inc"
+
+CONSTANT c_appver = "3.11"
 CONSTANT C_TESTDIR = "/sdcard/testdir"
-CONSTANT C_SENDER_ID = "960478794365"
+
 
 	DEFINE m_dir STRING -- restfull test 
 	DEFINE m_cmd STRING -- restfull test 
@@ -999,13 +1001,12 @@ FUNCTION push_register() --prob21
 	DEFINE l_badge_number INTEGER
 	OPEN WINDOW p21 WITH FORM "push"
 	LET l_sender_id = C_SENDER_ID
-	--LET l_server = "http://10.2.1.199:9999"
-	LET l_server = "http://10.1.0.103:9999"
+	LET l_server = C_REG_URL
 	LET l_badge_number = 69
 	LET l_app_user = "neilm"
 	INPUT BY NAME l_sender_id, l_server, l_badge_number,l_app_user, l_res ATTRIBUTES( WITHOUT DEFAULTS, UNBUFFERED, ACCEPT=FALSE )
 		ON ACTION register
-			LET l_res = push_reg(l_sender_id, l_server, l_badge_number, l_app_user)
+			LET l_res = push_reg(l_sender_id, l_server, l_badge_number, l_app_user, c_appver)
 	END INPUT
 	CLOSE WINDOW p21
 END FUNCTION
