@@ -2,7 +2,7 @@
 IMPORT com  -- For RESTful post
 IMPORT util -- JSON API
 
-&include "../Push/push.inc"
+&include "../src_serverside/push.inc"
 --------------------------------------------------------------------------------
 -- register for push notification
 FUNCTION push_register(l_app_ver) --prob21

@@ -6,11 +6,12 @@ IMPORT com
 
 IMPORT FGL push_cli
 
-&include "../Push/push.inc"
+&include "../src_serverside/push.inc"
 
-CONSTANT c_appver = "3.14"
+CONSTANT c_appver = "3.15"
 CONSTANT C_TESTDIR = "/sdcard/testdir"
-
+--CONSTANT C_RESTTEST_URL = "https://gpaas1.generocloud.net/g5/ws/r/m/rt?sleep=2"
+CONSTANT C_RESTTEST_URL = "https://www.4js-emea.com/dr/ws/r/resttest?sleep=2"
 
 	DEFINE m_dir STRING -- restfull test 
 	DEFINE m_cmd STRING -- restfull test 
@@ -688,7 +689,7 @@ FUNCTION prob14()
 	LET m_done_cre = FALSE
 	LET m_done_req = FALSE
 	LET m_done_res = FALSE
-	LET m_url = "https://gpaas1.generocloud.net/g5/ws/r/m/rt?sleep=2"
+	LET m_url = C_RESTTEST_URL
 	LET m_content = "text/plain"
 	LET m_con_timeout = 10
 	LET m_timeout = 15

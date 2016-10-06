@@ -86,7 +86,7 @@
         <File filePath="src/push.per"/>
       </VirtualFolder>
       <File filePath="src/main.4gl"/>
-      <File filePath="Push/push_cli.4gl"/>
+      <File filePath="src/push_cli.4gl"/>
     </Application>
     <Library binaryName="Entities" id="212784684" label="Entities"/>
     <Library binaryName="GoogleMapsWC" id="749244258" label="GoogleMapsWC">
@@ -94,13 +94,14 @@
       <File filePath="webcomponents/gm.js"/>
       <File filePath="webcomponents/test_wc.html"/>
     </Library>
+    <Group label="Group_1"/>
     <Library binaryName="Resources" id="159917928" label="Resources">
       <File filePath="resources/default.4ad"/>
       <File filePath="resources/default.4st"/>
     </Library>
   </Group>
   <Group label="Packages" language="Genero" targetDirectory="$(ProjectDir)/bin300">
-    <Package binaryName="emea_testcase2_arm" dependencies="400358049||781919164||159917928||212784684||715422167||362164715||313644474" description="Android Package (arm)" distDirectory="$(ProjectDir)/distbin300" label="emea_testcase2_arm" platform="Android (arm)" rootDirectory="$(ProjectDir)/bin300">
+    <Package binaryName="emea_testcase2_arm" dependencies="400358049||781919164||159917928||212784684||715422167||362164715||313644474" description="Android Package (arm)" distDirectory="$(ProjectDir)/distbin300" excludeFromBuild="true" label="emea_testcase2_arm" platform="Android (arm)" rootDirectory="$(ProjectDir)/bin300">
       <DynamicProperty name="gma-accent-color" value="#8ac2cd"/>
       <DynamicProperty name="gma-actionbar-color" value="#ebebeb"/>
       <DynamicProperty name="gma-primary-color" value="#3d7bb1"/>
@@ -127,7 +128,7 @@
       <Directory description="Resources" destinationDirectory="$(ProjectDir)/bin300" includedFiles="*.4ad *.4st *.ttf *.txt" label="Resources" recursive="false" sourceDirectory="$(ProjectDir)/resources"/>
       <Directory description="Web Components" destinationDirectory="$(ProjectDir)/bin300" label="Webcomponents" recursive="false" sourceDirectory="$(ProjectDir)/webcomponents"/>
     </Package>
-    <Package binaryName="emea_testcase2_iOS_Simulator" dependencies="400358049||781919164||159917928||212784684||715422167||362164715||313644474" description="iOS Simulator Package" distDirectory="$(ProjectDir)/distbin300" label="emea_testcase2_iOS_Simulator" platform="iOS Simulator" rootDirectory="$(ProjectDir)/bin300">
+    <Package binaryName="emea_testcase2_iOS_Simulator" dependencies="400358049||781919164||159917928||212784684||715422167||362164715||313644474" description="iOS Simulator Package" distDirectory="$(ProjectDir)/distbin300" excludeFromBuild="true" label="emea_testcase2_iOS_Simulator" platform="iOS Simulator" rootDirectory="$(ProjectDir)/bin300">
       <DynamicProperty name="icon120x120" value="$(ProjectDir)/images/myicon.png"/>
       <DynamicProperty name="icon152x152" value="$(ProjectDir)/images/myicon.png"/>
       <DynamicProperty name="icon180x180" value="$(ProjectDir)/images/myicon.png"/>
@@ -162,7 +163,7 @@
       <Directory description="Resources" destinationDirectory="$(ProjectDir)/bin300" includedFiles="*.4ad *.4st" label="Resources" recursive="false" sourceDirectory="$(ProjectDir)/resources"/>
       <Directory description="Web Components" destinationDirectory="$(ProjectDir)/bin300" label="Webcomponents" recursive="false" sourceDirectory="$(ProjectDir)/webcomponents"/>
     </Package>
-    <Package binaryName="emea_testcase2_x86" dependencies="400358049||781919164||159917928||212784684||715422167||362164715||313644474" description="Android Package (x86)" distDirectory="$(ProjectDir)/distbin300" label="emea_testcase2_x86" platform="Android (x86)" rootDirectory="$(ProjectDir)/bin300">
+    <Package binaryName="emea_testcase2_x86" dependencies="400358049||781919164||159917928||212784684||715422167||362164715||313644474" description="Android Package (x86)" distDirectory="$(ProjectDir)/distbin300" excludeFromBuild="true" label="emea_testcase2_x86" platform="Android (x86)" rootDirectory="$(ProjectDir)/bin300">
       <DynamicProperty name="icon-hdpi" value="$(ProjectDir)/images/myicon.png"/>
       <DynamicProperty name="icon-ldpi" value="$(ProjectDir)/images/myicon.png"/>
       <DynamicProperty name="icon-mdpi" value="$(ProjectDir)/images/myicon.png"/>
@@ -184,7 +185,7 @@
       <Directory description="Resources" destinationDirectory="$(ProjectDir)/bin300" includedFiles="*.4ad *.4st" label="Resources" recursive="false" sourceDirectory="$(ProjectDir)/resources"/>
       <Directory description="Web Components" destinationDirectory="$(ProjectDir)/bin300" label="Webcomponents" recursive="false" sourceDirectory="$(ProjectDir)/webcomponents"/>
     </Package>
-    <Package binaryName="emea_testcase5_arm" dependencies="400358049||781919164||159917928||212784684||715422167||362164715||313644474" description="Android Package (arm)" distDirectory="$(ProjectDir)/distbin300.5" label="emea_testcase5_arm" platform="Android (arm)" rootDirectory="$(ProjectDir)/bin300">
+    <Package binaryName="emea_testcase5_arm" dependencies="400358049||781919164||159917928||212784684||715422167||362164715||313644474" description="Android Package (arm)" distDirectory="$(ProjectDir)/distbin300.5" excludeFromBuild="true" label="emea_testcase5_arm" platform="Android (arm)" rootDirectory="$(ProjectDir)/bin300">
       <DynamicProperty name="gma-accent-color" value="#8ac2cd"/>
       <DynamicProperty name="gma-actionbar-color" value="#ebebeb"/>
       <DynamicProperty name="gma-primary-color" value="#3d7bb1"/>
@@ -254,8 +255,8 @@
       <DynamicProperty name="packageId" value="com.fjsemea.testcase9"/>
       <DynamicProperty name="packageLabel" value="emea-testcase9"/>
       <DynamicProperty name="packageName" value="EMEA TestCase9"/>
-      <DynamicProperty name="packageVersion" value="6"/>
-      <DynamicProperty name="packageVersionName" value="6"/>
+      <DynamicProperty name="packageVersion" value="9"/>
+      <DynamicProperty name="packageVersionName" value="9"/>
       <DynamicProperty name="permissions" value="ACCESS_COARSE_LOCATION;ACCESS_FINE_LOCATION;ACCESS_NETWORK_STATE;ACCESS_WIFI_STATE;C2DM_RECEIVE;C2D_MESSAGE;GET_ACCOUNTS;INSTALL_SHORTCUT;INTERNET;READ_CONTACTS;READ_EXTERNAL_STORAGE;WAKE_LOCK;WRITE_EXTERNAL_STORAGE"/>
       <Directory description="Binaries" destinationDirectory="$(ProjectDir)/bin300" includedFiles="*.42?" label="Binaries" recursive="false" sourceDirectory="$(ProjectDir)/bin300"/>
       <Directory description="Configuration Files" destinationDirectory="$(ProjectDir)/bin300" includedFiles="fglprofile *.pem" label="Config" recursive="false" sourceDirectory="$(ProjectDir)/config"/>
@@ -268,14 +269,14 @@
   </Group>
   <Group label="ServerSide" language="Genero" targetDirectory="$(ProjectDir)/bin_serverside">
     <Library binaryName="lib" excludeFromBuild="true" id="-173340672" label="lib">
-      <File filePath="Push/push.inc"/>
+      <File filePath="src_serverside/push.inc"/>
     </Library>
     <Application binaryName="push_register_tokens" commandLineArguments="x" environment="value:FGLPROFILE=" id="-682275888" label="push_register_tokens">
-      <File filePath="Push/push_reg.4gl"/>
+      <File filePath="src_serverside/push_reg.4gl"/>
     </Application>
     <Application binaryName="push_server" id="718255169" label="push_server">
-      <File filePath="Push/push_server.per"/>
-      <File filePath="Push/push_srv.4gl"/>
+      <File filePath="src_serverside/push_server.per"/>
+      <File filePath="src_serverside/push_srv.4gl"/>
     </Application>
     <Application binaryName="resttest" id="666956871" label="resttest">
       <File filePath="src_serverside/resttest.4gl"/>

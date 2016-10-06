@@ -1,0 +1,7 @@
+<MANIFEST>
+	<DESCRIPTION>This archive contains emea_testcase server side applications</DESCRIPTION>
+	<RESOURCES>images</RESOURCES>
+	<APPLICATION xcf='gas/sendnote.xcf' />
+	<SERVICE xcf='gas/regtoken.xcf' />
+	<SERVICE xcf='gas/resttest.xcf' />
+</MANIFEST>

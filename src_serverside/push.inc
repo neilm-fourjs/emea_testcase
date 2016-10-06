@@ -1,7 +1,8 @@
 
 CONSTANT C_REG_PORT = 9999
 --CONSTANT C_REG_URL= "http://10.2.1.199:9999"
-CONSTANT C_REG_URL= "http://10.1.0.103/g3/ws/r/regtoken"
+--CONSTANT C_REG_URL= "http://10.1.0.103/g3/ws/r/regtoken"
+CONSTANT C_REG_URL= "http://www.4js-emea.com/dr/ws/r/regtoken"
 CONSTANT C_SENDER_ID = "960478794365"
 
 TYPE t_reg_rec RECORD

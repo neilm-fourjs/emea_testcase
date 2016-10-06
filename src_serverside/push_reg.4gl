@@ -72,7 +72,7 @@ FUNCTION handle_registrations()
 		LET method = req.getMethod()
 		IF method IS NULL OR method != "POST" THEN
 			IF method == "GET" THEN
-				CALL req.sendTextResponse(200,NULL,"Hello from token maintainer...")
+				CALL req.sendTextResponse(200,NULL, CURRENT||":Hello from token maintainer...")
 			ELSE
 				DISPLAY SFMT("Unexpected HTTP request: %1", method)
 				CALL req.sendTextResponse(400,NULL,"Only POST requests supported")
