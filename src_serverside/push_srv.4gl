@@ -2,30 +2,21 @@
 IMPORT com
 IMPORT util
 
+IMPORT FGL push_db
+
 &include "push.inc"
 
 DEFINE m_api_key STRING
 DEFINE m_reg_ids DYNAMIC ARRAY OF STRING
-
+DEFINE m_recs DYNAMIC ARRAY OF t_reg_rec
 MAIN
 	DEFINE l_titl, l_mess, l_icon, l_res STRING
-	DEFINE l_rec DYNAMIC ARRAY OF t_reg_rec
-	DEFINE l_dbsrc VARCHAR(100)
+
 	DEFINE x SMALLINT
 
-	LET l_dbsrc = "tokendb" --+driver='dbmsqt'"
-	TRY
-		CONNECT TO l_dbsrc
-	CATCH
-		CALL fgl_winMessage("Fatal",SFMT("Failed to connect to %1\n%2",l_dbsrc,SQLERRMESSAGE),"exclamation")
-		EXIT PROGRAM
-	END TRY
+	CALL STARTLOG( base.Application.getProgramName()||".err" )
 
-	DECLARE c1 CURSOR FOR SELECT * FROM tokens ORDER BY id
-	FOREACH c1 INTO l_rec[ l_rec.getLength() + 1 ].*
-		LET l_rec[ l_rec.getLength()  ].send = FALSE		
-	END FOREACH
-	CALL l_rec.deleteElement( l_rec.getLength() )
+	CALL push_db.open_create_db()
 
 	OPEN FORM f FROM "push_server"
 	DISPLAY FORM f
@@ -36,6 +27,7 @@ MAIN
 		EXIT PROGRAM
 	END IF
 
+	CALL get_data()
 	LET l_titl = "my message title"
 	LET l_mess = "my message text"
 	LET l_icon = "information"
@@ -43,16 +35,18 @@ MAIN
 	DIALOG ATTRIBUTES(UNBUFFERED)
 		INPUT BY NAME l_titl, l_mess, l_icon, l_res ATTRIBUTES(WITHOUT DEFAULTS)
 		END INPUT
-		DISPLAY ARRAY l_rec TO f_rec.* 
+		DISPLAY ARRAY m_recs TO f_rec.* 
 			ON ACTION toggle
-				LET l_rec[ arr_curr() ].send = NOT l_rec[ arr_curr() ].send
+				LET m_recs[ arr_curr() ].send = NOT m_recs[ arr_curr() ].send
 		END DISPLAY
+		ON ACTION refresh
+			CALL get_data()
 		ON ACTION send
 			CALL m_reg_ids.clear()
 		-- setup array of tokens to send message to
-			FOR x = 1 TO l_rec.getLength()
-				IF l_rec[x].send THEN
-					LET m_reg_ids[ m_reg_ids.getLength() + 1 ] = l_rec[x].registration_token
+			FOR x = 1 TO m_recs.getLength()
+				IF m_recs[x].send THEN
+					LET m_reg_ids[ m_reg_ids.getLength() + 1 ] = m_recs[x].registration_token
 				END IF
 			END FOR
 			IF m_reg_ids.getLength() > 0 THEN
@@ -65,6 +59,15 @@ MAIN
 	END DIALOG
 
 END MAIN
+--------------------------------------------------------------------------------
+FUNCTION get_data()
+	CALL m_recs.clear()
+	DECLARE c1 CURSOR FOR SELECT * FROM tokens ORDER BY id
+	FOREACH c1 INTO m_recs[ m_recs.getLength() + 1 ].*
+		LET m_recs[ m_recs.getLength()  ].send = FALSE		
+	END FOREACH
+	CALL m_recs.deleteElement( m_recs.getLength() )
+END FUNCTION
 --------------------------------------------------------------------------------
 FUNCTION send_message(l_titl, l_mess, l_icon)
 	DEFINE l_titl, l_mess, l_icon, l_res STRING
@@ -105,21 +108,21 @@ FUNCTION gcm_send_notif_http(l_api_key, l_notif_obj)
 		CALL l_req.setMethod("POST")
 		LET l_req_msg = l_notif_obj.toString()
 		IF l_req_msg.getLength() >= 4096 THEN
-			 LET l_res = "ERROR : GCM message cannot exceed 4 kilobytes"
+			 LET l_res = ":ERROR : GCM message cannot exceed 4 kilobytes"
 			 RETURN l_res
 		END IF
 		CALL l_req.doTextRequest(l_req_msg)
 		LET l_resp = l_req.getResponse()
 		IF l_resp.getStatusCode() != 200 THEN
-			LET l_res = SFMT("HTTP Error (%1) %2",
+			LET l_res = SFMT(":HTTP Error (%1) %2",
 									 l_resp.getStatusCode(),
 									 l_resp.getStatusDescription())
 		ELSE
-			LET l_res = "Push notification sent!"
+			LET l_res = ":Push notification sent!"
 		END IF
 	CATCH
-		LET l_res = SFMT("ERROR : %1 (%2)", STATUS, SQLCA.SQLERRM)
+		LET l_res = SFMT(":ERROR : %1 (%2)", STATUS, SQLCA.SQLERRM)
 	END TRY
-	RETURN l_res
+	RETURN CURRENT||l_res
 
 END FUNCTION
