@@ -10,11 +10,11 @@ Icon:   [icon                       ]
 END -- GRID
 TABLE ( DOUBLECLICK=toggle )
 {
-[a01][a02           ][a03][a04            ][a4a   ][a05                     ][a6]
-[a01][a02           ][a03][a04            ][a4a   ][a05                     ][a6]
-[a01][a02           ][a03][a04            ][a4a   ][a05                     ][a6]
-[a01][a02           ][a03][a04            ][a4a   ][a05                     ][a6]
-[a01][a02           ][a03][a04            ][a4a   ][a05                     ][a6]
+[a01][a02           ][a03][a04            ][a4a   ][a4b      ][a05                     ][a6]
+[a01][a02           ][a03][a04            ][a4a   ][a4b      ][a05                     ][a6]
+[a01][a02           ][a03][a04            ][a4a   ][a4b      ][a05                     ][a6]
+[a01][a02           ][a03][a04            ][a4a   ][a4b      ][a05                     ][a6]
+[a01][a02           ][a03][a04            ][a4a   ][a4b      ][a05                     ][a6]
 }
 END -- TABLE
 GRID
@@ -39,7 +39,8 @@ PHANTOM FORMONLY.sender_id;
 a02 = FORMONLY.registration_token, TITLE="Token";
 a03 = FORMONLY.badge_number, TITLE="Badge";
 a04 = FORMONLY.app_user, TITLE="User";
-a4a = FORMONLY.app_ver, TITLE="Ver";
+a4a = FORMONLY.app_ver, TITLE="AppVer";
+a4b = FORMONLY.cli_ver, TITLE="CliVer";
 a05 = FORMONLY.reg_date, TITLE="Registered";
 CHECKBOX a6 = FORMONLY.send, TITLE="Send?", VALUECHECKED=1, VALUEUNCHECKED=0;
 

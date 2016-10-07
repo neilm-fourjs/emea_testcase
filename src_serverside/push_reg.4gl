@@ -32,6 +32,7 @@ FUNCTION open_create_db()
 			badge_number INTEGER NOT NULL,
 			app_user VARCHAR(50) NOT NULL, -- UNIQUE
 			app_ver DECIMAL(5,2),
+			cli_ver VARCHAR(20),
 			reg_date DATETIME YEAR TO SECOND NOT NULL
 		)
 	END IF
@@ -123,11 +124,14 @@ FUNCTION process_command(url, data)
 								WHERE registration_token = data_rec.registration_token
 				IF l_rec.id > 0 THEN
 					LET result_rec.status = 1
+					LET result_rec.message = "Token already registered."
 					IF data_rec.app_ver != l_rec.app_ver THEN
-						LET result_rec.message = "Token already registered.\nApp version updated."
+						LET result_rec.message = result_rec.message.append("\nApp version updated.")
 						UPDATE tokens SET app_ver = data_rec.app_ver WHERE registration_token = data_rec.registration_token
-					ELSE
-						LET result_rec.message = "Token already registered."
+					END IF
+					IF data_rec.cli_ver != l_rec.cli_ver THEN
+						LET result_rec.message = result_rec.message.append("\nCli version updated.")
+						UPDATE tokens SET cli_ver = data_rec.cli_ver WHERE registration_token = data_rec.registration_token
 					END IF
 					RETURN util.JSON.stringify(result_rec)
 				END IF
@@ -136,7 +140,7 @@ FUNCTION process_command(url, data)
 				LET p_ts = util.Datetime.toUTC(CURRENT YEAR TO FRACTION(3))
 				WHENEVER ERROR CONTINUE
 				INSERT INTO tokens
-						VALUES( p_id, data_rec.sender_id, data_rec.registration_token, data_rec.badge_number , data_rec.app_user,data_rec.app_ver, p_ts )
+						VALUES( p_id, data_rec.sender_id, data_rec.registration_token, data_rec.badge_number , data_rec.app_user,data_rec.app_ver, data_rec.cli_ver, p_ts )
 				WHENEVER ERROR STOP
 				IF SQLCA.SQLCODE = 0 THEN
 					LET result_rec.message = SFMT("Token is now registered:\n [%1]", data_rec.registration_token)
@@ -192,6 +196,7 @@ FUNCTION show_tokens()
 		DISPLAY "	", l_rec.id, ": ",
 						l_rec.app_user[1,10], " / ",
 						l_rec.app_ver, " / ",
+						l_rec.cli_ver, " / ",
 						l_rec.sender_id[1,20],"... / ",
 						"(",l_rec.badge_number USING "<<<<&", ") ",
 						l_rec.registration_token[1,20],"..."

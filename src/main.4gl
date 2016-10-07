@@ -8,7 +8,7 @@ IMPORT FGL push_cli
 
 &include "../src_serverside/push.inc"
 
-CONSTANT c_appver = "3.15"
+CONSTANT c_appver = "3.16"
 CONSTANT C_TESTDIR = "/sdcard/testdir"
 --CONSTANT C_RESTTEST_URL = "https://gpaas1.generocloud.net/g5/ws/r/m/rt?sleep=2"
 CONSTANT C_RESTTEST_URL = "https://www.4js-emea.com/dr/ws/r/resttest?sleep=2"
@@ -16,7 +16,8 @@ CONSTANT C_RESTTEST_URL = "https://www.4js-emea.com/dr/ws/r/resttest?sleep=2"
 	DEFINE m_dir STRING -- restfull test 
 	DEFINE m_cmd STRING -- restfull test 
 	DEFINE m_cli STRING -- GMA / GMI
-	DEFINE m_cli_info STRING -- Client / version
+	DEFINE m_cli_ver STRING -- Client / version
+	DEFINE m_cli_info STRING -- App + Client / version
 	DEFINE m_url, m_msg, m_content STRING -- restfull test 
 	DEFINE m_con_timeout, m_timeout,m_rw_timeout INTEGER -- restfull test 
 	DEFINE m_done_cre, m_done_req, m_done_res BOOLEAN -- restfull test 
@@ -64,7 +65,8 @@ MAIN
 
 	DISPLAY CURRENT TO l_curr
 
-	LET m_cli_info = c_appver," Cli:",m_cli," ",ui.Interface.getFrontEndVersion()
+	LET m_cli_ver = m_cli," ",ui.Interface.getFrontEndVersion()
+	LET m_cli_info = c_appver," Cli:",m_cli_ver
 	CALL log("Started:"||NVL(m_cli_info ,"NULL Client") )
 	DISPLAY BY NAME m_cli_info
 
@@ -158,7 +160,7 @@ MAIN
 	LET probs[ probs.getLength() ].icon = "info" }
 
 	LET l_first_time = TRUE
-	CALL push_cli.handle_notification(C_SENDER_ID, c_appver)
+	CALL push_cli.handle_notification(C_SENDER_ID, c_appver, m_cli_ver)
 
 	DIALOG
 		INPUT BY NAME l_dummy
@@ -179,7 +181,7 @@ MAIN
 		ON IDLE 15
 			DISPLAY CURRENT TO l_curr
 		ON ACTION notificationpushed
-			CALL push_cli.handle_notification(C_SENDER_ID, c_appver)
+			CALL push_cli.handle_notification(C_SENDER_ID, c_appver, m_cli_ver)
 	END DIALOG
 	CALL LOG("Finished")
 END MAIN
@@ -207,7 +209,7 @@ FUNCTION do_test( x )
 		WHEN 18 CALL prob18()
 		WHEN 19 CALL prob19()
 		WHEN 20 CALL prob20()
-		WHEN 21 CALL push_cli.push_register(c_appver)
+		WHEN 21 CALL push_cli.push_register(c_appver, m_cli_ver)
 	END CASE
 END FUNCTION
 --------------------------------------------------------------------------------

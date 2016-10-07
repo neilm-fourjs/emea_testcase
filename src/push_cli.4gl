@@ -5,8 +5,8 @@ IMPORT util -- JSON API
 &include "../src_serverside/push.inc"
 --------------------------------------------------------------------------------
 -- register for push notification
-FUNCTION push_register(l_app_ver) --prob21
-	DEFINE l_sender_id, l_server, l_res, l_app_user STRING
+FUNCTION push_register(l_app_ver, l_cli_ver) --prob21
+	DEFINE l_sender_id, l_server, l_res, l_app_user, l_cli_ver STRING
 	DEFINE l_app_ver DECIMAL(5,2)
 	DEFINE l_badge_number INTEGER
 	OPEN WINDOW p21 WITH FORM "push"
@@ -16,13 +16,13 @@ FUNCTION push_register(l_app_ver) --prob21
 	LET l_app_user = "neilm"
 	INPUT BY NAME l_sender_id, l_server, l_badge_number,l_app_user, l_res ATTRIBUTES( WITHOUT DEFAULTS, UNBUFFERED, ACCEPT=FALSE )
 		ON ACTION register
-			LET l_res = push_reg(l_sender_id, l_server, l_badge_number, l_app_user, l_app_ver)
+			LET l_res = push_reg(l_sender_id, l_server, l_badge_number, l_app_user, l_app_ver, l_cli_ver)
 	END INPUT
 	CLOSE WINDOW p21
 END FUNCTION
 --------------------------------------------------------------------------------
-FUNCTION push_reg(l_sender_id, l_server, l_badge_number, l_app_user, l_app_ver)
-	DEFINE l_sender_id, l_server, l_res, l_app_user STRING,
+FUNCTION push_reg(l_sender_id, l_server, l_badge_number, l_app_user, l_app_ver, l_cli_ver)
+	DEFINE l_sender_id, l_server, l_res, l_app_user, l_cli_ver STRING,
 				l_app_ver DECIMAL(5,2),
 				l_registration_token STRING,
 				l_req com.HTTPRequest,
@@ -46,6 +46,7 @@ FUNCTION push_reg(l_sender_id, l_server, l_badge_number, l_app_user, l_app_ver)
 		CALL l_obj.put("badge_number", l_badge_number)
 		CALL l_obj.put("app_user", l_app_user)
 		CALL l_obj.put("app_ver", l_app_ver)
+		CALL l_obj.put("cli_ver", l_cli_ver)
 		CALL l_req.doTextRequest(l_obj.toString())
 		LET l_resp = l_req.getResponse()
 		IF l_resp.getStatusCode() != 200 THEN
@@ -67,8 +68,8 @@ FUNCTION push_reg(l_sender_id, l_server, l_badge_number, l_app_user, l_app_ver)
 	RETURN l_res
 END FUNCTION
 --------------------------------------------------------------------------------
-FUNCTION handle_notification(l_sender_id, l_app_ver)
-	DEFINE l_sender_id STRING,
+FUNCTION handle_notification(l_sender_id, l_app_ver, l_cli_ver)
+	DEFINE l_sender_id, l_cli_ver STRING,
 		l_app_ver DECIMAL(5,2),
 		notif_list STRING,
 		notif_array util.JSONArray,

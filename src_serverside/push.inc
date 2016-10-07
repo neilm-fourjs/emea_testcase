@@ -12,6 +12,7 @@ TYPE t_reg_rec RECORD
 				badge_number INTEGER,
 				app_user VARCHAR(50),
 				app_ver DECIMAL(5,2),
+				cli_ver STRING,
 				reg_date DATETIME YEAR TO SECOND,
 				send BOOLEAN
 		END RECORD
