@@ -32,8 +32,9 @@
   <ActionDefault name="dialogtouched" validate="no" defaultView="no"  contextMenu="no"/>
   <ActionDefault name="notificationpushed" validate="no" defaultView="no"  contextMenu="no"/>
  	<ActionDefault name="about" text="About" image="quest"/>
+ 	<ActionDefault name="gma_about" text="GMA" image="quest"/>
 	<ActionDefault name="exit" text="Exit" image="quit"/>
-	<ActionDefault name="back" text="Go Back" image="arrleft"/>
+	<ActionDefault name="back" text="Go Back" image="fa-arrow-left"/>
 	<ActionDefault name="detail" text="Details" image="fa-gear"/>
 	<ActionDefault name="input" text="Input" image="pen"/>
   <ActionDefault name="act1" text="Action1" image="info" defaultView="yes" />

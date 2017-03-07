@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="ANSI_X3.4-1968"?>
 <StyleList>
+	<Style name="Table.probs_tab">
+		<StyleAttribute name="fontSize" value="8pt" />
+	</Style>
 	<Style name="Window.fab">
 			<StyleAttribute name="materialFABActionList" value="accept,select,detail"/>
 	</Style>

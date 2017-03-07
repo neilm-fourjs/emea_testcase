@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<Project defaultApplication="718255169" gstVersion="3001d" version="3.1">
+<Project defaultApplication="400358049" gstVersion="30020" version="3.1">
   <Settings>
     <DynamicProperties version="2">
       <DynamicProperty description="Accent color (Android 5.0 and later)" initialValue="#9575CD" isDefaultInherited="false" isHidden="false" label="Accent color" name="gma-accent-color" readOnly="false" type="COLOR"/>
@@ -61,8 +61,9 @@
       <File filePath="database/mydatabase.4db"/>
       <File filePath="database/mydatabase.db"/>
     </Library>
-    <Application binaryName="emea_testcase2" dependencies="159917928||212784684||362164715||455109296" environment="dirlist:FGLIMAGEPATH=$(ProjectDir)/webcomponents:$(ProjectDir)/images:$(ProjectDir)/resources:$(ProjectDir)/resources/image2font.txt" id="400358049" label="emea_testcase2">
+    <Application binaryName="emea_testcase2" dependencies="159917928||212784684||362164715||455109296" environment="dirlist:FGLIMAGEPATH=../images:../resources:../resources/image2font.txt" id="400358049" label="emea_testcase2">
       <VirtualFolder label="forms">
+        <File filePath="src/about.per"/>
         <File filePath="src/form.per"/>
         <File filePath="src/prob1.per"/>
         <File filePath="src/prob10.per"/>
@@ -94,15 +95,15 @@
       <File filePath="webcomponents/gm.js"/>
       <File filePath="webcomponents/test_wc.html"/>
     </Library>
-    <Group label="Group_1"/>
     <Library binaryName="Resources" id="159917928" label="Resources">
       <File filePath="resources/default.4ad"/>
       <File filePath="resources/default.4st"/>
+      <File filePath="resources/image2font.txt"/>
     </Library>
   </Group>
   <Group label="Packages" language="Genero" targetDirectory="$(ProjectDir)/bin300">
     <Package binaryName="emea_testcase10_arm" dependencies="400358049||781919164||159917928||212784684||715422167||362164715||313644474" description="Android Package (arm)" distDirectory="$(ProjectDir)/distbin300.10" label="emea_testcase10_arm" platform="Android (arm)" rootDirectory="$(ProjectDir)/bin300">
-      <DynamicProperty name="gma-accent-color" value="#8ac2cd"/>
+      <DynamicProperty name="gma-accent-color" value="#1c6ccd"/>
       <DynamicProperty name="gma-actionbar-color" value="#ebebeb"/>
       <DynamicProperty name="gma-primary-color" value="#3d7bb1"/>
       <DynamicProperty name="gma-primary-dark-color" value="#1e4da5"/>
@@ -119,6 +120,33 @@
       <DynamicProperty name="packageName" value="EMEA TestCase10"/>
       <DynamicProperty name="packageVersion" value="10"/>
       <DynamicProperty name="packageVersionName" value="10"/>
+      <DynamicProperty name="permissions" value="ACCESS_COARSE_LOCATION;ACCESS_FINE_LOCATION;ACCESS_NETWORK_STATE;ACCESS_WIFI_STATE;C2DM_RECEIVE;C2D_MESSAGE;GET_ACCOUNTS;INSTALL_SHORTCUT;INTERNET;READ_CONTACTS;READ_EXTERNAL_STORAGE;WAKE_LOCK;WRITE_EXTERNAL_STORAGE"/>
+      <Directory description="Binaries" destinationDirectory="$(ProjectDir)/bin300" includedFiles="*.42?" label="Binaries" recursive="false" sourceDirectory="$(ProjectDir)/bin300"/>
+      <Directory description="Configuration Files" destinationDirectory="$(ProjectDir)/bin300" includedFiles="fglprofile *.pem" label="Config" recursive="false" sourceDirectory="$(ProjectDir)/config"/>
+      <Directory description="Database" destinationDirectory="$(ProjectDir)/bin300" includedFiles="*.db" label="Database" recursive="false" sourceDirectory="$(ProjectDir)/database"/>
+      <Directory description="Images" destinationDirectory="$(ProjectDir)/bin300" includedFiles="*.png *.jpg" label="Images" sourceDirectory="$(ProjectDir)/images"/>
+      <Directory description="Studio Library" destinationDirectory="$(ProjectDir)/bin300" includedFiles="*.42?" label="libgst" recursive="false" sourceDirectory="$(GSTLIBRARYDIR)/bin"/>
+      <Directory description="Resources" destinationDirectory="$(ProjectDir)/bin300" includedFiles="*.4ad *.4st *.ttf *.txt" label="Resources" recursive="false" sourceDirectory="$(ProjectDir)/resources"/>
+      <Directory description="Web Components" destinationDirectory="$(ProjectDir)/bin300" label="Webcomponents" recursive="false" sourceDirectory="$(ProjectDir)/webcomponents"/>
+    </Package>
+    <Package binaryName="emea_testcase13_arm" dependencies="400358049||781919164||159917928||212784684||715422167||362164715||313644474" description="Android Package (arm)" distDirectory="$(ProjectDir)/distbin300.13" label="emea_testcase13_arm" platform="Android (arm)" rootDirectory="$(ProjectDir)/bin300">
+      <DynamicProperty name="gma-accent-color" value="#1c6ccd"/>
+      <DynamicProperty name="gma-actionbar-color" value="#ebebeb"/>
+      <DynamicProperty name="gma-primary-color" value="#3d7bb1"/>
+      <DynamicProperty name="gma-primary-dark-color" value="#1e4da5"/>
+      <DynamicProperty name="icon-hdpi" value="$(ProjectDir)/images/myicon.png"/>
+      <DynamicProperty name="icon-ldpi" value="$(ProjectDir)/images/myicon.png"/>
+      <DynamicProperty name="icon-mdpi" value="$(ProjectDir)/images/myicon.png"/>
+      <DynamicProperty name="icon-xhdpi" value="$(ProjectDir)/images/myicon.png"/>
+      <DynamicProperty name="icon-xxhdpi" value="$(ProjectDir)/images/myicon.png"/>
+      <DynamicProperty name="icon60x60" value="$(ProjectDir)/images/myicon.png"/>
+      <DynamicProperty name="launchScreen320x480" value="$(ProjectDir)/images/myicon.png"/>
+      <DynamicProperty name="launchScreen640x960" value="$(ProjectDir)/images/myicon.png"/>
+      <DynamicProperty name="packageId" value="com.fjsemea.testcase13"/>
+      <DynamicProperty name="packageLabel" value="emea-testcase13"/>
+      <DynamicProperty name="packageName" value="EMEA TestCase13"/>
+      <DynamicProperty name="packageVersion" value="13"/>
+      <DynamicProperty name="packageVersionName" value="13"/>
       <DynamicProperty name="permissions" value="ACCESS_COARSE_LOCATION;ACCESS_FINE_LOCATION;ACCESS_NETWORK_STATE;ACCESS_WIFI_STATE;C2DM_RECEIVE;C2D_MESSAGE;GET_ACCOUNTS;INSTALL_SHORTCUT;INTERNET;READ_CONTACTS;READ_EXTERNAL_STORAGE;WAKE_LOCK;WRITE_EXTERNAL_STORAGE"/>
       <Directory description="Binaries" destinationDirectory="$(ProjectDir)/bin300" includedFiles="*.42?" label="Binaries" recursive="false" sourceDirectory="$(ProjectDir)/bin300"/>
       <Directory description="Configuration Files" destinationDirectory="$(ProjectDir)/bin300" includedFiles="fglprofile *.pem" label="Config" recursive="false" sourceDirectory="$(ProjectDir)/config"/>

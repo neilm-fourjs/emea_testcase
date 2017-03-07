@@ -8,7 +8,7 @@ IMPORT FGL push_cli
 
 &include "../src_serverside/push.inc"
 
-CONSTANT c_appver = "3.16"
+CONSTANT c_appver = "3.20"
 CONSTANT C_TESTDIR = "/sdcard/testdir"
 --CONSTANT C_RESTTEST_URL = "https://gpaas1.generocloud.net/g5/ws/r/m/rt?sleep=2"
 CONSTANT C_RESTTEST_URL = "https://www.4js-emea.com/dr/ws/r/resttest?sleep=2"
@@ -26,18 +26,72 @@ CONSTANT C_RESTTEST_URL = "https://www.4js-emea.com/dr/ws/r/resttest?sleep=2"
 	DEFINE m_add_runno BOOLEAN -- restfull test 
 	DEFINE m_geo_loc STRING
 	DEFINE m_conn STRING
-MAIN
-	DEFINE probs DYNAMIC ARRAY OF RECORD
+	DEFINE m_probs DYNAMIC ARRAY OF RECORD
 		titl STRING,
 		desc STRING,
 		icon STRING
 	END RECORD
+MAIN
 	DEFINE l_dummy STRING
 	DEFINE l_first_time BOOLEAN
-	DEFINE l_ret STRING
 
 	WHENEVER ERROR CALL erro
+	CALL init_app()
+-- problems array setup:
+	CALL add_prob(1,"Limitation Ex1.","Simple 'type' selector infront of field",NULL)
+	CALL add_prob(2,"ButtonEdit bug.","buttonEdit image over text.","ssmiley")
+	CALL add_prob(3,"Textedit working here","textTdit not expanding.","smiley")
+	CALL add_prob(4,"Limitation Ex2.","Getting a sequence of digits in a nice way.",NULL)
+	CALL add_prob(5,"Missing Image.","Multiple Actions / icons wrong.","ssmiley")
+	CALL add_prob(6,"Action Issue","Hidden vs Active Action, shouldn't be clickable.","ssmiley")
+	CALL add_prob(7,"Styles test","Styles test - GMI missing icon on button.","ssmiley")
+	CALL add_prob(8,"List Issue","Moving from a list and back.","ssmiley")
+	CALL add_prob(9,"os.path", "os.path tests, copy fails!","ssmiley")
+	CALL add_prob(10,"GoogleMaps","Simple test for a WC","fa-map")
+	CALL add_prob(11,"Choose an Image","Choosing an image with Google Photos App","smiley")
+	CALL add_prob(12,"Take a Photo","Take a photo and store it in a specific folder","camera")
+	CALL add_prob(13,"shellexec pdf","Attempt to open a PDF","fa-file-pdf-o")
+	CALL add_prob(14,"RESTFUL call","Testing restful calls to a simple service",NULL)
+	CALL add_prob(15,"GEO Location","Open a GEO location with default app","fa-map-marker")
+	CALL add_prob(16,"Email","Sending an Email","mail")
+	CALL add_prob(17,"FrontCalls","Various frontCalls",NULL)
+	CALL add_prob(18,"Widgets/Dialog Touched","Various Widgets & Dialog Touched","fa-bug")
+	CALL add_prob(19,"Single Checkbox","requires two taps","fa-bug")
+	CALL add_prob(20,"FAB action","Floating Action Button","smiley")
+	CALL add_prob(21,"Register for PUSH","Register for PUSH","info")
 
+	OPEN FORM f FROM "form"
+	DISPLAY FORM f
+	DISPLAY CURRENT TO l_curr
+	DISPLAY BY NAME m_cli_info
+	LET l_first_time = TRUE
+
+	DIALOG
+		INPUT BY NAME l_dummy
+		END INPUT
+		DISPLAY ARRAY m_probs TO menu.* --ATTRIBUTE(ACCEPT=FALSE,CANCEL=FALSE)
+			BEFORE ROW
+				--IF NOT l_first_time THEN
+					CALL LOG("Doing test:"||m_probs[arr_curr()].desc)
+					CALL do_test( arr_curr() )
+					NEXT FIELD l_dummy
+				--ELSE
+				--	LET l_first_time = FALSE
+				--END IF
+		END DISPLAY
+		ON ACTION close EXIT DIALOG
+		ON ACTION about CALL about()
+		ON ACTION exit EXIT DIALOG
+		ON IDLE 15
+			DISPLAY CURRENT TO l_curr
+		ON ACTION notificationpushed
+			CALL push_cli.handle_notification(C_SENDER_ID, c_appver, m_cli_ver)
+	END DIALOG
+	CALL log("Finished")
+END MAIN
+--------------------------------------------------------------------------------
+FUNCTION init_app()
+	DEFINE l_ret INTEGER
 	LET m_dir = C_TESTDIR
 	IF NOT os.path.exists( m_dir ) THEN
 		IF NOT os.path.mkdir( m_dir ) THEN
@@ -53,138 +107,46 @@ MAIN
 		CATCH
 			CALL fgl_winMessage("Error",SFMT("Failed 'askForPermission' %1",l_ret),"exclamation")
 		END TRY
+		CALL push_cli.handle_notification(C_SENDER_ID, c_appver, m_cli_ver)
 	END IF
 	TRY
 		CALL STARTLOG( os.path.join( m_dir,base.Application.getProgramName()||".err" ) )
 	CATCH
 		CALL fgl_winMessage("Error",SFMT("Failed to start error log\n%1\n%2-%3\nUsing %4",m_dir,STATUS,ERR_GET(STATUS),os.Path.pwd()),"exclamation")
 	END TRY
-
-	OPEN FORM f FROM "form"
-	DISPLAY FORM f
-
-	DISPLAY CURRENT TO l_curr
-
 	LET m_cli_ver = m_cli," ",ui.Interface.getFrontEndVersion()
 	LET m_cli_info = c_appver," Cli:",m_cli_ver
 	CALL log("Started:"||NVL(m_cli_info ,"NULL Client") )
-	DISPLAY BY NAME m_cli_info
-
-	LET probs[ probs.getLength() + 1 ].titl = "1. Limitation Ex1."
-	LET probs[ probs.getLength() ].desc = "Simple 'type' selector infront of field"
-	LET probs[ probs.getLength() ].icon = "info"
-
-	LET probs[ probs.getLength() + 1 ].titl = "2. ButtonEdit bug."
-	LET probs[ probs.getLength() ].desc = "buttonEdit image over text."
-	LET probs[ probs.getLength() ].icon = "ssmiley"
-
-	LET probs[ probs.getLength() + 1 ].titl = "3. Textedit working here"
-	LET probs[ probs.getLength() ].desc = "textTdit not expanding."
-	LET probs[ probs.getLength() ].icon = "smiley"
-
-	LET probs[ probs.getLength() + 1 ].titl = "4. Limitation Ex2."
-	LET probs[ probs.getLength() ].desc = "Getting a sequence of digits in a nice way."
-	LET probs[ probs.getLength() ].icon = "info"
-
-	LET probs[ probs.getLength() + 1 ].titl = "5. Missing Image."
-	LET probs[ probs.getLength() ].desc = "Multiple Actions / icons wrong."
-	LET probs[ probs.getLength() ].icon = "ssmiley"
-
-	LET probs[ probs.getLength() + 1 ].titl = "6. Action Issue"
-	LET probs[ probs.getLength() ].desc = "Hidden vs Active Action, shouldn't be clickable."
-	LET probs[ probs.getLength() ].icon = "ssmiley"
-
-	LET probs[ probs.getLength() + 1 ].titl = "7. Styles test"
-	LET probs[ probs.getLength() ].desc = "Styles test - GMI missing icon on button."
-	LET probs[ probs.getLength() ].icon = "ssmiley"
-
-	LET probs[ probs.getLength() + 1 ].titl = "8. List Issue"
-	LET probs[ probs.getLength() ].desc = "Moving from a list and back."
-	LET probs[ probs.getLength() ].icon = "ssmiley"
-
-	LET probs[ probs.getLength() + 1 ].titl = "9. os.path"
-	LET probs[ probs.getLength() ].desc = "os.path tests, copy fails!"
-	LET probs[ probs.getLength() ].icon = "ssmiley"
-
-	LET probs[ probs.getLength() + 1 ].titl = "10. GoogleMaps"
-	LET probs[ probs.getLength() ].desc = "Simple test for a WC"
-	LET probs[ probs.getLength() ].icon = "fa-map"
-
-	LET probs[ probs.getLength() + 1 ].titl = "11. Choose an Image"
-	LET probs[ probs.getLength() ].desc = "Choosing an image with Google Photos App"
-	LET probs[ probs.getLength() ].icon = "smiley"
-
-	LET probs[ probs.getLength() + 1 ].titl = "12. Take a Photo"
-	LET probs[ probs.getLength() ].desc = "Take a photo and store it in a specific folder"
-	LET probs[ probs.getLength() ].icon = "camera"
-
-	LET probs[ probs.getLength() + 1 ].titl = "13. shellexec pdf"
-	LET probs[ probs.getLength() ].desc = "Attempt to open a PDF"
-	LET probs[ probs.getLength() ].icon = "fa-file-pdf-o"
-
-	LET probs[ probs.getLength() + 1 ].titl = "14. RESTFUL call"
-	LET probs[ probs.getLength() ].desc = "Testing restful calls to a simple service"
-	LET probs[ probs.getLength() ].icon = "info"
-
-	LET probs[ probs.getLength() + 1 ].titl = "15. GEO Location"
-	LET probs[ probs.getLength() ].desc = "Open a GEO location with default app"
-	LET probs[ probs.getLength() ].icon = "fa-map-marker"
-
-	LET probs[ probs.getLength() + 1 ].titl = "16. Email"
-	LET probs[ probs.getLength() ].desc = "Sending an Email"
-	LET probs[ probs.getLength() ].icon = "mail"
-	LET l_first_time = TRUE
-
-	LET probs[ probs.getLength() + 1 ].titl = "17. FrontCalls"
-	LET probs[ probs.getLength() ].desc = "Various frontCalls"
-	LET probs[ probs.getLength() ].icon = "info"
-
-	LET probs[ probs.getLength() + 1 ].titl = "18. Widgets/Dialog Touched"
-	LET probs[ probs.getLength() ].desc = "Various Widgets & Dialog Touched"
-	LET probs[ probs.getLength() ].icon = "fa-bug"
-
-	LET probs[ probs.getLength() + 1 ].titl = "19. Single Checkbox"
-	LET probs[ probs.getLength() ].desc = "requires two taps"
-	LET probs[ probs.getLength() ].icon = "fa-bug"
-
-	LET probs[ probs.getLength() + 1 ].titl = "20. FAB action"
-	LET probs[ probs.getLength() ].desc = "Floating Action Button"
-	LET probs[ probs.getLength() ].icon = "smiley"
-
-	LET probs[ probs.getLength() + 1 ].titl = "21. Register for PUSH"
-	LET probs[ probs.getLength() ].desc = "Register for PUSH"
-	LET probs[ probs.getLength() ].icon = "info"
-
-{	LET probs[ probs.getLength() + 1 ].titl = "22. no done yet"
-	LET probs[ probs.getLength() ].desc = "..."
-	LET probs[ probs.getLength() ].icon = "info" }
-
-	LET l_first_time = TRUE
-	CALL push_cli.handle_notification(C_SENDER_ID, c_appver, m_cli_ver)
-
-	DIALOG
-		INPUT BY NAME l_dummy
-		END INPUT
-		DISPLAY ARRAY probs TO menu.* --ATTRIBUTE(ACCEPT=FALSE,CANCEL=FALSE)
-			BEFORE ROW
-				--IF NOT l_first_time THEN
-					CALL LOG("Doing test:"||probs[arr_curr()].desc)
-					CALL do_test( arr_curr() )
-					NEXT FIELD l_dummy
-				--ELSE
-				--	LET l_first_time = FALSE
-				--END IF
-		END DISPLAY
-		ON ACTION close EXIT DIALOG
-		ON ACTION about CALL ui.interface.frontCall("Android","showAbout",[],[])
-		ON ACTION exit EXIT DIALOG
-		ON IDLE 15
-			DISPLAY CURRENT TO l_curr
-		ON ACTION notificationpushed
-			CALL push_cli.handle_notification(C_SENDER_ID, c_appver, m_cli_ver)
-	END DIALOG
-	CALL LOG("Finished")
-END MAIN
+END FUNCTION
+--------------------------------------------------------------------------------
+FUNCTION add_prob( l_x,l_titl, l_desc, l_icon )
+	DEFINE l_x SMALLINT
+	DEFINE l_titl, l_desc, l_icon STRING
+	IF l_icon IS NULL THEN LET l_icon = "info" END IF
+	LET m_probs[ l_x ].titl = l_x||". "||l_titl
+	LET m_probs[ l_x ].desc = l_desc
+	LET m_probs[ l_x ].icon = l_icon
+END FUNCTION
+--------------------------------------------------------------------------------
+FUNCTION about()
+	DEFINE ar DYNAMIC ARRAY OF RECORD
+		info STRING,
+		val STRING
+	END RECORD
+	LET ar[ ar.getLength() + 1 ].info = "App ver:" LET ar[ ar.getLength() ].val = c_appver
+	LET ar[ ar.getLength() + 1 ].info = "Client:" LET ar[ ar.getLength() ].val = m_cli_ver
+	LET ar[ ar.getLength() + 1 ].info = "DVM Ver:" LET ar[ ar.getLength() ].val = fgl_getVersion()
+	LET ar[ ar.getLength() + 1 ].info = "IMG Path:" LET ar[ ar.getLength() ].val = NVL(fgl_getEnv("FGLIMAGEPATH"),"NULL")
+	LET ar[ ar.getLength() + 1 ].info = "Test Dir:" LET ar[ ar.getLength() ].val = m_dir
+	LET ar[ ar.getLength() + 1 ].info = "Rest URL:" LET ar[ ar.getLength() ].val = C_RESTTEST_URL
+	OPEN WINDOW about WITH FORM "about"
+	DISPLAY ARRAY ar TO arr.* ATTRIBUTES(ACCEPT=FALSE,CANCEL=FALSE)
+		ON ACTION gma_about CALL ui.interface.frontCall("Android","showAbout",[],[])
+		ON ACTION back EXIT DISPLAY
+		ON ACTION close EXIT DISPLAY
+	END DISPLAY
+	CLOSE WINDOW about
+END FUNCTION
 --------------------------------------------------------------------------------
 FUNCTION do_test( x )
 	DEFINE x SMALLINT
@@ -265,6 +227,7 @@ FUNCTION prob3()
 	LET fld4 = 69.69
 	DISPLAY BY NAME txt1, fld1,fld2, fld3, fld4
 	MENU
+		ON ACTION back EXIT MENU
 		ON ACTION CLOSE EXIT MENU
 	END MENU
 
@@ -429,14 +392,14 @@ FUNCTION prob8()
 	CLOSE WINDOW p8
 END FUNCTION
 --------------------------------------------------------------------------------
--- os.path.separator
+-- os.path.
 FUNCTION prob9()
-	DEFINE l_msg, l_src, l_trg STRING
+	DEFINE l_msg, l_src, l_trg, l_dir STRING
 	DEFINE l_paths DYNAMIC ARRAY OF RECORD
 		path STRING,
 		exist BOOLEAN
 	END RECORD
-	DEFINE x SMALLINT
+	DEFINE x, l_stat SMALLINT
 	DEFINE l_c base.Channel
 	OPEN WINDOW p9 WITH FORM "prob9"
 
@@ -446,16 +409,20 @@ FUNCTION prob9()
 	DISPLAY BY NAME l_msg
 
 	LET l_src = os.path.join(m_dir, "emea_testcase.txt")
-
+	LET l_dir = m_dir||"2"
 	MENU
 		ON ACTION back EXIT MENU
 		ON ACTION CLOSE EXIT MENU
 
 		ON ACTION mkdir
-			IF os.path.mkdir( m_dir ) THEN
-				LET l_msg = l_msg.append( SFMT( "os.path.mkdir %1 worked\n",m_dir) )
+			IF os.path.exists( l_dir ) THEN
+				LET l_msg = l_msg.append( SFMT( "os.path.mkdir %1 already exists!\n",l_dir) )
 			ELSE
-				LET l_msg = l_msg.append( SFMT( "os.path.mkdir  failed: %1\n",m_dir, STATUS) )
+				IF os.path.mkdir( l_dir ) THEN
+					LET l_msg = l_msg.append( SFMT("os.path.mkdir %1 worked\n",l_dir) )
+				ELSE
+					LET l_msg = l_msg.append( SFMT("os.path.mkdir  failed: %1\n",l_dir, STATUS) )
+				END IF
 			END IF
 			DISPLAY BY NAME l_msg
 		ON ACTION create
@@ -464,24 +431,36 @@ FUNCTION prob9()
 				CALL l_c.openFile(l_src,"w")
 				CALL l_c.writeLine( "Test" )
 				CALL l_c.close()
-				LET l_msg = l_msg.append( SFMT( "file created:%1\n",l_src) )
+				LET l_msg = l_msg.append( SFMT("file created:%1\n",l_src) )
 			CATCH
-				LET l_msg = l_msg.append( SFMT( "Failed to create:%1\n",l_src) )
+				LET l_msg = l_msg.append( SFMT("Failed to create:%1\n",l_src) )
 			END TRY
 			DISPLAY BY NAME l_msg
 		ON ACTION copy
 			LET l_trg = l_src||".copy"
-			IF os.path.copy( l_src, l_trg ) THEN
+			LET l_stat = os.path.copy( l_src, l_trg )
+			IF l_stat THEN
 				LET l_msg = l_msg.append( "os.path.copy worked\n" )
 			ELSE
-				LET l_msg = l_msg.append( SFMT( "os.path.copy failed: %1\n", STATUS) )
+				LET l_msg = l_msg.append( SFMT("os.path.copy failed: %1 %2\n", l_stat,STATUS) )
 			END IF
 			DISPLAY BY NAME l_msg
 		ON ACTION remove
-			IF os.path.delete( l_src ) THEN
-				LET l_msg = l_msg.append( "os.path.delete worked\n" )
+			IF os.Path.exists( l_src ) THEN LET l_trg = l_src END IF
+			LET l_stat = os.path.delete( l_trg )
+			IF l_stat THEN
+				LET l_msg = l_msg.append( SFMT("os.path.delete of %1 worked\n",l_trg) )
 			ELSE
-				LET l_msg = l_msg.append( SFMT( "os.path.delete failed: %1\n", STATUS) )
+				LET l_msg = l_msg.append( SFMT("os.path.delete of %1 failed: %2 %3\n",l_trg, l_stat,STATUS) )
+			END IF
+			DISPLAY BY NAME l_msg
+		ON ACTION rename
+			LET l_trg = l_src||".rename"
+			LET l_stat = os.path.rename( l_src, l_trg )
+			IF l_stat THEN
+				LET l_msg = l_msg.append( "os.path.rename worked\n" )
+			ELSE
+				LET l_msg = l_msg.append( SFMT("os.path.rename failed: %1 %2\n", l_stat,STATUS) )
 			END IF
 			DISPLAY BY NAME l_msg
 
@@ -565,7 +544,7 @@ FUNCTION prob11()
 
 	OPEN WINDOW p11 WITH FORM "prob11"
 
-	DISPLAY ARRAY l_file TO arr.* ATTRIBUTE(UNBUFFERED)
+	DISPLAY ARRAY l_file TO arr.* ATTRIBUTE(UNBUFFERED,CANCEL=FALSE)
 		ON ACTION choose
 			LET x = arr_curr()
 			LET x = x + 1
@@ -576,16 +555,12 @@ FUNCTION prob11()
 			END TRY
 			DISPLAY l_file[ x ] TO img
 
-		ON ACTION ACCEPT
-			LET x = arr_curr()
-			DISPLAY l_file[ x ] TO img
-
 		BEFORE ROW
 			LET x = arr_curr()
 			DISPLAY l_file[ x ] TO img
 
 		ON ACTION close EXIT DISPLAY
-		ON ACTION cancel EXIT DISPLAY
+		ON ACTION back EXIT DISPLAY
 	END DISPLAY
 
 	IF l_file.getLength() > 0 THEN
