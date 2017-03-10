@@ -86,6 +86,7 @@
         <File filePath="src/prob9.per"/>
         <File filePath="src/push.per"/>
       </VirtualFolder>
+      <File filePath="src/getgps.4gl"/>
       <File filePath="src/main.4gl"/>
       <File filePath="src/push_cli.4gl"/>
     </Application>

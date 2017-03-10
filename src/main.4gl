@@ -36,6 +36,12 @@ MAIN
 	DEFINE l_first_time BOOLEAN
 
 	WHENEVER ERROR CALL erro
+
+	IF  ARG_VAL(1) = "getgps" THEN
+		CALL getgps()
+		EXIT PROGRAM
+	END IF
+
 	CALL init_app()
 -- problems array setup:
 	CALL add_prob(1,"Limitation Ex1.","Simple 'type' selector infront of field",NULL)
@@ -59,6 +65,7 @@ MAIN
 	CALL add_prob(19,"Single Checkbox","requires two taps","fa-bug")
 	CALL add_prob(20,"FAB action","Floating Action Button","smiley")
 	CALL add_prob(21,"Register for PUSH","Register for PUSH","info")
+	CALL add_prob(22,"Run without waiting","Run without waiting - async","info")
 
 	OPEN FORM f FROM "form"
 	DISPLAY FORM f
@@ -172,6 +179,7 @@ FUNCTION do_test( x )
 		WHEN 19 CALL prob19()
 		WHEN 20 CALL prob20()
 		WHEN 21 CALL push_cli.push_register(c_appver, m_cli_ver)
+		WHEN 22 CALL prob22()
 	END CASE
 END FUNCTION
 --------------------------------------------------------------------------------
@@ -859,6 +867,7 @@ FUNCTION prob18()
     edt2 CHAR(20),
     cmb STRING,
     dte DATE,
+		tim DATETIME HOUR TO SECOND,
     dtetim DATETIME YEAR TO SECOND,
     chk BOOLEAN,
     radio SMALLINT,
@@ -874,6 +883,7 @@ FUNCTION prob18()
   LET rec.edt2 = "EDIT UPSHIFTED"
   LET rec.cmb = "Item 1"
   LET rec.dte = TODAY
+	LET rec.tim = TIME
   LET rec.dtetim = CURRENT
   LET rec.chk = TRUE
   LET rec.spin = 0
@@ -970,6 +980,11 @@ FUNCTION prob20()
 	END MENU
 
 	CLOSE WINDOW p20
+END FUNCTION
+--------------------------------------------------------------------------------
+-- RUN without waiting
+FUNCTION prob22()
+	RUN "fglrun emea_testcase2.42r getgps" WITHOUT WAITING
 END FUNCTION
 
 

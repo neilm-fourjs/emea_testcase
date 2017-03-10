@@ -7,6 +7,7 @@ GRID
 [ledt2  ][edt2                                    ]
 [lcmb   ][cmb                                     ]
 [ldte   ][dte       ]
+[ltim   ][tim       ]
 [ldtetim][dtetim             ] 
 [lfld5  ][Chk]
 [lfld6  ][radio                          ]
@@ -34,6 +35,7 @@ LABEL ledt  : ledt, TEXT="Edit:",JUSTIFY=RIGHT;
 LABEL ledt2  : ledt2, TEXT="Edit Up:",JUSTIFY=RIGHT;
 LABEL lcmb  : lab2, TEXT="Combo:",JUSTIFY=RIGHT;
 LABEL ldte  : lab3, TEXT="Date:",JUSTIFY=RIGHT;
+LABEL ltim  : lab3a, TEXT="Date:",JUSTIFY=RIGHT;
 LABEL ldtetim : lab4, TEXT="DateTime:",JUSTIFY=RIGHT;
 LABEL lfld5 : lab5, TEXT="Check:",JUSTIFY=RIGHT;
 LABEL lfld6 : lab6, TEXT="Radio:",JUSTIFY=RIGHT;
@@ -45,6 +47,7 @@ EDIT edt = FORMONLY.edt;
 EDIT edt2 = FORMONLY.edt2,UPSHIFT;
 COMBOBOX cmb = FORMONLY.cmb, ITEMS=("Item 1","Item Two", "3rd Item" );
 DATEEDIT dte = FORMONLY.dte;
+TIMEEDIT tim = FORMONLY.tim;
 DATETIMEEDIT dtetim = FORMONLY.dtetim;
 CHECKBOX chk = FORMONLY.chk, VALUECHECKED=1,VALUEUNCHECKED=0, NOT NULL;
 RADIOGROUP radio = FORMONLY.radio, ITEMS=((1,"Male"),(2,"Famale"),(3,"Other")), NOT NULL,ORIENTATION=HORIZONTAL;
