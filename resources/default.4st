@@ -32,6 +32,12 @@
 	<Style name=".darkred">
 		<StyleAttribute name="textColor" value="darkred" />
 	</Style>
+	<Style name="Grid.titl">
+		<StyleAttribute name="backgroundColor" value="white" />
+		<StyleAttribute name="textColor" value="black" />
+		<StyleAttribute name="fontSize" value="large" />
+		<StyleAttribute name="fontWeight" value="bold" />
+	</Style>
 	<Style name="Label">
 		<StyleAttribute name="textColor" value="darkblue" />
 	</Style>

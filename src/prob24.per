@@ -1,0 +1,36 @@
+
+LAYOUT ( TEXT="Prob #24", STYLE="fab" )
+VBOX ( SPLITTER )
+GRID (STYLE="titl")
+{
+[titl                          ]
+}
+END -- GRID
+GRID
+{
+Fld1:[fld1                     ]
+Fld2:[fld2                     ]
+Fld3:[fld3                     ]
+     [                         ]
+     [                         ]
+Fld4:[fld4           ]
+Fld5:[fld5]
+Fld6:[fld6                     ]
+Fld7:[fld7                     ]
+Fld8:[fld8                     ]
+     [                         ]
+     [                         ]
+}
+END -- GRID
+END -- VBOX
+
+ATTRIBUTES
+LABEL titl : p1,TEXT="Title1";
+fld1 = FORMONLY.fld1;
+fld2 = FORMONLY.fld2;
+TEXTEDIT fld3 = FORMONLY.fld3;
+DATEEDIT fld4 = FORMONLY.fld4;
+fld5 = FORMONLY.fld5;
+fld6 = FORMONLY.fld6;
+fld7 = FORMONLY.fld7;
+TEXTEDIT fld8 = FORMONLY.fld8;

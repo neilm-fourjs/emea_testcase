@@ -66,6 +66,8 @@ MAIN
 	CALL add_prob(20,"FAB action","Floating Action Button","smiley")
 	CALL add_prob(21,"Register for PUSH","Register for PUSH","info")
 	CALL add_prob(22,"Run without waiting","Run without waiting - async","info")
+	CALL add_prob(23,"Layouting options #1","Layouting options #1","info")
+	CALL add_prob(24,"Layouting options #2","Layouting options #2","info")
 
 	OPEN FORM f FROM "form"
 	DISPLAY FORM f
@@ -179,7 +181,9 @@ FUNCTION do_test( x )
 		WHEN 19 CALL prob19()
 		WHEN 20 CALL prob20()
 		WHEN 21 CALL push_cli.push_register(c_appver, m_cli_ver)
-		WHEN 22 CALL prob22()
+		WHEN 22 CALL prob22() --      1234567890123456789012345678901234567890123456789
+		WHEN 23 CALL prob23("prob23","This is a very long Title that may get truncated.")
+		WHEN 24 CALL prob23("prob24","This is a Title")
 	END CASE
 END FUNCTION
 --------------------------------------------------------------------------------
@@ -336,7 +340,7 @@ FUNCTION prob6()
 			CALL DIALOG.setActionActive("act4",TRUE )
 			LET l_fld2 = "Enabled, Visible"
 			LET l_fld4 = "Enabled, Visible"
-	END INPUT
+	CALL add_prob(23,"Layouting options #1","Layouting options #1","info")	END INPUT
 
 	CLOSE WINDOW p6
 END FUNCTION
@@ -881,7 +885,7 @@ FUNCTION prob18()
   LET audit_log = "Dialog / Widget Test\n"
   LET rec.edt = "Edit field"
   LET rec.edt2 = "EDIT UPSHIFTED"
-  LET rec.cmb = "Item 1"
+  LET rec.cmb = "i3"
   LET rec.dte = TODAY
 	LET rec.tim = TIME
   LET rec.dtetim = CURRENT
@@ -905,6 +909,9 @@ FUNCTION prob18()
       LET rec.* = sav_rec.* -- re-read incase someone else has changed it
       CALL DIALOG.setActionActive("dialogtouched",FALSE)
       CALL DIALOG.setActionActive("accept",TRUE)
+
+    ON CHANGE cmb
+			LET audit_log = audit_log.append( SFMT("Combo changed to %1\n",rec.cmb))
 
     ON CHANGE dte
       IF rec.dte > TODAY THEN
@@ -986,6 +993,38 @@ END FUNCTION
 FUNCTION prob22()
 	RUN "fglrun emea_testcase2.42r getgps" WITHOUT WAITING
 END FUNCTION
+--------------------------------------------------------------------------------
+-- Layouting #1 -- folder
+FUNCTION prob23(l_form, l_titl)
+	DEFINE l_form, l_titl STRING
+	DEFINE rec RECORD
+		fld1, fld2, fld3 STRING,
+	 	fld4 DATE,
+		fld5, fld6, fld7, fld8 STRING
+	END RECORD
+	DEFINE w ui.Window
+	DEFINE f ui.Form
+	OPEN WINDOW p23 WITH FORM l_form
+	LET w = ui.Window.getCurrent()
+	LET f = w.getForm()
+
+	CALL f.setElementText("p1",l_titl)
+
+	LET rec.fld1 = "Field 1"
+	LET rec.fld2 = "Field 2"
+	LET rec.fld3 = "Field 3\nit's a text edit with mulitple lines."
+	LET rec.fld4 = TODAY
+	LET rec.fld5 = "f5"
+	LET rec.fld6 = "fld6"
+	LET rec.fld7 = "Test"
+	LET rec.fld8 = "This is another text edit field with a some long text in it."
+	INPUT BY NAME rec.* WITHOUT DEFAULTS
+
+	CLOSE WINDOW p23
+END FUNCTION
+--------------------------------------------------------------------------------
+
+
 
 
 
