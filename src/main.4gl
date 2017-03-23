@@ -8,7 +8,7 @@ IMPORT FGL push_cli
 
 &include "../src_serverside/push.inc"
 
-CONSTANT c_appver = "3.20"
+CONSTANT c_appver = "3.21"
 CONSTANT C_TESTDIR = "/sdcard/testdir"
 --CONSTANT C_RESTTEST_URL = "https://gpaas1.generocloud.net/g5/ws/r/m/rt?sleep=2"
 CONSTANT C_RESTTEST_URL = "https://www.4js-emea.com/dr/ws/r/resttest?sleep=2"
@@ -44,10 +44,10 @@ MAIN
 
 	CALL init_app()
 -- problems array setup:
-	CALL add_prob(1,"Limitation Ex1.","Simple 'type' selector infront of field",NULL)
-	CALL add_prob(2,"ButtonEdit bug.","buttonEdit image over text.","ssmiley")
-	CALL add_prob(3,"Textedit working here","textTdit not expanding.","smiley")
-	CALL add_prob(4,"Limitation Ex2.","Getting a sequence of digits in a nice way.",NULL)
+	CALL add_prob(1,"Limitation Ex1.","Simple 'type' selector infront of field","fa-arrow-circle-right")
+	CALL add_prob(2,"ButtonEdit bug.","buttonEdit image over text.","fa-bug")
+	CALL add_prob(3,"Textedit working here","textEdit not expanding.","smiley")
+	CALL add_prob(4,"Limitation Ex2.","Getting a sequence of digits in a nice way.","fa-arrow-circle-right")
 	CALL add_prob(5,"Missing Image.","Multiple Actions / icons wrong.","ssmiley")
 	CALL add_prob(6,"Action Issue","Hidden vs Active Action, shouldn't be clickable.","ssmiley")
 	CALL add_prob(7,"Styles test","Styles test - GMI missing icon on button.","ssmiley")
@@ -57,10 +57,10 @@ MAIN
 	CALL add_prob(11,"Choose an Image","Choosing an image with Google Photos App","smiley")
 	CALL add_prob(12,"Take a Photo","Take a photo and store it in a specific folder","camera")
 	CALL add_prob(13,"shellexec pdf","Attempt to open a PDF","fa-file-pdf-o")
-	CALL add_prob(14,"RESTFUL call","Testing restful calls to a simple service",NULL)
+	CALL add_prob(14,"RESTFUL call","Testing restful calls to a simple service","fa-arrow-circle-right")
 	CALL add_prob(15,"GEO Location","Open a GEO location with default app","fa-map-marker")
 	CALL add_prob(16,"Email","Sending an Email","mail")
-	CALL add_prob(17,"FrontCalls","Various frontCalls",NULL)
+	CALL add_prob(17,"FrontCalls","Various frontCalls","fa-arrow-circle-right")
 	CALL add_prob(18,"Widgets/Dialog Touched","Various Widgets & Dialog Touched","fa-bug")
 	CALL add_prob(19,"Single Checkbox","requires two taps","fa-bug")
 	CALL add_prob(20,"FAB action","Floating Action Button","smiley")
@@ -293,8 +293,12 @@ END FUNCTION
 FUNCTION prob6()
 	DEFINE l_fld0, l_fld1, l_fld2, l_fld3, l_fld4, l_fld5, l_res STRING
 	DEFINE l_f ui.Form
+	DEFINE w ui.Window
 	DEFINE l_a1 BOOLEAN
 	OPEN WINDOW p6 WITH FORM "prob6"
+	LET w = ui.Window.getCurrent()
+	CALL w.setImage(" ")
+	CALL ui.Interface.setImage(" ")
 
 	LET l_fld1 = "Enabled, Visible"
 	LET l_fld2 = "Hidden"
