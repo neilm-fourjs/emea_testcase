@@ -68,6 +68,7 @@ MAIN
 	CALL add_prob(22,"Run without waiting","Run without waiting - async","info")
 	CALL add_prob(23,"Layouting options #1","Layouting options #1","info")
 	CALL add_prob(24,"Layouting options #2","Layouting options #2","info")
+	CALL add_prob(25,"Local Database","Local Database","fa-database")
 
 	OPEN FORM f FROM "form"
 	DISPLAY FORM f
@@ -184,6 +185,7 @@ FUNCTION do_test( x )
 		WHEN 22 CALL prob22() --      1234567890123456789012345678901234567890123456789
 		WHEN 23 CALL prob23("prob23","This is a very long Title that may get truncated.")
 		WHEN 24 CALL prob23("prob24","This is a Title")
+		WHEN 25 CALL prob25()
 	END CASE
 END FUNCTION
 --------------------------------------------------------------------------------
@@ -1027,7 +1029,29 @@ FUNCTION prob23(l_form, l_titl)
 	CLOSE WINDOW p23
 END FUNCTION
 --------------------------------------------------------------------------------
+FUNCTION prob25()
+	DEFINE l_conn STRING
+	DEFINE l_stat INTEGER
+	DEFINE l_cnt SMALLINT
+	OPEN WINDOW p25 WITH FORM "prob25"
 
+	DISPLAY base.Application.getProgramDir() TO progdir
+	DISPLAY os.path.pwd() TO rundir
+
+	MENU
+		ON ACTION opendb
+			CALL openDB("testdb.db") RETURNING l_stat, l_conn
+			DISPLAY l_stat TO stat
+			DISPLAY l_conn TO conn
+		ON ACTION sel_data1
+			SELECT COUNT(*) INTO l_cnt FROM tab1
+			DISPLAY l_cnt TO rows
+		ON ACTION close EXIT MENU
+	END MENU
+
+	CLOSE WINDOW p25
+END FUNCTION
+--------------------------------------------------------------------------------
 
 
 
