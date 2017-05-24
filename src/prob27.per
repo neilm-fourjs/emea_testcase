@@ -1,0 +1,24 @@
+
+ACTION DEFAULTS
+  ACTION values(TEXT="Values")
+  ACTION clear(TEXT="Clear")
+END
+
+LAYOUT (TEXT="Signature",STYLE="dialog")
+GRID
+{
+Name:[f01                      ]
+Signature:
+[f02                           ]
+[                              ]
+[                              ]
+[                              ]
+[                              ]
+[                              ]
+[                              ]
+}
+END
+END
+ATTRIBUTES
+f01 = formonly.l_name, TITLE="Name",NOT NULL;
+WEBCOMPONENT f02 = formonly.l_signature, COMPONENTTYPE="signature", SIZEPOLICY=FIXED,STRETCH=BOTH;

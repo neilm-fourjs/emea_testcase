@@ -1,19 +1,13 @@
 LAYOUT ( TEXT="Prob #25" )
-GRID
+TABLE
 {
-[progdir                           ]
-[rundir                            ]
-[dbname                            ]
-Status:[stat                       ]
-[conn                              ]
-Rows in table:[rows                ]
+[fld1  ][fld2   ]
 }
-END 
+END -- TABLE
 
 ATTRIBUTES
-LABEL progdir = FORMONLY.progdir;
-LABEL rundir = FORMONLY.rundir;
-LABEL dbname = FORMONLY.dbname;
-LABEL stat = FORMONLY.stat;
-LABEL conn = FORMONLY.conn;
-LABEL rows = FORMONLY.rows;
+fld1 = FORMONLY.fld1;
+fld2 = FORMONLY.fld2;
+
+INSTRUCTIONS
+SCREEN RECORD arr ( fld1, fld2 )

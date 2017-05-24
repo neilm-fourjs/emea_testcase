@@ -1,0 +1,25 @@
+LAYOUT ( TEXT="Prob #26" )
+GRID
+{
+Program Dir:
+[progdir                           ]
+Runtime Dir:
+[rundir                            ]
+Database Name:
+[dbname                            ]
+Connect OKay:[ok]
+[msg                               ]
+[                                  ]
+[                                  ]
+[                                  ]
+Rows in table:[rows]
+}
+END 
+
+ATTRIBUTES
+EDIT progdir = FORMONLY.progdir;
+EDIT rundir = FORMONLY.rundir;
+EDIT dbname = FORMONLY.l_dbname;
+EDIT ok = FORMONLY.l_ok;
+TEXTEDIT msg = FORMONLY.l_msg, STRETCH=BOTH, SCROLLBARS=NONE;
+EDIT rows = FORMONLY.l_rows;

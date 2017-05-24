@@ -42,4 +42,6 @@
   <ActionDefault name="act3" defaultView="yes" image="fa-gear" />
   <ActionDefault name="act4" text="Action4" image="ssmiley" defaultView="yes" />
   <ActionDefault name="act5" text="Action5" image="heart" defaultView="yes" />
+  <ActionDefault name="opendb" text="OpenDB" image="fa-database" defaultView="yes" />
+  <ActionDefault name="row_cnt" text="RowCnt" image="fa-hashtag" defaultView="yes" />
 </ActionDefaultList>

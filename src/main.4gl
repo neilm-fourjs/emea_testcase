@@ -5,10 +5,11 @@ IMPORT security
 IMPORT com
 
 IMPORT FGL push_cli
+IMPORT FGL lib_db
 
 &include "../src_serverside/push.inc"
 
-CONSTANT c_appver = "3.21"
+CONSTANT c_appver = "3.23"
 CONSTANT C_TESTDIR = "/sdcard/testdir"
 --CONSTANT C_RESTTEST_URL = "https://gpaas1.generocloud.net/g5/ws/r/m/rt?sleep=2"
 CONSTANT C_RESTTEST_URL = "https://www.4js-emea.com/dr/ws/r/resttest?sleep=2"
@@ -64,11 +65,13 @@ MAIN
 	CALL add_prob(18,"Widgets/Dialog Touched","Various Widgets & Dialog Touched","fa-bug")
 	CALL add_prob(19,"Single Checkbox","requires two taps","fa-bug")
 	CALL add_prob(20,"FAB action","Floating Action Button","smiley")
-	CALL add_prob(21,"Register for PUSH","Register for PUSH","info")
-	CALL add_prob(22,"Run without waiting","Run without waiting - async","info")
-	CALL add_prob(23,"Layouting options #1","Layouting options #1","info")
-	CALL add_prob(24,"Layouting options #2","Layouting options #2","info")
-	CALL add_prob(25,"Local Database","Local Database","fa-database")
+	CALL add_prob(21,"Register for PUSH","Register for PUSH","fa-flag-o")
+	CALL add_prob(22,"Run without waiting","Run without waiting - async","fa-flag-o")
+	CALL add_prob(23,"Layouting options #1","Layouting options #1","fa-tv")
+	CALL add_prob(24,"Layouting options #2","Layouting options #2","fa-tv")
+	CALL add_prob(25,"Layouting - Split Layout","Layouting - Split Layout","fa-tv")
+	CALL add_prob(26,"Local Database","Local Database","fa-database")
+	CALL add_prob(27,"WC Signature","Signature Webcomponent","fa-tv")
 
 	OPEN FORM f FROM "form"
 	DISPLAY FORM f
@@ -147,6 +150,7 @@ FUNCTION about()
 	LET ar[ ar.getLength() + 1 ].info = "Client:" LET ar[ ar.getLength() ].val = m_cli_ver
 	LET ar[ ar.getLength() + 1 ].info = "DVM Ver:" LET ar[ ar.getLength() ].val = fgl_getVersion()
 	LET ar[ ar.getLength() + 1 ].info = "IMG Path:" LET ar[ ar.getLength() ].val = NVL(fgl_getEnv("FGLIMAGEPATH"),"NULL")
+	LET ar[ ar.getLength() + 1 ].info = "DB Path:" LET ar[ ar.getLength() ].val = NVL(fgl_getEnv("DBPATH"),"NULL")
 	LET ar[ ar.getLength() + 1 ].info = "Test Dir:" LET ar[ ar.getLength() ].val = m_dir
 	LET ar[ ar.getLength() + 1 ].info = "Rest URL:" LET ar[ ar.getLength() ].val = C_RESTTEST_URL
 	OPEN WINDOW about WITH FORM "about"
@@ -186,6 +190,8 @@ FUNCTION do_test( x )
 		WHEN 23 CALL prob23("prob23","This is a very long Title that may get truncated.")
 		WHEN 24 CALL prob23("prob24","This is a Title")
 		WHEN 25 CALL prob25()
+		WHEN 26 CALL prob26()
+		WHEN 27 CALL prob27()
 	END CASE
 END FUNCTION
 --------------------------------------------------------------------------------
@@ -507,11 +513,11 @@ FUNCTION prob10()
 
 	OPEN WINDOW p10 WITH FORM "prob10"
 
-	CALL ui.Interface.frontCall("standard","setwebcomponentpath", os.path.pwd(),l_tf)
+	{CALL ui.Interface.frontCall("standard","setwebcomponentpath", os.path.pwd(),l_tf)
 	IF NOT l_tf THEN
 		CALL fgl_winMessage("Error","Failed to set setwebcomponentpath!","exclamation")
 		EXIT PROGRAM
-	END IF
+	END IF}
 
 -- Old
 	LET lat = "50.8462723212"
@@ -1014,8 +1020,9 @@ FUNCTION prob23(l_form, l_titl)
 	LET w = ui.Window.getCurrent()
 	LET f = w.getForm()
 
-	CALL f.setElementText("p1",l_titl)
-
+	IF l_form = "prob23" OR l_form = "prob24" THEN
+		CALL f.setElementText("p1",l_titl)
+	END IF
 	LET rec.fld1 = "Field 1"
 	LET rec.fld2 = "Field 2"
 	LET rec.fld3 = "Field 3\nit's a text edit with mulitple lines."
@@ -1030,30 +1037,69 @@ FUNCTION prob23(l_form, l_titl)
 END FUNCTION
 --------------------------------------------------------------------------------
 FUNCTION prob25()
-	DEFINE l_conn STRING
-	DEFINE l_stat INTEGER
-	DEFINE l_cnt SMALLINT
-	OPEN WINDOW p25 WITH FORM "prob25"
+	DEFINE arr DYNAMIC ARRAY OF RECORD
+		fld1 STRING,
+		fld2 STRING
+	END RECORD
+	DEFINE x SMALLINT
 
+	FOR x = 1 TO 10
+		LET arr[x].fld1 = "This is a test"||x
+		LET arr[x].fld2 = "some more info for "||x
+	END FOR
+
+	OPEN WINDOW p25 WITH FORM "prob25" ATTRIBUTE(TYPE=LEFT)
+	OPEN WINDOW p25r WITH FORM "prob25r" ATTRIBUTE(TYPE=RIGHT)
+	CURRENT WINDOW IS p25
+
+	DISPLAY ARRAY arr TO arr.*
+		BEFORE ROW
+			CURRENT WINDOW IS p25r
+			DISPLAY arr[ arr_curr() ].fld1 TO row
+			CURRENT WINDOW IS p25
+	END DISPLAY
+
+	CLOSE WINDOW p25r
+	CLOSE WINDOW p25
+
+END FUNCTION
+--------------------------------------------------------------------------------
+FUNCTION prob26()
+	DEFINE l_msg STRING
+	DEFINE l_dbname STRING
+	DEFINE l_ok INTEGER
+	DEFINE l_rows SMALLINT
+	OPEN WINDOW p26 WITH FORM "prob26"
+
+	LET l_dbname = "testdb.db"
 	DISPLAY base.Application.getProgramDir() TO progdir
 	DISPLAY os.path.pwd() TO rundir
-
+	DISPLAY BY NAME l_dbname
 	MENU
 		ON ACTION opendb
-			CALL openDB("testdb.db") RETURNING l_stat, l_conn
-			DISPLAY l_stat TO stat
-			DISPLAY l_conn TO conn
-		ON ACTION sel_data1
-			SELECT COUNT(*) INTO l_cnt FROM tab1
-			DISPLAY l_cnt TO rows
+			CALL lib_db.openDB(l_dbname, TRUE) RETURNING l_ok, l_msg
+			DISPLAY BY NAME l_ok
+			DISPLAY BY NAME l_msg
+		ON ACTION row_cnt
+			LET l_rows = lib_db.test_row_cnt()
+			DISPLAY BY NAME l_rows
 		ON ACTION close EXIT MENU
 	END MENU
 
-	CLOSE WINDOW p25
+	CLOSE WINDOW p26
 END FUNCTION
 --------------------------------------------------------------------------------
+FUNCTION prob27()
+ 	DEFINE l_name,l_signature STRING
 
+	OPEN WINDOW p27 WITH FORM "prob27"
 
+  LET int_flag = FALSE
+ 	INPUT BY NAME l_name, l_signature ATTRIBUTES(UNBUFFERED, WITHOUT DEFAULTS=TRUE)
+
+	CLOSE WINDOW p27
+END FUNCTION
+--------------------------------------------------------------------------------
 
 
 

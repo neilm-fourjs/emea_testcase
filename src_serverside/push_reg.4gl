@@ -188,7 +188,7 @@ FUNCTION check_apns_feedback()
 					END RECORD,
 				 timestamp DATETIME YEAR TO FRACTION(3),
 				 token VARCHAR(250),
-				 i INTEGER,
+				 i, l_stat INTEGER,
 				 data BYTE
 
 	IF NUM_ARGS() = 0 OR ARG_VAL(1) != "APNS" THEN RETURN END IF
@@ -202,7 +202,7 @@ FUNCTION check_apns_feedback()
 		CALL req.setTimeout(2)
 		CALL req.doRequest()
 		LET resp = req.getResponse()
-		CALL resp.getDataResponse(data)
+		CALL resp.getDataResponse(data) RETURNING l_stat
 		CALL com.APNS.DecodeFeedback(data,feedback)
 		FOR i=1 TO feedback.getLength()
 			LET timestamp = util.Datetime.fromSecondsSinceEpoch(feedback[i].timestamp)

@@ -1,11 +1,7 @@
 
 LAYOUT ( TEXT="Prob #24", STYLE="fab" )
 VBOX ( SPLITTER )
-GRID (STYLE="titl")
-{
-[titl                          ]
-}
-END -- GRID
+GROUP p1
 GRID
 {
 Fld1:[fld1                     ]
@@ -22,10 +18,11 @@ Fld8:[fld8                     ]
      [                         ]
 }
 END -- GRID
+END -- GROUP
 END -- VBOX
 
 ATTRIBUTES
-LABEL titl : p1,TEXT="Title1";
+--LABEL titl : p1,TEXT="Title1";
 fld1 = FORMONLY.fld1;
 fld2 = FORMONLY.fld2;
 TEXTEDIT fld3 = FORMONLY.fld3;
