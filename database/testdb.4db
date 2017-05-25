@@ -1,0 +1,11 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<Schema id="{2bb630a8-c71e-4477-9e65-523ce7cf1c7e}" version="4.0">
+  <ExtractionSettings last="SQLite">
+    <ExtractionOptions casens="LowerCase" cvmeth="AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" ignerr="true" systab="false" type="SQLite"/>
+  </ExtractionSettings>
+  <Table name="tab1" isView="false" status="U">
+    <Column fglLength="4" fglType="6" name="fld1" notNull="false" order="1" status="U"/>
+    <Column fglLength="20" fglType="0" name="fld2" notNull="false" order="2" status="U"/>
+    <Index indexColumns="fld1" indexConstraint="primaryKey" name="primary_key_tab1" status="U"/>
+  </Table>
+</Schema>

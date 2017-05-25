@@ -56,13 +56,13 @@
   <LanguageList version="1.0"/>
   <PlatformList version="1.0"/>
   <Group environment="filelist:FGLPROFILE=$(ProjectDir)/config/fglprofile,dirlist:DBPATH=$(ProjectDir)/database;$(DBPATH)" label="MobileTestCase" language="Genero" targetDirectory="$(ProjectDir)/bin310">
-    <Library binaryName="Config" id="362164715" label="Config">
+    <Library binaryName="Config" excludeFromBuild="true" id="362164715" label="Config">
       <File filePath="config/fglprofile"/>
     </Library>
     <Library binaryName="Database" id="455109296" label="Database">
       <File filePath="database/testdb.4db"/>
     </Library>
-    <Application binaryName="emea_testcase" dependencies="159917928,212784684,362164715,455109296" environment="dirlist:FGLIMAGEPATH=../images:../resources:../resources/image2font.txt:.." id="400358049" label="emea_testcase">
+    <Application binaryName="emea_testcase" dependencies="159917928,212784684,362164715" environment="dirlist:FGLIMAGEPATH=../images:../resources:../resources/image2font.txt" id="400358049" label="emea_testcase">
       <VirtualFolder label="forms">
         <File filePath="src/about.per"/>
         <File filePath="src/form.per"/>
@@ -98,19 +98,18 @@
       <File filePath="src/main.4gl"/>
       <File filePath="src/push_cli.4gl"/>
     </Application>
-    <Library binaryName="Entities" id="212784684" label="Entities"/>
     <Library binaryName="Resources" id="159917928" label="Resources">
       <File filePath="resources/default.4ad"/>
       <File filePath="resources/default.4st"/>
       <File filePath="resources/image2font.txt"/>
     </Library>
-    <Library binaryName="WC_GoogleMaps" id="749244258" label="WC_GoogleMaps">
-      <File filePath="webcomponents/gm/gm.html"/>
-      <File filePath="webcomponents/gm/gm.js"/>
+    <Library binaryName="WC_GoogleMaps" excludeFromBuild="true" id="749244258" label="WC_GoogleMaps">
+      <File filePath="images/webcomponents/gm/gm.html"/>
+      <File filePath="images/webcomponents/gm/gm.js"/>
     </Library>
-    <Library binaryName="WC_Signature" id="-292446792" label="WC_Signature">
-      <File filePath="webcomponents/signature/signature.html"/>
-      <File filePath="webcomponents/signature/signature.js"/>
+    <Library binaryName="WC_Signature" excludeFromBuild="true" id="-292446792" label="WC_Signature">
+      <File filePath="images/webcomponents/signature/signature.html"/>
+      <File filePath="images/webcomponents/signature/signature.js"/>
     </Library>
   </Group>
   <Group label="Packages" language="Genero" targetDirectory="$(ProjectDir)/bin310">

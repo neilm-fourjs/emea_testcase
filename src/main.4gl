@@ -38,6 +38,11 @@ MAIN
 
 	WHENEVER ERROR CALL erro
 
+	IF NOT base.Application.isMobile() THEN
+		DISPLAY "PWD:",os.path.pwd()
+		DISPLAY "FGLIMAGEPATH:",fgl_getEnv("FGLIMAGEPATH")
+	END IF
+
 	IF  ARG_VAL(1) = "getgps" THEN
 		CALL getgps()
 		EXIT PROGRAM
@@ -1089,14 +1094,11 @@ FUNCTION prob26()
 	CLOSE WINDOW p26
 END FUNCTION
 --------------------------------------------------------------------------------
-FUNCTION prob27()
+FUNCTION prob27() -- WC signature
  	DEFINE l_name,l_signature STRING
-
 	OPEN WINDOW p27 WITH FORM "prob27"
-
   LET int_flag = FALSE
  	INPUT BY NAME l_name, l_signature ATTRIBUTES(UNBUFFERED, WITHOUT DEFAULTS=TRUE)
-
 	CLOSE WINDOW p27
 END FUNCTION
 --------------------------------------------------------------------------------
