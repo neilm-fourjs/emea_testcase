@@ -191,7 +191,7 @@
       <Directory description="Resources" destinationDirectory="$(ProjectDir)/bin300" includedFiles="*.4ad,*.4st,*.ttf,*.txt" label="Resources_1" recursive="false" sourceDirectory="$(ProjectDir)/resources"/>
       <Directory description="Web Components" destinationDirectory="$(ProjectDir)/bin300" label="Webcomponents_1" recursive="false" sourceDirectory="$(ProjectDir)/webcomponents"/>
     </Package>
-    <Package binaryName="emea_testcase2_iOS_Simulator" dependencies="400358049,781919164,159917928,212784684,715422167,362164715,313644474" description="iOS Simulator Package" distDirectory="$(ProjectDir)/distbin300" excludeFromBuild="true" label="emea_testcase2_iOS_Simulator" platform="iOS Simulator" rootDirectory="$(ProjectDir)/bin300">
+    <Package binaryName="emea_testcase2_iOS_Simulator" dependencies="400358049,781919164,159917928,212784684,715422167,362164715,313644474" description="iOS Simulator Package" distDirectory="$(ProjectDir)/distbin310" excludeFromBuild="true" label="emea_testcase2_iOS_Simulator" platform="iOS Simulator" rootDirectory="$(ProjectDir)/bin310">
       <DynamicProperty name="icon120x120" value="$(ProjectDir)/images/myicon.png"/>
       <DynamicProperty name="icon152x152" value="$(ProjectDir)/images/myicon.png"/>
       <DynamicProperty name="icon180x180" value="$(ProjectDir)/images/myicon.png"/>
@@ -213,17 +213,15 @@
       <DynamicProperty name="launchScreen640x960" value="$(ProjectDir)/images/myicon.png"/>
       <DynamicProperty name="launchScreen750x1334" value="$(ProjectDir)/images/myicon.png"/>
       <DynamicProperty name="launchScreen768x1024" value="$(ProjectDir)/images/myicon.png"/>
-      <DynamicProperty name="packageId" value="com.fjsemea.testcase2"/>
-      <DynamicProperty name="packageLabel" value="EMEA TestCase2"/>
-      <DynamicProperty name="packageVersion" value="2"/>
-      <DynamicProperty name="packageVersionName" value="2"/>
-      <Directory description="Binaries" destinationDirectory="$(ProjectDir)/bin300" includedFiles="*.42?" label="Binaries" recursive="false" sourceDirectory="$(ProjectDir)/bin300"/>
-      <Directory description="Configuration Files" destinationDirectory="$(ProjectDir)/bin300" includedFiles="fglprofile,,*.pem" label="Config" recursive="false" sourceDirectory="$(ProjectDir)/config"/>
-      <Directory description="Database" destinationDirectory="$(ProjectDir)/bin300" includedFiles="*.db" label="Database" recursive="false" sourceDirectory="$(ProjectDir)/database"/>
-      <Directory description="Images" destinationDirectory="$(ProjectDir)/bin300" includedFiles="*.png,*.jpg" label="Images" sourceDirectory="$(ProjectDir)/images"/>
-      <Directory description="Studio Library" destinationDirectory="$(ProjectDir)/bin300" includedFiles="*.42?" label="libgst" recursive="false" sourceDirectory="$(GSTLIBRARYDIR)/bin"/>
-      <Directory description="Resources" destinationDirectory="$(ProjectDir)/bin300" includedFiles="*.4ad,*.4st" label="Resources" recursive="false" sourceDirectory="$(ProjectDir)/resources"/>
-      <Directory description="Web Components" destinationDirectory="$(ProjectDir)/bin300" label="Webcomponents" recursive="false" sourceDirectory="$(ProjectDir)/webcomponents"/>
+      <DynamicProperty name="packageId" value="com.fjsemea.testcase"/>
+      <DynamicProperty name="packageLabel" value="EMEA TestCase"/>
+      <Directory description="Binaries" destinationDirectory="$(ProjectDir)/bin" includedFiles="*.42?" label="Binaries" recursive="false" sourceDirectory="$(ProjectDir)/bin310"/>
+      <Directory description="Configuration Files" destinationDirectory="$(ProjectDir)/bin" includedFiles="fglprofile,,*.pem" label="Config" recursive="false" sourceDirectory="$(ProjectDir)/config"/>
+      <Directory description="Database" destinationDirectory="$(ProjectDir)/bin" includedFiles="*.db" label="Database" recursive="false" sourceDirectory="$(ProjectDir)/database"/>
+      <Directory description="Images" destinationDirectory="$(ProjectDir)/bin" includedFiles="*.png,*.jpg" label="Images" sourceDirectory="$(ProjectDir)/images"/>
+      <Directory description="Studio Library" destinationDirectory="$(ProjectDir)/bin" includedFiles="*.42?" label="libgst" recursive="false" sourceDirectory="$(GSTLIBRARYDIR)/bin"/>
+      <Directory description="Resources" destinationDirectory="$(ProjectDir)/bin" includedFiles="*.4ad,*.4st,*.ttf,*.txt" label="Resources" recursive="false" sourceDirectory="$(ProjectDir)/resources"/>
+      <Directory description="Web Components" destinationDirectory="$(ProjectDir)/bin/webcomponents" label="Webcomponents" sourceDirectory="$(ProjectDir)/pics/webcomponents"/>
     </Package>
     <Package binaryName="emea_testcase_arm_3_10_3" dependencies="400358049,781919164,159917928,212784684,715422167,362164715,313644474" description="Android Package (arm)" distDirectory="$(ProjectDir)/distbin31003" label="emea_testcase_arm_3_10_3" platform="Android">
       <DynamicProperty name="gma-accent-color" value="#1c6ccd"/>
@@ -249,7 +247,7 @@
       <Directory description="Images" destinationDirectory="$(ProjectDir)/bin" includedFiles="*.png,*.jpg" label="Images" sourceDirectory="$(ProjectDir)/images"/>
       <Directory description="Studio Library" destinationDirectory="$(ProjectDir)/bin" includedFiles="*.42?" label="libgst" recursive="false" sourceDirectory="$(GSTLIBRARYDIR)/bin"/>
       <Directory description="Resources" destinationDirectory="$(ProjectDir)/bin" includedFiles="*.4ad,*.4st,*.ttf,*.txt" label="Resources" recursive="false" sourceDirectory="$(ProjectDir)/resources"/>
-      <Directory description="Web Components" destinationDirectory="$(ProjectDir)/bin/webcomponents" label="Webcomponents" sourceDirectory="$(ProjectDir)/webcomponents"/>
+      <Directory description="Web Components" destinationDirectory="$(ProjectDir)/bin/webcomponents" label="Webcomponents" sourceDirectory="$(ProjectDir)/pics/webcomponents"/>
     </Package>
   </Group>
   <Group label="ServerSide" language="Genero" targetDirectory="$(ProjectDir)/bin_serverside310">

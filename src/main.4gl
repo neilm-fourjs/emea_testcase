@@ -9,7 +9,7 @@ IMPORT FGL lib_db
 
 &include "../src_serverside/push.inc"
 
-CONSTANT c_appver = "3.23"
+CONSTANT c_appver = "3.24"
 CONSTANT C_TESTDIR = "/sdcard/testdir"
 --CONSTANT C_RESTTEST_URL = "https://gpaas1.generocloud.net/g5/ws/r/m/rt?sleep=2"
 CONSTANT C_RESTTEST_URL = "https://www.4js-emea.com/dr/ws/r/resttest?sleep=2"
