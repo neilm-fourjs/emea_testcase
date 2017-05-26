@@ -147,17 +147,16 @@
       <DynamicProperty name="gma-actionbar-color" value="#ebebeb"/>
       <DynamicProperty name="gma-primary-color" value="#3d7bb1"/>
       <DynamicProperty name="gma-primary-dark-color" value="#1e4da5"/>
-      <DynamicProperty name="icon120x120" value="$(ProjectDir)/images/icon/Icon-60@2x.png"/>
-      <DynamicProperty name="icon152x152" value="$(ProjectDir)/images/icon/Icon-76@2x.png"/>
-      <DynamicProperty name="icon167x167" value="$(ProjectDir)/images/icon/Icon-83.5@2x.png"/>
-      <DynamicProperty name="icon180x180" value="$(ProjectDir)/images/icon/Icon-60@3x.png"/>
-      <DynamicProperty name="icon29x29" value="$(ProjectDir)/images/icon/Icon-Small.png"/>
-      <DynamicProperty name="icon40x40" value="$(ProjectDir)/images/icon/Icon-Small-40.png"/>
-      <DynamicProperty name="icon58x58" value="$(ProjectDir)/images/icon/Icon-Small@2x.png"/>
-      <DynamicProperty name="icon60x60" value="$(ProjectDir)/images/icon/Icon-60x60.png"/>
-      <DynamicProperty name="icon76x76" value="$(ProjectDir)/images/icon/Icon-76.png"/>
-      <DynamicProperty name="icon80x80" value="$(ProjectDir)/images/icon/AppIcon40x40@2x.png"/>
-      <DynamicProperty name="icon87x87" value="$(ProjectDir)/images/icon/Icon-Small@3x.png"/>
+      <DynamicProperty name="icon120x120" value="$(ProjectDir)/images/Icon-60@2x.png"/>
+      <DynamicProperty name="icon152x152" value="$(ProjectDir)/images/Icon-76@2x.png"/>
+      <DynamicProperty name="icon167x167" value="$(ProjectDir)/images/Icon-83.5@2x.png"/>
+      <DynamicProperty name="icon180x180" value="$(ProjectDir)/images/Icon-60@3x.png"/>
+      <DynamicProperty name="icon29x29" value="$(ProjectDir)/images/Icon-Small.png"/>
+      <DynamicProperty name="icon40x40" value="$(ProjectDir)/images/Icon-Small-40.png"/>
+      <DynamicProperty name="icon58x58" value="$(ProjectDir)/images/Icon-Small@2x.png"/>
+      <DynamicProperty name="icon76x76" value="$(ProjectDir)/images/Icon-76.png"/>
+      <DynamicProperty name="icon80x80" value="$(ProjectDir)/images/AppIcon40x40@2x.png"/>
+      <DynamicProperty name="icon87x87" value="$(ProjectDir)/images/Icon-Small@3x.png"/>
       <DynamicProperty name="packageId" value="com.fjsemea.testcase3103"/>
       <DynamicProperty name="packageLabel" value="emea-testcase3103"/>
       <DynamicProperty name="permissions" value="ACCESS_COARSE_LOCATION;ACCESS_FINE_LOCATION;ACCESS_NETWORK_STATE;ACCESS_WIFI_STATE;C2DM_RECEIVE;C2D_MESSAGE;GET_ACCOUNTS;INSTALL_SHORTCUT;INTERNET;READ_CONTACTS;READ_EXTERNAL_STORAGE;WAKE_LOCK;WRITE_EXTERNAL_STORAGE"/>
