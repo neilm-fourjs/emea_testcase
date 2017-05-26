@@ -110,14 +110,20 @@ END MAIN
 --------------------------------------------------------------------------------
 FUNCTION init_app()
 	DEFINE l_ret INTEGER
-	LET m_dir = C_TESTDIR
+	LET m_cli = UPSHIFT(ui.Interface.getFrontEndName())
+
+	CASE m_cli
+		WHEN "GMA" LET m_dir = C_TESTDIR
+		WHEN "GMI" LET m_dir = os.Path.pwd()
+		OTHERWISE LET m_dir = "/tmp"
+	END CASE
+
 	IF NOT os.path.exists( m_dir ) THEN
 		IF NOT os.path.mkdir( m_dir ) THEN
 			CALL fgl_winMessage("Error",SFMT("Failed to create %1\n%2-%3\nUsing %4",m_dir,STATUS,ERR_GET(STATUS),os.Path.pwd()),"exclamation")
 			LET m_dir = os.Path.pwd()
 		END IF
 	END IF
-	LET m_cli = UPSHIFT(ui.Interface.getFrontEndName())
 	IF m_cli = "GMA" THEN
 		TRY
 			CALL ui.Interface.frontCall("android", "askForPermission", 
