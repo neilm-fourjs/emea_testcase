@@ -2,8 +2,8 @@ LAYOUT (TEXT="Tests")
 VBOX
 GRID
 {
-Version:[cli                   |d]
-Time:   [tim                   ]
+[lb1:cli                   |ico|d]
+[tim                             ]
 }
 END -- GRID
 TABLE (STYLE="probs_tab")
@@ -20,8 +20,10 @@ END -- VBOX
 
 ATTRIBUTES
 d = FORMONLY.l_dummy,STYLE="invisible";
+IMAGE ico : ico, IMAGE="myicon", AUTOSCALE, SIZEPOLICY=FIXED;
+LABEL lb1 : lb1, TEXT=%"Ver:";
 cli = FORMONLY.m_cli_info, STYLE="big";
-tim = FORMONLY.l_curr;
+LABEL tim = FORMONLY.l_curr;
 a001 = FORMONLY.titl, IMAGECOLUMN=icon;
 a002 = FORMONLY.desc;
 PHANTOM FORMONLY.icon;
