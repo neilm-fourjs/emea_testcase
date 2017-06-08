@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="ANSI_X3.4-1968"?>
 <StyleList>
 	<Style name="Table.probs_tab">
-		<StyleAttribute name="fontSize" value="8pt" />
+		<StyleAttribute name="fontSize" value="1em" />
 	</Style>
 	<Style name="Window.fab">
 			<StyleAttribute name="materialFABActionList" value="accept,select,detail"/>
@@ -52,7 +52,7 @@
 		<StyleAttribute name="textColor" value="white" />
 		<StyleAttribute name="backgroundColor" value="white" />
 		<StyleAttribute name="border" value="none" />
-		<StyleAttribute name="fontSize" value="4pt" />
+		<StyleAttribute name="fontSize" value=".2em" />
 	</Style>
 	<Style name=".small">
 		<StyleAttribute name="fontSize" value="xx-small" />
