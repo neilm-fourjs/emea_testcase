@@ -54,6 +54,9 @@
 		<StyleAttribute name="border" value="none" />
 		<StyleAttribute name="fontSize" value=".2em" />
 	</Style>
+	<Style name="Table">
+		<StyleAttribute name="tableType" value="listView" />
+	</Style>
 	<Style name=".small">
 		<StyleAttribute name="fontSize" value="xx-small" />
 	</Style>

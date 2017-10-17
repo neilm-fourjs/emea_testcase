@@ -161,7 +161,11 @@ FUNCTION about()
 	LET ar[ ar.getLength() + 1 ].info = "Client:" LET ar[ ar.getLength() ].val = m_cli_ver
 	LET ar[ ar.getLength() + 1 ].info = "DVM Ver:" LET ar[ ar.getLength() ].val = fgl_getVersion()
 	LET ar[ ar.getLength() + 1 ].info = "IMG Path:" LET ar[ ar.getLength() ].val = NVL(fgl_getEnv("FGLIMAGEPATH"),"NULL")
+	LET ar[ ar.getLength() + 1 ].info = "Resource Path:" LET ar[ ar.getLength() ].val = NVL(fgl_getEnv("FGLRESOURCEPATH"),"NULL")
+	LET ar[ ar.getLength() + 1 ].info = "Profile:" LET ar[ ar.getLength() ].val = NVL(fgl_getEnv("FGLPROFILE"),"NULL")
+	LET ar[ ar.getLength() + 1 ].info = "LANG:" LET ar[ ar.getLength() ].val = NVL(fgl_getEnv("LANG"),"NULL")
 	LET ar[ ar.getLength() + 1 ].info = "DB Path:" LET ar[ ar.getLength() ].val = NVL(fgl_getEnv("DBPATH"),"NULL")
+	LET ar[ ar.getLength() + 1 ].info = "DB Date:" LET ar[ ar.getLength() ].val = NVL(fgl_getEnv("DBDATE"),"NULL")
 	LET ar[ ar.getLength() + 1 ].info = "Test Dir:" LET ar[ ar.getLength() ].val = m_dir
 	LET ar[ ar.getLength() + 1 ].info = "Rest URL:" LET ar[ ar.getLength() ].val = C_RESTTEST_URL
 	OPEN WINDOW about WITH FORM "about"
