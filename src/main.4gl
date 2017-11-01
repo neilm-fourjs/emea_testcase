@@ -77,6 +77,7 @@ MAIN
 	CALL add_prob(25,"Layouting - Split Layout","Layouting - Split Layout","fa-tv")
 	CALL add_prob(26,"Local Database","Local Database","fa-database")
 	CALL add_prob(27,"WC Signature","Signature Webcomponent","fa-tv")
+	CALL add_prob(28,"Menu actions","Menu Actions","fa-tv")
 
 	OPEN FORM f FROM "form"
 	DISPLAY FORM f
@@ -207,6 +208,7 @@ FUNCTION do_test( x )
 		WHEN 25 CALL prob25()
 		WHEN 26 CALL prob26()
 		WHEN 27 CALL prob27()
+		WHEN 28 CALL prob28()
 	END CASE
 END FUNCTION
 --------------------------------------------------------------------------------
@@ -1108,11 +1110,31 @@ FUNCTION prob27() -- WC signature
  	DEFINE l_name,l_signature STRING
 	OPEN WINDOW p27 WITH FORM "prob27"
   LET int_flag = FALSE
- 	INPUT BY NAME l_name, l_signature ATTRIBUTES(UNBUFFERED, WITHOUT DEFAULTS=TRUE)
+	DIALOG ATTRIBUTES(UNBUFFERED)
+ 		INPUT BY NAME l_name, l_signature ATTRIBUTES(WITHOUT DEFAULTS=TRUE)
+		END INPUT
+		ON ACTION accept EXIT DIALOG
+		ON ACTION cancel EXIT DIALOG
+	END DIALOG
 	CLOSE WINDOW p27
 END FUNCTION
 --------------------------------------------------------------------------------
-
+FUNCTION prob28() -- Menu actions
+	DEFINE l_txt STRING
+	OPEN WINDOW p28 WITH FORM "prob28"
+	MENU
+		BEFORE MENU
+			CALL DIALOG.setActionHidden("menuitem2",TRUE)
+			HIDE OPTION "menuitem3"
+		ON ACTION menuitem1 LET l_txt = l_txt.append("\nItem1") DISPLAY BY NAME l_txt
+		ON ACTION menuitem2 LET l_txt = l_txt.append("\nItem2") DISPLAY BY NAME l_txt
+		ON ACTION menuitem3 LET l_txt = l_txt.append("\nItem3") DISPLAY BY NAME l_txt
+		ON ACTION menuitem4 LET l_txt = l_txt.append("\nItem4") DISPLAY BY NAME l_txt
+		ON ACTION close EXIT MENU
+	END MENU
+	CLOSE WINDOW p28
+END FUNCTION
+--------------------------------------------------------------------------------
 
 
 

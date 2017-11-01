@@ -1,0 +1,22 @@
+
+ACTION DEFAULTS
+	ACTION menuitem1 (TEXT="Item 1", DEFAULTVIEW=AUTO )
+	ACTION menuitem2 (TEXT="Item 2", DEFAULTVIEW=AUTO )
+	ACTION menuitem3 (TEXT="Item 3", DEFAULTVIEW=AUTO )
+	ACTION menuitem4 (TEXT="Item 4", DEFAULTVIEW=NO )
+END -- AD
+
+LAYOUT (TEXT="Menu")
+GRID
+{
+[wc                ]
+[                  ]
+[txt               ]
+[                  ]
+}
+END -- GRID
+
+ATTRIBUTES
+WEBCOMPONENT wc = formonly.wc, COMPONENTTYPE="button", SIZEPOLICY=FIXED;
+
+TEXTEDIT txt = FORMONLY.l_txt, STRETCH=BOTH;

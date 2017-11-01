@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<APPLICATION Parent="defaultgwc"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xsi:noNamespaceSchemaLocation="http://www.4js.com/ns/gas/2.50/cfextwa.xsd">
+	<RESOURCE Id="res.my.path" Source="INTERNAL">/opt/users/neilm/all/my_github/emea_testcase</RESOURCE>
+	<EXECUTION>
+		<ENVIRONMENT_VARIABLE Id="FGLIMAGEPATH">../images:../resources:../resources/image2font.txt</ENVIRONMENT_VARIABLE>
+		<ENVIRONMENT_VARIABLE Id="FGLRESOURCEPATH">../resources</ENVIRONMENT_VARIABLE>
+		<PATH>$(res.my.path)/bin310</PATH>
+		<WEB_COMPONENT_DIRECTORY>$(res.my.path)/images/webcomponents</WEB_COMPONENT_DIRECTORY>
+	</EXECUTION>
+</APPLICATION>
