@@ -88,15 +88,11 @@ MAIN
 	DIALOG
 		INPUT BY NAME l_dummy
 		END INPUT
-		DISPLAY ARRAY m_probs TO menu.* --ATTRIBUTE(ACCEPT=FALSE,CANCEL=FALSE)
+		DISPLAY ARRAY m_probs TO menu.*
 			BEFORE ROW
-				--IF NOT l_first_time THEN
-					CALL LOG("Doing test:"||m_probs[arr_curr()].desc)
-					CALL do_test( arr_curr() )
-					NEXT FIELD l_dummy
-				--ELSE
-				--	LET l_first_time = FALSE
-				--END IF
+				CALL LOG("Doing test:"||m_probs[arr_curr()].desc)
+				CALL do_test( arr_curr() )
+				NEXT FIELD l_dummy
 		END DISPLAY
 		ON ACTION close EXIT DIALOG
 		ON ACTION about CALL about()
