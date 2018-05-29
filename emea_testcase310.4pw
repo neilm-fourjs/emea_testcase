@@ -122,6 +122,66 @@
     </Library>
   </Group>
   <Group label="Packages" language="Genero" targetDirectory="$(ProjectDir)/bin310">
+    <Package binaryName="emea_testcase_arm_1_30_12" dependencies="400358049,781919164,159917928,212784684,715422167,362164715,313644474" description="Android Package" distDirectory="$(ProjectDir)/distbin_gma13012" label="emea_testcase_arm_1_30_12" platform="Android">
+      <DynamicProperty name="gma-accent-color" value="#1c6ccd"/>
+      <DynamicProperty name="gma-actionbar-color" value="#ebebeb"/>
+      <DynamicProperty name="gma-navigationBarBackground-color" value="#3d7bb1"/>
+      <DynamicProperty name="gma-primary-color" value="#3d7bb1"/>
+      <DynamicProperty name="gma-primary-dark-color" value="#1e4da5"/>
+      <DynamicProperty name="icon-hdpi" value="$(ProjectDir)/images/hdpi.png"/>
+      <DynamicProperty name="icon-ldpi" value="$(ProjectDir)/images/ldpi.png"/>
+      <DynamicProperty name="icon-mdpi" value="$(ProjectDir)/images/mdpi.png"/>
+      <DynamicProperty name="icon-xhdpi" value="$(ProjectDir)/images/xhdpi.png"/>
+      <DynamicProperty name="icon-xxhdpi" value="$(ProjectDir)/images/xxhdpi.png"/>
+      <DynamicProperty name="icon60x60" value="$(ProjectDir)/images/myicon.png"/>
+      <DynamicProperty name="launchScreen320x480" value="$(ProjectDir)/images/myicon.png"/>
+      <DynamicProperty name="launchScreen640x960" value="$(ProjectDir)/images/myicon.png"/>
+      <DynamicProperty name="packageId" value="com.fjsemea.testcase13012"/>
+      <DynamicProperty name="packageLabel" value="testcase13012"/>
+      <DynamicProperty name="packageVersion" value="13012"/>
+      <DynamicProperty name="packageVersionName" value="13012"/>
+      <DynamicProperty name="permissions" value="ACCESS_COARSE_LOCATION;ACCESS_FINE_LOCATION;ACCESS_NETWORK_STATE;ACCESS_WIFI_STATE;C2DM_RECEIVE;C2D_MESSAGE;GET_ACCOUNTS;INSTALL_SHORTCUT;INTERNET;READ_CONTACTS;READ_EXTERNAL_STORAGE;WAKE_LOCK;WRITE_EXTERNAL_STORAGE"/>
+      <DynamicProperty name="status-icon-hdpi" value="$(ProjectDir)/images/hdpi.png"/>
+      <DynamicProperty name="status-icon-mdpi" value="$(ProjectDir)/images/mdpi.png"/>
+      <DynamicProperty name="status-icon-xhdpi" value="$(ProjectDir)/images/xhdpi.png"/>
+      <Directory description="Binaries" destinationDirectory="$(ProjectDir)/bin" includedFiles="*.42?" label="Binaries" recursive="false" sourceDirectory="$(ProjectDir)/bin310"/>
+      <Directory description="Configuration Files" destinationDirectory="$(ProjectDir)/bin" includedFiles="fglprofile,*.pem" label="Config" recursive="false" sourceDirectory="$(ProjectDir)/config"/>
+      <Directory description="Database" destinationDirectory="$(ProjectDir)/bin" includedFiles="*.db" label="Database" recursive="false" sourceDirectory="$(ProjectDir)/database"/>
+      <Directory description="Images" destinationDirectory="$(ProjectDir)/bin" includedFiles="*.png,*.jpg" label="Images" sourceDirectory="$(ProjectDir)/images"/>
+      <Directory description="Studio Library" destinationDirectory="$(ProjectDir)/bin" includedFiles="*.42?" label="libgst" recursive="false" sourceDirectory="$(GSTLIBRARYDIR)/bin"/>
+      <Directory description="Resources" destinationDirectory="$(ProjectDir)/bin" includedFiles="*.4ad,*.4st,*.ttf,*.txt" label="Resources" recursive="false" sourceDirectory="$(ProjectDir)/resources"/>
+      <Directory description="Web Components" destinationDirectory="$(ProjectDir)/bin/webcomponents" label="Webcomponents" sourceDirectory="$(ProjectDir)/images/webcomponents"/>
+    </Package>
+    <Package binaryName="emea_testcase_arm_1_30_13" dependencies="400358049,781919164,159917928,212784684,715422167,362164715,313644474" description="Android Package" distDirectory="$(ProjectDir)/distbin_gma13013" label="emea_testcase_arm_1_30_13" platform="Android">
+      <DynamicProperty name="gma-accent-color" value="#1c6ccd"/>
+      <DynamicProperty name="gma-actionbar-color" value="#ebebeb"/>
+      <DynamicProperty name="gma-navigationBarBackground-color" value="#3d7bb1"/>
+      <DynamicProperty name="gma-primary-color" value="#3d7bb1"/>
+      <DynamicProperty name="gma-primary-dark-color" value="#1e4da5"/>
+      <DynamicProperty name="icon-hdpi" value="$(ProjectDir)/images/hdpi.png"/>
+      <DynamicProperty name="icon-ldpi" value="$(ProjectDir)/images/ldpi.png"/>
+      <DynamicProperty name="icon-mdpi" value="$(ProjectDir)/images/mdpi.png"/>
+      <DynamicProperty name="icon-xhdpi" value="$(ProjectDir)/images/xhdpi.png"/>
+      <DynamicProperty name="icon-xxhdpi" value="$(ProjectDir)/images/xxhdpi.png"/>
+      <DynamicProperty name="icon60x60" value="$(ProjectDir)/images/myicon.png"/>
+      <DynamicProperty name="launchScreen320x480" value="$(ProjectDir)/images/myicon.png"/>
+      <DynamicProperty name="launchScreen640x960" value="$(ProjectDir)/images/myicon.png"/>
+      <DynamicProperty name="packageId" value="com.fjsemea.testcase13013"/>
+      <DynamicProperty name="packageLabel" value="testcase13013"/>
+      <DynamicProperty name="packageVersion" value="13013"/>
+      <DynamicProperty name="packageVersionName" value="13013"/>
+      <DynamicProperty name="permissions" value="ACCESS_COARSE_LOCATION;ACCESS_FINE_LOCATION;ACCESS_NETWORK_STATE;ACCESS_WIFI_STATE;C2DM_RECEIVE;C2D_MESSAGE;GET_ACCOUNTS;INSTALL_SHORTCUT;INTERNET;READ_CONTACTS;READ_EXTERNAL_STORAGE;WAKE_LOCK;WRITE_EXTERNAL_STORAGE"/>
+      <DynamicProperty name="status-icon-hdpi" value="$(ProjectDir)/images/hdpi.png"/>
+      <DynamicProperty name="status-icon-mdpi" value="$(ProjectDir)/images/mdpi.png"/>
+      <DynamicProperty name="status-icon-xhdpi" value="$(ProjectDir)/images/xhdpi.png"/>
+      <Directory description="Binaries" destinationDirectory="$(ProjectDir)/bin" includedFiles="*.42?" label="Binaries" recursive="false" sourceDirectory="$(ProjectDir)/bin310"/>
+      <Directory description="Configuration Files" destinationDirectory="$(ProjectDir)/bin" includedFiles="fglprofile,*.pem" label="Config" recursive="false" sourceDirectory="$(ProjectDir)/config"/>
+      <Directory description="Database" destinationDirectory="$(ProjectDir)/bin" includedFiles="*.db" label="Database" recursive="false" sourceDirectory="$(ProjectDir)/database"/>
+      <Directory description="Images" destinationDirectory="$(ProjectDir)/bin" includedFiles="*.png,*.jpg" label="Images" sourceDirectory="$(ProjectDir)/images"/>
+      <Directory description="Studio Library" destinationDirectory="$(ProjectDir)/bin" includedFiles="*.42?" label="libgst" recursive="false" sourceDirectory="$(GSTLIBRARYDIR)/bin"/>
+      <Directory description="Resources" destinationDirectory="$(ProjectDir)/bin" includedFiles="*.4ad,*.4st,*.ttf,*.txt" label="Resources" recursive="false" sourceDirectory="$(ProjectDir)/resources"/>
+      <Directory description="Web Components" destinationDirectory="$(ProjectDir)/bin/webcomponents" label="Webcomponents" sourceDirectory="$(ProjectDir)/images/webcomponents"/>
+    </Package>
     <Package binaryName="emea_testcase_arm_1_30_11" dependencies="400358049,781919164,159917928,212784684,715422167,362164715,313644474" description="Android Package" distDirectory="$(ProjectDir)/distbin_gma13011" label="emea_testcase_arm_1_30_11" platform="Android">
       <DynamicProperty name="gma-accent-color" value="#1c6ccd"/>
       <DynamicProperty name="gma-actionbar-color" value="#ebebeb"/>
@@ -212,7 +272,6 @@
       <Directory description="Resources" destinationDirectory="$(ProjectDir)/bin" includedFiles="*.4ad,*.4st,*.ttf,*.txt" label="Resources" recursive="false" sourceDirectory="$(ProjectDir)/resources"/>
       <Directory description="Web Components" destinationDirectory="$(ProjectDir)/bin/webcomponents" label="Webcomponents" sourceDirectory="$(ProjectDir)/images/webcomponents"/>
     </Package>
-    <Group label="Group_1"/>
   </Group>
   <Group label="ServerSide" language="Genero" targetDirectory="$(ProjectDir)/bin_serverside310">
     <Library binaryName="lib" excludeFromBuild="true" id="-173340672" label="lib">
