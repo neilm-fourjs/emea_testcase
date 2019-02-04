@@ -41,6 +41,9 @@
 	<Style name="Label">
 		<StyleAttribute name="textColor" value="darkblue" />
 	</Style>
+	<Style name=".noborder">
+		<StyleAttribute name="border" value="none" />
+	</Style>
 	<Style name=".bold">
 		<StyleAttribute name="fontWeight" value="bold" />
 	</Style>

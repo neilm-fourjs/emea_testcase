@@ -1,42 +1,38 @@
 LAYOUT ( TEXT="Test #18" )
-VBOX
 GRID
 {
-[lnum   ][num     ]
-[ledt   ][edt                                     ]
-[ledt2  ][edt2                                    ]
-[lcmb   ][cmb                                     ]
-[ldte   ][dte       ]
-[ltim   ][tim       ]
-[ldtetim][dtetim             ] 
-[lfld5  ][Chk]
-[lfld6  ][radio                          ]
-[lfld7  ][spin]
-[lfld8  ][txt                            ]
-         [                               ]
+[lnum |num     ]
+[ledt |edt                            ]
+[ledt2|edt2                           ]
+[lbedt|bedt                           ]
+[lcmb |cmb                            ]
+[ldte |dte       ]
+[ltim |tim       ]
+[ldtet|dtetim             ]
+[lfld5|Chk]
+[lfld6|radio                          ]
+[lfld7|spin]
+[lfld8|txt                            ]
+      [                               ]
+[:         :but1           :         :]
+<G "Results:"                          >
+[audit_log                            ]
+[                                     ]
+[                                     ]
+[                                     ]
 }
 END -- GRID
-GROUP (TEXT="Result")
-GRID
-{
-[audit_log                               ]
-[                                        ]
-[                                        ]
-[                                        ]
-}
-END -- GRID
-END -- GROUP
-END -- VBOX
 END -- LAYOUT
 
 ATTRIBUTES
-LABEL lnum : lab1, TEXT="Number:",JUSTIFY=RIGHT;
+LABEL lnum  : lab1, TEXT="Number:",JUSTIFY=RIGHT;
 LABEL ledt  : ledt, TEXT="Edit:",JUSTIFY=RIGHT;
-LABEL ledt2  : ledt2, TEXT="Edit Up:",JUSTIFY=RIGHT;
+LABEL ledt2 : ledt2, TEXT="Edit Up:",JUSTIFY=RIGHT;
+LABEL lbedt : lbedt, TEXT="ButtonE:",JUSTIFY=RIGHT;
 LABEL lcmb  : lab2, TEXT="Combo:",JUSTIFY=RIGHT;
 LABEL ldte  : lab3, TEXT="Date:",JUSTIFY=RIGHT;
 LABEL ltim  : lab3a, TEXT="Date:",JUSTIFY=RIGHT;
-LABEL ldtetim : lab4, TEXT="DateTime:",JUSTIFY=RIGHT;
+LABEL ldtet : lab4, TEXT="DateTime:",JUSTIFY=RIGHT;
 LABEL lfld5 : lab5, TEXT="Check:",JUSTIFY=RIGHT;
 LABEL lfld6 : lab6, TEXT="Radio:",JUSTIFY=RIGHT;
 LABEL lfld7 : lab7, TEXT="SpinEdit:",JUSTIFY=RIGHT;
@@ -45,6 +41,7 @@ LABEL lfld8 : lab8, TEXT="TextEdit:",JUSTIFY=RIGHT;
 EDIT num = FORMONLY.num, KEYBOARDHINT=NUMBER;
 EDIT edt = FORMONLY.edt;
 EDIT edt2 = FORMONLY.edt2,UPSHIFT;
+BUTTONEDIT bedt = FORMONLY.bedt, ACTION=be, IMAGE="ssmiley";
 COMBOBOX cmb = FORMONLY.cmb, ITEMS=(("i1","Item 1"), ("i2","Item Two"), ("i3","3rd Item" ));
 DATEEDIT dte = FORMONLY.dte;
 TIMEEDIT tim = FORMONLY.tim;
@@ -53,5 +50,5 @@ CHECKBOX chk = FORMONLY.chk, VALUECHECKED=1,VALUEUNCHECKED=0, NOT NULL;
 RADIOGROUP radio = FORMONLY.radio, ITEMS=((1,"Male"),(2,"Famale"),(3,"Other")), NOT NULL,ORIENTATION=HORIZONTAL;
 SPINEDIT spin = FORMONLY.spin, VALUEMAX=100, VALUEMIN=0, STEP=5;
 TEXTEDIT txt = FORMONLY.txt;
-
+BUTTON but1 : but1, { TEXT="Press Me!",} IMAGE="smile";
 TEXTEDIT audit_log = FORMONLY.audit_log, STRETCH=BOTH, NOENTRY;

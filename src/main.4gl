@@ -757,29 +757,22 @@ FUNCTION prob14()
 	CLOSE WINDOW p14
 END FUNCTION
 --------------------------------------------------------------------------------
--- Get GEO Location and open it.
+-- Get GEO Location and open it
 FUNCTION prob15()
-	DEFINE l_lat, l_long FLOAT
-	DEFINE l_fcstatus STRING
 
 	OPEN WINDOW p15 WITH FORM "prob15"
 
 	MENU
 		ON ACTION get_geo
-			DISPLAY "Getting Geo Location ..." TO stat
-			CALL ui.interface.refresh()
-			TRY
-				CALL ui.Interface.frontCall("mobile", "getGeolocation", [], [l_fcstatus, l_lat, l_long])
-			CATCH
-				CALL fgl_winMessage("GEO Location",SFMT("Status: %1 Ret: %2\n%3",STATUS,l_fcstatus, err_get(STATUS)),"info" )
-			END TRY
-			CALL ui.interface.refresh()
-			IF l_fcstatus = "ok" THEN
-				LET m_geo_loc = SFMT("%1,%2",replace_with_dot(l_lat),replace_with_dot(l_long))
-				DISPLAY SFMT("You are here: %1",m_geo_loc) TO stat
-			ELSE
-				DISPLAY SFMT("Failed: %1",l_fcstatus) TO stat
-			END IF
+			CALL get_geoLocation()
+
+		ON ACTION do_timer
+			CALL get_geoLocation()
+			MENU
+				ON ACTION CLOSE EXIT MENU
+				ON ACTION CANCEL EXIT MENU
+				ON TIMER 10 CALL get_geoLocation()
+			END MENU
 
 		ON ACTION show_map
 			IF m_geo_loc IS NOT NULL THEN
@@ -798,6 +791,28 @@ FUNCTION prob15()
 	
 	CLOSE WINDOW p15
 
+END FUNCTION
+--------------------------------------------------------------------------------
+FUNCTION get_geoLocation()
+	DEFINE l_lat, l_long FLOAT
+	DEFINE l_fcstatus STRING
+	DEFINE l_st, l_ed DATETIME HOUR TO FRACTION(5)
+	LET l_st = CURRENT
+	DISPLAY SFMT("%1\nGetting Geo Location ...",l_St) TO stat
+	CALL ui.interface.refresh()
+	TRY
+		CALL ui.Interface.frontCall("mobile", "getGeolocation", [], [l_fcstatus, l_lat, l_long])
+	CATCH
+		CALL fgl_winMessage("GEO Location",SFMT("Status: %1 Ret: %2\n%3",STATUS,l_fcstatus, err_get(STATUS)),"info" )
+	END TRY
+	LET l_ed = CURRENT
+	CALL ui.interface.refresh()
+	IF l_fcstatus = "ok" THEN
+		LET m_geo_loc = SFMT("%1,%2",replace_with_dot(l_lat),replace_with_dot(l_long))
+		DISPLAY SFMT("%1 (%2 )\nYou are here: %3",l_ed, ( l_ed - l_st ),m_geo_loc) TO stat
+	ELSE
+		DISPLAY SFMT("%1 (%2 )\nFailed: %3",l_ed,( l_ed - l_st ),l_fcstatus) TO stat
+	END IF
 END FUNCTION
 --------------------------------------------------------------------------------
 -- Show the location
@@ -888,12 +903,12 @@ FUNCTION prob17()
 	CLOSE WINDOW p17
 END FUNCTION
 --------------------------------------------------------------------------------
--- Widgets
-FUNCTION prob18()
+FUNCTION prob18() -- Widgets
   TYPE t_rec RECORD
     num SMALLINT,
     edt CHAR(20),
     edt2 CHAR(20),
+    bedt CHAR(20),
     cmb STRING,
     dte DATE,
 		tim DATETIME HOUR TO SECOND,
@@ -935,6 +950,9 @@ FUNCTION prob18()
       CALL DIALOG.setActionActive("dialogtouched",FALSE)
       CALL DIALOG.setActionActive("accept",TRUE)
 
+		ON ACTION be 
+			LET rec.bedt = "Smile!"
+
     ON CHANGE cmb
 			LET audit_log = audit_log.append( SFMT("Combo changed to %1\n",rec.cmb))
 
@@ -955,6 +973,9 @@ FUNCTION prob18()
         LET audit_log = audit_log.append("Jump to Spinedit\n")
         NEXT FIELD spin
       END IF
+
+		ON ACTION but1
+			CALL fgl_winMessage("WinMessage","You Pressed it!","exclamation")
 
     ON ACTION cancel
       LET audit_log = audit_log.append("Cancelled\n")

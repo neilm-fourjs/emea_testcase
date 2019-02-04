@@ -5,18 +5,21 @@ GRID
 [""]
 Running:
 [stat                               ]
+[                                   ]
 [""]
 [but1                               ]
 [but2                               ]
 [but3                               ]
+[but4                               ]
 }
 END -- GRID
 END -- LAYOUT
 
 ATTRIBUTES
-EDIT stat = FORMONLY.stat;
+TEXTEDIT stat = FORMONLY.stat, SCROLLBARS=NONE;
 
 BUTTON but0 : get_geo ,TEXT="Get Geo Location";
 BUTTON but1 : show_map,TEXT="Show Map for Current";
 BUTTON but2 : show_map2,TEXT="Show Map - Dartford Office";
 BUTTON but3 : show_map3,TEXT="Show Map - Strasbourg Office";
+BUTTON but4 : do_timer,TEXT="ON TIMER 10 - refresh location";
